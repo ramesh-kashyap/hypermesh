@@ -15,7 +15,7 @@ const Wallet = () => {
                             </div>
                             <div className="flex flex-row gap-2 items-end">
                                 <a className="bg-black text-white h-[46px] px-6 py-2 rounded-[30px] flex flex-1 items-center justify-center" href="/RechargeFunds" style={{ color: 'black' }}>Deposit</a>
-                                <a href="/SelectNetwork">
+                                <a href="/withdrawReq">
                                     <button className="border border-black h-[46px] text-black px-6 py-2 rounded-[30px] flex flex-1 items-center justify-center">Withdraw</button>
                                 </a>
                                 {/* <a href="/Transferfund">
