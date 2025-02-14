@@ -1258,8 +1258,8 @@ video {
 
 .bg-black {
   --tw-bg-opacity: 1;
-  background-color: #0093E9;
-  background-image: linear-gradient(315deg, #0093E9 0%, #80D0C7 100%);}
+  
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));}
 
 .bg-blue-100 {
   --tw-bg-opacity: 1;
@@ -1268,7 +1268,8 @@ video {
 
 .bg-blue-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246/var(--tw-bg-opacity))
+    background-color: #0093E9;
+    background-image: linear-gradient(315deg, #0093E9 0%, #80D0C7 100%);
 }
 
 .bg-gray-100 {
@@ -1447,7 +1448,8 @@ video {
 .py-3 {
   margin-top:12px ;
   padding-top: .75rem;
-  padding-bottom: .75rem
+  padding-bottom: .75rem;
+  margin-left:15px
 }
 
 .py-4 {
