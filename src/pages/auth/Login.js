@@ -1,19 +1,53 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Api2, { googleAuth } from '../../Requests/Api';
 import Api from '../../Requests/Api';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { BrowserRouter as Route, Router,Routes, Link } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { Toaster, toast } from "react-hot-toast";
 import axios from "axios";
-
 
 const Login = () => {
   const navigate = useNavigate();
-  const handleLogin = () => {
-    // Redirecting to your Google login API
-    window.location.href = "http://localhost:3002/google";
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    if (!email || !password) {
+        toast.error("Please enter both email and password");
+        setLoading(false);
+        return;
+    }
+
+    try {
+        const response = await Api.post('auth/login', { email, password })
+        if (response.data.status) 
+          {
+            toast.success("Login successful!");
+            localStorage.setItem("token", response.token); // Save JWT token
+            console.log("User Logged In:", response);
+            // Navigate to a protected route (e.g., /dashboard)
+            navigate('/dashboard');
+          }
+          else
+          {
+            toast.error(response.data.message || "Login failed");
+          }
+
+      
+
+    } catch (error) {
+        toast.error(error.message || "Login failed");
+    } finally {
+        setLoading(false);
+    }
+};
 
     // 🔹 Check for token on page load
     useEffect(() => {
@@ -24,15 +58,12 @@ const Login = () => {
       }
     }, [navigate]); // Runs only on component mount
   
-
-  
-
   const responseGoogle = async (authResult)=>{
     try{
         console.log(authResult);
         if(authResult['code']){
             const result = await googleAuth(authResult['code']); 
-            console.log(result.data);
+            // console.log(result.data);
             // Extract user information from the result (assuming the backend returns this)
             const { name, email, picture } = result.data.user;
 
@@ -91,31 +122,30 @@ const Login = () => {
 
 
   return (
+    <><Toaster position="top-center" />
     <div className="min-h-screen flex flex-col items-center justify-center pt-[100px] bg-gray-50 p-6">
       <div className="absolute top-6 flex justify-between w-full px-6">
         <img
           alt="MeshNode Logo"
-          loading="lazy"
-          width="163"
-          height="40"
+          loading="lazy" style={{ width: '139px' }}
           className="hidden sm:flex"
-          src="/upnl/assets/icons/logo_meshchain_full_text.svg"
-        />
+          src="/upnl/assets/icons/logo.png" />
         <img
           alt="Logo"
-          loading="lazy"
-          width="40"
-          height="40"
+          loading="lazy" style={{ width: '139px' }}
           className="flex sm:hidden"
-          src="/upnl/assets/icons/logo_meshchain.svg"
-        />
+          src="/upnl/assets/icons/logo.png" />
         <div className="flex">
+        <Link to="/login">
           <button className="w-[80px] md:w-[100px] mr-2 md:mr-4 py-2 px-2 md:px-4 bg-green-500 text-white rounded-[30px] shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
             Log In
           </button>
-          <button className="w-[100px] py-2 px-2 md:px-4 bg-[#171717] text-white rounded-[30px] shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+          </Link>
+          <Link to="/register">
+          <button className="w-[100px] py-2 px-2 md:px-4 bg-[#171717] text-white rounded-[30px] shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500" style={{color:"#fff"}}>
             Sign Up
           </button>
+          </Link>
         </div>
       </div>
       <div className="bg-white max-w-[385px] rounded-[20px] py-6 px-6 md:px-8 w-full shadow-lg">
@@ -125,17 +155,17 @@ const Login = () => {
         <p className="text-sm text-gray-500 text-center mb-6">
           Welcome back! Log in to stay updated with all your nodes and rewards.
         </p>
-        <form onSubmit={(e) => e.preventDefault()}> {/* Prevent default form submission */}
+        <form onSubmit={handleLogin}> {/* Prevent default form submission */}
           <div className="mb-3">
             <label className="block text-sm font-medium text-gray-700">
-              Username
+              Email ID
             </label>
             <div className="relative">
-              <input
-                type="text"
-                placeholder="Enter username"
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-[12px] shadow-sm focus:outline-none focus:ring focus:ring-green-500"
-              />
+              <input type="email"
+                placeholder="Enter Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-[12px] shadow-sm focus:outline-none focus:ring focus:ring-green-500" />
             </div>
           </div>
 
@@ -145,10 +175,11 @@ const Login = () => {
             </label>
             <div className="relative">
               <input
-                required
+                type="password"
                 placeholder="Enter Password"
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-[12px] shadow-sm focus:outline-none focus:ring focus:ring-green-500"
-              />
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-[12px] shadow-sm focus:outline-none focus:ring focus:ring-green-500" />
             </div>
           </div>
           <div className="flex items-center justify-end">
@@ -160,29 +191,28 @@ const Login = () => {
             type="submit"
             className="w-full h-[46px] py-2 px-4 bg-green-500 font-medium text-white rounded-[30px] shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 mt-4"
           >
-            Log In
+            {loading ? "Logging in..." : "Log In"}
           </button>
         </form>
 
         {/* Google Login Button */}
         <div className="mt-6 text-center">
-        <GoogleLogin
-  onSuccess={handleLoginSuccess}
-  onError={responseGoogle}
-  flow="auth-code"
-/>
+          <GoogleLogin
+            onSuccess={handleLoginSuccess}
+            onError={responseGoogle}
+            flow="auth-code" />
         </div>
 
         <div className="mt-6 text-center">
           <span className="text-sm text-gray-600">
-            Don't have an account? 
+            Don't have an account?
             <a className="text-gray-800 underline font-semibold" href="/register">
               Sign Up
             </a>
           </span>
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 
