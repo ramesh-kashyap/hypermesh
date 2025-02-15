@@ -43,14 +43,11 @@ const Register = () => {
 
     try {
       const response = await Api.post('auth/register', { fullName, email, password, repeatPassword, referralCode });
-
       if (response.data.status) {
-
           // Reset form after successful registration
           setFormData(initialState);
           setSuccess(true); // Show success message
           // toast.success("✅ Registration successful!");
-
       }
       else {
         toast.error(response.data.message || "Login failed");
