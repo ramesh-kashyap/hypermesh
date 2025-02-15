@@ -141,29 +141,7 @@ const NetworkSelect = () => {
                         </div>
                     </div>
                 </div>
-                <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg">
-                    <Link className="flex w-1/5 p-2 sm:p-[12px] flex-col items-center" to="/">
-                        <img alt="overview Icon" loading="lazy" width="20" height="20" src="/upnl/assets/icons/icon-overview.svg" style={{ color: 'transparent' }} />
-                        <span className="text-xs mt-1 text-gray-400">Overview</span>
-                    </Link>
-                    <Link className="flex w-1/5 p-2 sm:p-[12px] flex-col items-center" to="/nodes">
-                        <img alt="my_nodes Icon" loading="lazy" width="20" height="20" src="/upnl/assets/icons/icon-nodes.svg" style={{ color: 'transparent' }} />
-                        <span className="text-xs mt-1 text-gray-400">Nodes</span>
-                    </Link>
-                    <Link className="flex w-1/5 p-2 sm:p-[12px] flex-col items-center" to="/rewards">
-                        <img alt="rewards Icon" loading="lazy" width="20" height="20" src="/upnl/assets/icons/icon-rewards.svg" style={{ color: 'transparent' }} />
-                        <span className="text-xs mt-1 text-gray-400">Rewards</span>
-                    </Link>
-                    <Link className="flex w-1/5 p-2 sm:p-[12px] flex-col items-center" to="/referrals">
-                        <img alt="referrals Icon" loading="lazy" width="20" height="20" src="/upnl/assets/icons/icon-referrals.svg" style={{ color: 'transparent' }} />
-                        <span className="text-xs mt-1 text-gray-400">Referrals</span>
-                    </Link>
-                    <Link className="flex w-1/5 p-2 sm:p-[12px] flex-col items-center" to="/wallet">
-                        <img alt="wallet Icon" loading="lazy" width="20" height="20" src="/upnl/assets/icons/icon-wallet.svg" style={{ color: 'transparent' }} />
-                        <span className="text-xs mt-1 text-gray-400">Wallet</span>
-                    </Link>
-                  
-                </div>
+               
             </div>
         </div>
     );
