@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Api from "../../Requests/Api";
+import React, { useEffect, useState } from "react";
 
 const Dashboard = () => {
    const [balance, setBalance] = useState([]);
@@ -64,7 +62,7 @@ const Dashboard = () => {
                        }}>
                        <span  style={{
                        fontSize: '25px'
-                       }}> {Number(balance.totlinvest)} USDT</span></p>
+                       }}>sagar</span></p>
                        <p className="text-secondary"></p>
                     </div>
                  </div>
@@ -86,7 +84,7 @@ const Dashboard = () => {
                  }}>
                  <span style={{
                  fontSize: '25px'
-                 }}>{Number(balance.withdraw)} USDT</span></p>
+                 }}>100 USDT</span></p>
               </div>
            </div>
         </div>
