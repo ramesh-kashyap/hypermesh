@@ -63,6 +63,9 @@ const Profile = () => {
             setError("");
             toast.success("Password Updated Successfully");
 
+            // Reload after 5 seconds (5000 milliseconds)
+           
+
         } catch (err) {
             setError(err.message);
             toast.error("Failed to update Pssword: " + err.message);
@@ -94,6 +97,9 @@ const Profile = () => {
             if (response.data) {
                 setUser((prevUser) => ({ ...prevUser, name: newName })); // ✅ UI Update
                  toast.success("Profile Updated Successfully");
+                 setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             }
         } catch (error) {
             console.error("Error updating profile:", error);
