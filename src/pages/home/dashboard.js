@@ -449,25 +449,7 @@ const Dashboard = () => {
                   </div>
                </div>
             </div>
-            <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg">
-               <a className="flex w-1/5 p-[12px] flex-col items-center" to="/dashboard">
-                  <img alt="overview Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-overview.svg" style={{ color: 'transparent' }} />
-                  <span className="text-xs mt-1 text-gray-400">Overview</span>
-               </a>
-               <a className="flex w-1/5 p-[12px] flex-col items-center" to="/">
-                  <img alt="my_nodes Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-nodes.svg" style={{ color: 'transparent' }} />
-                  <span className="text-xs mt-1 text-gray-400">Nodes</span>
-               </a>
-               <a className="flex w-1/5 p-[12px] flex-col items-center" to="/">
-                  <img alt="referrals Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-referrals.svg" style={{ color: 'transparent' }} />
-                  <span className="text-xs mt-1 text-gray-400">Referrals</span>
-               </a>
-               <a className="flex w-1/5 p-[12px] flex-col items-center" to="/">
-                  <img alt="wallet Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-wallet.svg" style={{ color: 'transparent' }} />
-                  <span className="text-xs mt-1 text-green-500">Wallet</span>
-               </a>
-
-            </div>
+          
          </div>
       </div>
    );
