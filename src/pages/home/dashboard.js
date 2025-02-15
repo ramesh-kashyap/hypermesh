@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Api from "../../Requests/Api";
 
 const Dashboard = () => {
@@ -13,7 +14,7 @@ const Dashboard = () => {
     
         try {
           
-            const response =await  Api.get('auth/available-balance');                
+            const response =await Api.get('auth/available-balance');                
             setBalance(response.data);
             console.log(response.data)
         } catch (err) {
@@ -41,6 +42,7 @@ const Dashboard = () => {
                        }}><span style={{
                        fontSize: '25px'
                        }}> {balance.available_balance} USDT</span></p>
+                      
                        <p className="text-secondary"></p>
                     </div>
                  </div>
@@ -63,7 +65,7 @@ const Dashboard = () => {
                        }}>
                        <span  style={{
                        fontSize: '25px'
-                       }}>sagar</span></p>
+                       }}> {balance.withdraw} USDT</span></p>
                        <p className="text-secondary"></p>
                     </div>
                  </div>
@@ -85,7 +87,7 @@ const Dashboard = () => {
                  }}>
                  <span style={{
                  fontSize: '25px'
-                 }}>100 USDT</span></p>
+                 }}>{balance.withdraw} USDT</span></p>
               </div>
            </div>
         </div>
