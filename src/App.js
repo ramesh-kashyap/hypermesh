@@ -3,6 +3,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Team from './pages/team/Team';
 import Level from './pages/team/Level';
+import Investment from './pages/invest/Investment';
 
 import Node from './pages/team/Node';
 import Profile from './pages/profile/Profile';
@@ -48,6 +49,7 @@ function Layout({ children }) {
                             <Route path="/nodedetails" element={<ProtectedRoute><NodeDetails /></ProtectedRoute>} />
                             <Route path="/Team" element={<ProtectedRoute><Team /></ProtectedRoute>} />
                             <Route path="/Level" element={<ProtectedRoute><Level /></ProtectedRoute>} />
+                            <Route path="/Investment" element={<ProtectedRoute><Investment/></ProtectedRoute>} />
 
                             <Route path="/Wallet" element={<ProtectedRoute><Wallet /></ProtectedRoute>} />
                             <Route path="/Profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />

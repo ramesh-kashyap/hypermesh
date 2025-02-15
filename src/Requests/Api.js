@@ -39,6 +39,12 @@ Api.interceptors.response.use(
     }
 );
 
+// API function to send OTP
+export const sendOtp = (email) => Api.post("auth/send-code", { email });
+
+// API function to reset password
+export const resetPassword = (data) => Api.post("auth/reset-password", data);
+
 const Api2 = axios.create({
     baseURL: 'http://localhost:3002', // Make sure this is the correct backend port
   });
