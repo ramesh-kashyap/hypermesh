@@ -329,150 +329,150 @@ const Dashboard = () => {
                              618.0714285714286,42.3L 618.0714285714286,233A 5,5,0,0,1,
                              613.0714285714286,238L 599.0714285714286,238A 5,5,0,0,1,
                              594.0714285714286,233Z"></path>
-                       </g>
-                    </g>
-                    <g className="recharts-layer"></g>
-                    <g className="recharts-layer recharts-label-list">
-                       <text x="606.0714285714286"
-                          y="31.299999999999997" text-anchor="middle" fill="#666" font-size="11"
-                          font-weight="bold" className="z-[999]">25.2</text>
-                    </g>
-                 </g>
-                 </svg>
-                 <div tabindex="-1"
-                 className="recharts-tooltip-wrapper recharts-tooltip-wrapper-right recharts-tooltip-wrapper-bottom"
-                 style={{
-                 visibility: 'hidden',
-                 pointerEvents: 'none',
-                 position: 'absolute',
-                 top: '0px',
-                 left: '0px',
-                 transform: 'translate(77.3929px, 118px)'
-                 }}>
-              </div>
-           </div>
-        </div>
-     </div>
+                                 </g>
+                              </g>
+                              <g className="recharts-layer"></g>
+                              <g className="recharts-layer recharts-label-list">
+                                 <text x="606.0714285714286"
+                                    y="31.299999999999997" text-anchor="middle" fill="#666" font-size="11"
+                                    font-weight="bold" className="z-[999]">25.2</text>
+                              </g>
+                           </g>
+                        </svg>
+                        <div tabindex="-1"
+                           className="recharts-tooltip-wrapper recharts-tooltip-wrapper-right recharts-tooltip-wrapper-bottom"
+                           style={{
+                              visibility: 'hidden',
+                              pointerEvents: 'none',
+                              position: 'absolute',
+                              top: '0px',
+                              left: '0px',
+                              transform: 'translate(77.3929px, 118px)'
+                           }}>
+                        </div>
+                     </div>
+                  </div>
+               </div>
 
-     
-     <div className="flex space-x-4 mt-6">
-        <div className="flex items-center"><span
-           className="w-[22px] h-[22px] bg-green-500 rounded-full mr-2"></span><span
-           className="text-gray-600">Mining</span></div>
-        <div className="flex items-center"><span
-           className="w-[22px] h-[22px] bg-blue-500 rounded-full mr-2"></span><span
-           className="text-gray-600">Referrals</span></div>
-        <div className="flex items-center"><span
-           className="w-[22px] h-[22px] bg-[#FFCC00] rounded-full mr-2"></span><span
-           className="text-gray-600">Tasks</span></div>
-     </div>
-     </div>
-     <div className="col-span-1 lg:col-span-4 bg-white rounded-[16px] mt-6 p-5" >
-        <h2 className="text-[20px] font-medium text-primary text-center mb-3">Become Resource
-           Provider
-        </h2>
-        <div className="space-y-4">
-           <a 
-              className="relative min-h-[70px] h-full text-left w-full py-4 text-white font-semibold bg-[#003724] rounded-[16px] flex items-center justify-center space-x-2 overflow-hidden"
-              >
-              <div className="absolute top-[-50px] inset-0 flex items-center justify-center">
-                 <div className="w-[140%] h-[150%] rounded-full opacity-30"
-                 style={{
-                 backgroundColor: "#0093E9",
-                 backgroundImage: "linear-gradient(315deg, #0093E9 0%, #80D0C7 100%)"
-                 }}>
-              </div>
-        </div>
-        <div className="w-full"><span className="text-[16px] ml-4">Set Up Telegram Node</span>
-        </div><img alt="Set Up Telegram Node" loading="lazy" width="98" height="98" decoding="async"
-        data-nimg="1" src="/upnl/assets/images/telegram-svgrepo-com.svg"
-        style={{
-        color: 'transparent',
-        position: 'absolute',
-        bottom: '0px',
-        right: '10px',
-        marginBottom: '-5px',
-        opacity: '0.2'
-        }}/>
-        </a>
-        <a 
-           className="relative min-h-[70px] h-full text-left w-full py-4 text-white font-semibold bg-[#003724] rounded-[16px] flex items-center justify-center space-x-2 overflow-hidden"
-           >
-           <div className="absolute top-[-50px] inset-0 flex items-center justify-center">
-              <div className="w-[140%] h-[150%] rounded-full opacity-30"
-              style={{
-              backgroundColor: '#0093E9',
-              backgroundImage: 'linear-gradient(315deg, #0093E9 0%, #80D0C7 100%)'
-              }}>
-           </div>
-     </div>
-     <div className="w-full"><span className="text-[16px] ml-4">Install Browser
-     Extension</span></div><img alt="Install Browser Extension" loading="lazy" width="98"
-     height="98" decoding="async" data-nimg="1"
-     src="/upnl/assets/images/server-square-svgrepo-com.svg"
-     style={{
-     color: 'transparent',
-     position: 'absolute',
-     bottom: '0px',
-     right: '10px',
-     marginBottom: '-5px',
-     opacity: '0.2'
-     }}/>
-     </a>
-     <a 
-        className="relative min-h-[70px] h-full text-left w-full py-4 text-white font-semibold bg-[#003724] rounded-[16px] flex items-center justify-center space-x-2 overflow-hidden"
-        >
-        <div className="absolute top-[-50px] inset-0 flex items-center justify-center">
-           <div className="w-[140%] h-[150%] rounded-full opacity-30"
-           style={{
-           backgroundColor: '#0093E9',
-           backgroundImage: 'linear-gradient(315deg, #0093E9 0%, #80D0C7 100%)'
-           }}>
-        </div>
-        </div>
-        <div className="w-full"><span className="text-[16px] ml-4">Install Desktop Node</span>
-        </div>
-        <img alt="Install Desktop Node" loading="lazy" width="98" height="98" decoding="async"
-        data-nimg="1" src="/upnl/assets/images/extension-puzzle-sharp-svgrepo-com.svg"
-        style={{
-        color: 'transparent',
-        position: 'absolute',
-        bottom: '0px',
-        right: '10px',
-        marginBottom: '-5px',
-        opacity: '0.2'
-        }}/>
-     </a>
-     <div className="w-[140%] h-[150%] rounded-full opacity-30"
-     style={{
-     backgroundColor: '#0093E9',
-     backgroundImage: 'linear-gradient(315deg, #0093E9 0%, #80D0C7 100%)'
-     }}>
-     </div>
-     </div>
-     </div>
-     <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg">
-        <a className="flex w-1/5 p-[12px] flex-col items-center" to="/dashboard">
-        <img alt="overview Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-overview.svg" style={{ color: 'transparent' }} />
-        <span className="text-xs mt-1 text-gray-400">Overview</span>
-        </a>
-        <a className="flex w-1/5 p-[12px] flex-col items-center" to="/">
-        <img alt="my_nodes Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-nodes.svg" style={{ color: 'transparent' }} />
-        <span className="text-xs mt-1 text-gray-400">Nodes</span>
-        </a>
-        <a className="flex w-1/5 p-[12px] flex-col items-center" to="/">
-        <img alt="referrals Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-referrals.svg" style={{ color: 'transparent' }} />
-        <span className="text-xs mt-1 text-gray-400">Referrals</span>
-        </a>
-        <a className="flex w-1/5 p-[12px] flex-col items-center" to="/">
-        <img alt="wallet Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-wallet.svg" style={{ color: 'transparent' }} />
-        <span className="text-xs mt-1 text-green-500">Wallet</span>
-        </a>
-        
-     </div>
-     </div>
-     </div>   
-    );
+
+               <div className="flex space-x-4 mt-6">
+                  <div className="flex items-center"><span
+                     className="w-[22px] h-[22px] bg-green-500 rounded-full mr-2"></span><span
+                        className="text-gray-600">Mining</span></div>
+                  <div className="flex items-center"><span
+                     className="w-[22px] h-[22px] bg-blue-500 rounded-full mr-2"></span><span
+                        className="text-gray-600">Referrals</span></div>
+                  <div className="flex items-center"><span
+                     className="w-[22px] h-[22px] bg-[#FFCC00] rounded-full mr-2"></span><span
+                        className="text-gray-600">Tasks</span></div>
+               </div>
+            </div>
+            <div className="col-span-1 lg:col-span-4 bg-white rounded-[16px] mt-6 p-5" >
+               <h2 className="text-[20px] font-medium text-primary text-center mb-3">Become Resource
+                  Provider
+               </h2>
+               <div className="space-y-4">
+                  <a
+                     className="relative min-h-[70px] h-full text-left w-full py-4 text-white font-semibold bg-[#003724] rounded-[16px] flex items-center justify-center space-x-2 overflow-hidden"
+                  >
+                     <div className="absolute top-[-50px] inset-0 flex items-center justify-center">
+                        <div className="w-[140%] h-[150%] rounded-full opacity-30"
+                           style={{
+                              backgroundColor: "#0093E9",
+                              backgroundImage: "linear-gradient(315deg, #0093E9 0%, #80D0C7 100%)"
+                           }}>
+                        </div>
+                     </div>
+                     <div className="w-full"><span className="text-[16px] ml-4">Set Up Telegram Node</span>
+                     </div><img alt="Set Up Telegram Node" loading="lazy" width="98" height="98" decoding="async"
+                        data-nimg="1" src="/upnl/assets/images/telegram-svgrepo-com.svg"
+                        style={{
+                           color: 'transparent',
+                           position: 'absolute',
+                           bottom: '0px',
+                           right: '10px',
+                           marginBottom: '-5px',
+                           opacity: '0.2'
+                        }} />
+                  </a>
+                  <a
+                     className="relative min-h-[70px] h-full text-left w-full py-4 text-white font-semibold bg-[#003724] rounded-[16px] flex items-center justify-center space-x-2 overflow-hidden"
+                  >
+                     <div className="absolute top-[-50px] inset-0 flex items-center justify-center">
+                        <div className="w-[140%] h-[150%] rounded-full opacity-30"
+                           style={{
+                              backgroundColor: '#0093E9',
+                              backgroundImage: 'linear-gradient(315deg, #0093E9 0%, #80D0C7 100%)'
+                           }}>
+                        </div>
+                     </div>
+                     <div className="w-full"><span className="text-[16px] ml-4">Install Browser
+                        Extension</span></div><img alt="Install Browser Extension" loading="lazy" width="98"
+                           height="98" decoding="async" data-nimg="1"
+                           src="/upnl/assets/images/server-square-svgrepo-com.svg"
+                           style={{
+                              color: 'transparent',
+                              position: 'absolute',
+                              bottom: '0px',
+                              right: '10px',
+                              marginBottom: '-5px',
+                              opacity: '0.2'
+                           }} />
+                  </a>
+                  <a
+                     className="relative min-h-[70px] h-full text-left w-full py-4 text-white font-semibold bg-[#003724] rounded-[16px] flex items-center justify-center space-x-2 overflow-hidden"
+                  >
+                     <div className="absolute top-[-50px] inset-0 flex items-center justify-center">
+                        <div className="w-[140%] h-[150%] rounded-full opacity-30"
+                           style={{
+                              backgroundColor: '#0093E9',
+                              backgroundImage: 'linear-gradient(315deg, #0093E9 0%, #80D0C7 100%)'
+                           }}>
+                        </div>
+                     </div>
+                     <div className="w-full"><span className="text-[16px] ml-4">Install Desktop Node</span>
+                     </div>
+                     <img alt="Install Desktop Node" loading="lazy" width="98" height="98" decoding="async"
+                        data-nimg="1" src="/upnl/assets/images/extension-puzzle-sharp-svgrepo-com.svg"
+                        style={{
+                           color: 'transparent',
+                           position: 'absolute',
+                           bottom: '0px',
+                           right: '10px',
+                           marginBottom: '-5px',
+                           opacity: '0.2'
+                        }} />
+                  </a>
+                  <div className="w-[140%] h-[150%] rounded-full opacity-30"
+                     style={{
+                        backgroundColor: '#0093E9',
+                        backgroundImage: 'linear-gradient(315deg, #0093E9 0%, #80D0C7 100%)'
+                     }}>
+                  </div>
+               </div>
+            </div>
+            <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg">
+               <a className="flex w-1/5 p-[12px] flex-col items-center" to="/dashboard">
+                  <img alt="overview Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-overview.svg" style={{ color: 'transparent' }} />
+                  <span className="text-xs mt-1 text-gray-400">Overview</span>
+               </a>
+               <a className="flex w-1/5 p-[12px] flex-col items-center" to="/">
+                  <img alt="my_nodes Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-nodes.svg" style={{ color: 'transparent' }} />
+                  <span className="text-xs mt-1 text-gray-400">Nodes</span>
+               </a>
+               <a className="flex w-1/5 p-[12px] flex-col items-center" to="/">
+                  <img alt="referrals Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-referrals.svg" style={{ color: 'transparent' }} />
+                  <span className="text-xs mt-1 text-gray-400">Referrals</span>
+               </a>
+               <a className="flex w-1/5 p-[12px] flex-col items-center" to="/">
+                  <img alt="wallet Icon" loading="lazy" width="20" height="20" decoding="async" src="/upnl/assets/icons/icon-wallet.svg" style={{ color: 'transparent' }} />
+                  <span className="text-xs mt-1 text-green-500">Wallet</span>
+               </a>
+
+            </div>
+         </div>
+      </div>
+   );
 };
 
 export default Dashboard;
