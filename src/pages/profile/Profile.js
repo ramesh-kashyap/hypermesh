@@ -41,18 +41,25 @@ const Profile = () => {
 
 
 
-     // ✅ OTP Send Karne ka Function
-     const handleSendOtp = async () => {
+    const handleSendOtp = async () => {
+        console.log("handleSendOtp function called");
         try {
             const response = await sendOtp(email);
+            console.log("API Response in handleSendOtp:", response);
+    
             setMessage(response.message);
             setError("");
+            toast.success("Send Otp Successfully");
+
         } catch (err) {
+            console.error("Error in handleSendOtp:", err);
             setError(err.message);
+            toast.error("Failed to Send OTP: " + err.message);
+
         }
     };
+    
 
-    // ✅ Password Reset Karne ka Function
     const handleResetPassword = async (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
@@ -63,12 +70,15 @@ const Profile = () => {
             const response = await resetPassword(email, code, password);
             setMessage(response.message);
             setError("");
+            toast.success("Password Updated Successfully");
+
         } catch (err) {
             setError(err.message);
+            toast.error("Failed to update Pssword: " + err.message);
+
         }
     };
 
-    // Fetch user profile when profile popup is opened
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
@@ -76,7 +86,6 @@ const Profile = () => {
                 if (response.data) {
                     setUser(response.data);
                     setNewName(response.data.name); 
-                    setEmail(response.data.email); 
                 }
             } catch (error) {
                 console.error("Error fetching user profile:", error);
@@ -143,6 +152,8 @@ const Profile = () => {
                            
                             <form>
                                 <input type="hidden" name="_token" value="KKX0De0b1aF69ZyhV4ctcUqPaDEGxVrpSEIoZILh" />
+                                {message && <p className="text-green-500">{message}</p>}
+                                {error && <p className="text-red-500">{error}</p>}
                                 {message && <p className="text-green-500">{message}</p>}
                                 {error && <p className="text-red-500">{error}</p>}
                                 <div className="bg-white rounded-[20px] w-[400px] px-8 pt-10 pb-6 text-center relative">
