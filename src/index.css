@@ -12,18 +12,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
-.register-success.fixed.inset-0.z-50.flex.items-center.justify-center.bg-black.bg-opacity-50 {
-  display: none !important;
-}
-.register-success.fixed.inset-0.z-50.flex.items-center.justify-center.bg-black.bg-opacity-50.show {
-  display: flex !important;
-}
-@media (min-width: 768px) {
-  .md\:flex {
-      display: unset;
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
   }
+
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+  #customers tr:hover {background-color: #ddd;}
+
+  #customers th { 
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #52bad3;
+    color: white;
+  }
+  @media (min-width: 768px) {
+    .md\:flex {
+        display: unset;
+    }
 }
+.my-5 {
+  margin-top: 3.25rem;
+  margin-bottom: 1.25rem;
+}
+
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
