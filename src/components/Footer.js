@@ -92,7 +92,7 @@ const Footer = () => {
           src="/upnl/assets/icons/icon-profile.svg"
           style={{ color: 'transparent' }}
         />
-        <span className="text-xs mt-1 text-white">Profile</span>
+        <span className="text-xs mt-1 text-white">raj</span>
       </Link>
       
     </div>
