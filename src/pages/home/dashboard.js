@@ -64,7 +64,7 @@ const Dashboard = () => {
                        }}>
                        <span  style={{
                        fontSize: '25px'
-                       }}> {Number(balance.withdraw)} USDT</span></p>
+                       }}> {Number(balance.totlinvest)} USDT</span></p>
                        <p className="text-secondary"></p>
                     </div>
                  </div>
