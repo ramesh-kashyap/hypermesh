@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Api from "../../Requests/Api";
 
 const Dashboard = () => {
    const [balance, setBalance] = useState([]);
@@ -12,7 +13,7 @@ const Dashboard = () => {
     
         try {
           
-            const response =await Api.get('auth/available-balance');                
+            const response =await  Api.get('auth/available-balance');                
             setBalance(response.data);
             console.log(response.data)
         } catch (err) {
