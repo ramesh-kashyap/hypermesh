@@ -1,5 +1,8 @@
 import React from 'react';
 import { ThreeDots } from 'react-loader-spinner';
+import { ClipLoader } from "react-spinners";
+import { DotLoader } from "react-spinners";
+
 export default function Loader() {
   return (
 <div className="spinner-container" style={{ position:'absolute',top:'50%',left:'50%' }}>

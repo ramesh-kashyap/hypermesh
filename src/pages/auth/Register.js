@@ -4,14 +4,18 @@ import { Link } from 'react-router-dom';
 import Api from "../../Requests/Api";
 import { Toaster, toast } from "react-hot-toast";
 const Register = () => {
-  const [formData, setFormData] = useState({
+
+  const initialState = {
     fullName: "",
     email: "",
     password: "",
     repeatPassword: "",
     referralCode: ""
-  });
+};
+
+  const [formData, setFormData] = useState(initialState);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false); // Track success state
 
   // Handle input change
   const handleChange = (e) => {
@@ -21,7 +25,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    setSuccess(false); // Hide success message before new submission
     const { fullName, email, password, repeatPassword, referralCode } = formData;
 
     // Basic validation
@@ -39,13 +43,11 @@ const Register = () => {
 
     try {
       const response = await Api.post('auth/register', { fullName, email, password, repeatPassword, referralCode });
-
       if (response.data.status) {
-
-
-
-        toast.success("✅ Registration successful!");
-
+          // Reset form after successful registration
+          setFormData(initialState);
+          setSuccess(true); // Show success message
+          // toast.success("✅ Registration successful!");
       }
       else {
         toast.error(response.data.message || "Login failed");
@@ -62,12 +64,14 @@ const Register = () => {
 
   return (
    <><Toaster position="top-center" /><div className="min-h-screen flex flex-col items-center justify-center pt-[100px] bg-gray-50 p-6">
-      <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" style={{ display: 'none' }}>
+      <div  className={`register-success fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50  ${success ? "show" : ""}`}  style={{backgroundColor:'rgb(0 0 0/var(--tw-bg-opacity))',backgroundImage:'none'  }} >
         <div class="bg-[#FFF] rounded-[20px] px-8 pt-10 pb-6 w-[400px] max-w-[90%] text-center">
           <img alt="Success" loading="lazy" width="80" height="80" decoding="async" data-nimg="1" class="mx-auto" src="/upnl/assets/icons/icon_success.svg" style={{ width: "80px" }} />
           <p class="text-[24px] font-semibold text-primary mt-8 mb-2">Your account has been successfully created!</p>
           <p class="text-secondary text-sm">Start mining tokens and earning rewards right away</p>
+          <Link to="/login">
           <button class="w-full mt-10 bg-[#171717] text-white h-[46px] py-2 rounded-[30px]" style={{ color: "#fff" }}>Log in</button>
+          </Link>
         </div>
       </div>
       <div className="absolute top-6 flex justify-between w-full px-6">

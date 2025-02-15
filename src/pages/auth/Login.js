@@ -30,7 +30,7 @@ const Login = () => {
         if (response.data.status) 
           {
             toast.success("Login successful!");
-            localStorage.setItem("token", response.token); // Save JWT token
+            localStorage.setItem("token", response.data.token); // Save JWT token
             console.log("User Logged In:", response);
             // Navigate to a protected route (e.g., /dashboard)
             navigate('/dashboard');
