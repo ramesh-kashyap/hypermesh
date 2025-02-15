@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThreeDots } from 'react-loader-spinner';
-import { ClipLoader } from "react-spinners";
-import { DotLoader } from "react-spinners";
+// import { ClipLoader } from "react-spinners";
+// import { DotLoader } from "react-spinners";
 
 export default function Loader() {
   return (
