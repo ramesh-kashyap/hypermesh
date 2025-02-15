@@ -1,10 +1,26 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Api from "../../Requests/Api";
 
 const Dashboard = () => {
-   const [user, setUser] = useState(null);
+   const [balance, setBalance] = useState([]);
+    const [error, setError] = useState("");
 
- 
 
+    useEffect(() => {
+        fetchbalance();
+    }, []);
+    const fetchbalance = async () => {
+    
+        try {
+          
+            const response =await Api.get('auth/available-balance');                
+            setBalance(response.data);
+            console.log(response.data)
+        } catch (err) {
+            setError(err.response?.data?.error || "Error fetching income");
+        }
+    };
     return (
         
         <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
@@ -25,7 +41,7 @@ const Dashboard = () => {
                        fontFamily: 'ClashDisplay-Semibold'
                        }}><span style={{
                        fontSize: '25px'
-                       }}> 1000 USDT</span></p>
+                       }}> {balance.available_balance} USDT</span></p>
                        <p className="text-secondary"></p>
                     </div>
                  </div>
@@ -48,7 +64,7 @@ const Dashboard = () => {
                        }}>
                        <span  style={{
                        fontSize: '25px'
-                       }}>sagar</span></p>
+                       }}> {balance.withdraw} USDT</span></p>
                        <p className="text-secondary"></p>
                     </div>
                  </div>
@@ -70,7 +86,7 @@ const Dashboard = () => {
                  }}>
                  <span style={{
                  fontSize: '25px'
-                 }}>100 USDT</span></p>
+                 }}>{balance.withdraw} USDT</span></p>
               </div>
            </div>
         </div>
