@@ -221,7 +221,7 @@ const Profile = () => {
                                 <div className="w-[100px] my-10 h-[100px] mx-auto cursor-pointer">
                                     <div className="w-full h-full rounded-full mx-auto text-[72px] font-semibold"
                                         style={{ background: 'rgb(45, 169, 221)', fontFamily: 'ClashDisplay-Semibold' }}>
-                                        {user.name?.charAt(0).toUpperCase() || "U"}
+                                        {user?.name.charAt(0).toUpperCase() || "U"}
                                     </div>
                                 </div>
                                 <div className="mb-4 text-left">
