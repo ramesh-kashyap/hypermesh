@@ -85,3 +85,7 @@ margin-bottom: 1.25rem;
     background-color: #52bad3;
     color: white;
   }
+  .text-white {
+    --tw-text-opacity: 1;
+    color: #000000;
+}
