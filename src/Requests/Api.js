@@ -39,11 +39,34 @@ Api.interceptors.response.use(
     }
 );
 
-// API function to send OTP
-export const sendOtp = (email) => Api.post("auth/send-code", { email });
 
-// API function to reset password
-export const resetPassword = (data) => Api.post("auth/reset-password", data);
+
+export const sendOtp = async (email) => {
+    try {
+        console.log("OTP function called with email:", email);
+        const response = await Api.post("auth/send-code", { email });
+
+        console.log("Response from API:", response); // Ye check karein
+
+        return response.data;
+    } catch (error) {
+        console.error("Error in sendOtp:", error);
+        throw error.response?.data || { message: "Something went wrong" };
+    }
+};
+
+
+// ✅ Password Reset ka function
+export const resetPassword = async (email, code, password) => {
+    try {
+        const response = await Api.post("auth/reset-password", { email, code, PSR: password });
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { message: "Something went wrong" };
+    }
+};
+
+
 
 const Api2 = axios.create({
     baseURL: 'http://localhost:3002', // Make sure this is the correct backend port
