@@ -20,6 +20,9 @@ import Content from './pages/home/Content';
 
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+import Footer from './components/Footer';
+
+
 import NodeDetails from './pages/home/NodeDetails';
 import ForgotPassword from "./pages/auth/ForgotPassword"; // Import Forgot Password Page
 import ResetPassword from "./pages/auth/ResetPassword"; // Import Forgot Password Page
@@ -37,8 +40,12 @@ function Layout({ children }) {
                 <div className="w-full max-w-[1920px] flex bg-white shadow-lg">
                     {!hideLayout && <Sidebar />}
                     <div className="flex-1 flex flex-col text-black bg-[#F1F1F1] h-screen">
-                        {!hideLayout && <Header />}
+                        {!hideLayout && <Header />  }
+                        {!hideLayout && <Footer />  }
+
+
                         <Routes>
+                            
                             
                         <Route path="/" element={<Navigate to="/login" />} />
                         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />

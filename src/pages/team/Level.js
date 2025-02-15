@@ -2,25 +2,37 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Api from "../../Requests/Api";
 import Loader from "../../components/Loader";
+import { useLocation } from "react-router-dom";
+
 
 const Level = () => {
+    const location = useLocation();
     const [level, setLevel] = useState([]);
     const [error, setError] = useState("");
     const [users, setUsers] = useState([]);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [limit] = useState(10); // Default limit
-    const [selectedLevel, setSelectedLevel] = useState(0);
+    const [selectedLevel, setSelectedLevel] = useState(null);
     const [loading, setLoading] = useState(false);
     const { lvl } = useParams(); // 🔹 Get the 'lvl' parameter from URL
 
     useEffect(() => {
         loadUsers();
-    }, [page, selectedLevel]);
+    }, []);
+
     const loadUsers = async () => {
         setLoading(true);
-        try {
-            const reaponse = await Api.get('auth/list', { limit, page, selected_level: selectedLevel, search });
+        try {     
+            const queryParams = new URLSearchParams(location.search);
+            const level = queryParams.get("selected_level"); // Get value from query param
+            setSelectedLevel(level);
+
+            console.log(level);
+            const reaponse = await Api.get("auth/list", {
+            params: { // ✅ Ensure query parameters are passed correctly
+                selected_level: level || 0 },
+        });
 
             if (reaponse.data.status) {
                 setUsers(reaponse.data.direct_team);
@@ -58,6 +70,7 @@ const Level = () => {
         loadUsers();
     };
 
+  
     const handleLevelChange = (e) => {
         setSelectedLevel(e.target.value);
         setPage(1); // Reset page on level change
@@ -105,28 +118,7 @@ const Level = () => {
 
                 </div>
             </div>
-            <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg">
-                <a className="flex w-1/5 p-[12px] flex-col items-center" href="dashboard">
-                    <img alt="Overview Icon" loading="lazy" width="20" height="20" src="upnl/assets/icons/icon-overview.svg" />
-                    <span className="text-xs mt-1 text-gray-400">Overview</span>
-                </a>
-                <a className="flex w-1/5 p-[12px] flex-col items-center" href="Node">
-                    <img alt="My Nodes Icon" loading="lazy" width="20" height="20" src="upnl/assets/icons/icon-nodes.svg" />
-                    <span className="text-xs mt-1 text-gray-400">Nodes</span>
-                </a>
-                <a className="flex w-1/5 p-[12px] flex-col items-center" href="team">
-                    <img alt="Referrals Icon" loading="lazy" width="20" height="20" src="upnl/assets/icons/icon-referrals.svg" />
-                    <span className="text-xs mt-1 text-gray-400">Referrals</span>
-                </a>
-                <a className="flex w-1/5 p-[12px] flex-col items-center" href="wallet">
-                    <img alt="Wallet Icon" loading="lazy" width="20" height="20" src="upnl/assets/icons/icon-wallet.svg" />
-                    <span className="text-xs mt-1 text-green-500">Wallet</span>
-                </a>
-                <a className="flex w-1/5 p-[12px] flex-col items-center" href="Profile">
-                    <img alt="Profile Icon" loading="lazy" width="20" height="20" src="upnl/assets/icons/icon-wallet.svg" />
-                    <span className="text-xs mt-1 text-green-500">Profile</span>
-                </a>
-            </div>
+         
         </div>
     );
 };
