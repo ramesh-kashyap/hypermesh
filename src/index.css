@@ -17,3 +17,12 @@ code {
 .register-success.fixed.inset-0.z-50.flex.items-center.justify-center.bg-black.bg-opacity-50.show {
   display: flex !important;
 }
+@media (min-width: 768px) {
+  .md\:flex {
+      display: unset;
+  }
+}
+.my-5 {
+  margin-top: 47px;
+  margin-bottom: 1.25rem;
+}
