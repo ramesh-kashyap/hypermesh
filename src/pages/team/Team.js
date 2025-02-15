@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import Api from "../../Requests/Api";
 const Team = () => {
+    const navigate = useNavigate(); 
     const copyToClipboard = () => {
         const textToCopy = document.getElementById('textToCopy').innerText;
         navigator.clipboard.writeText(textToCopy).then(() => {
@@ -35,6 +38,11 @@ const Team = () => {
             setError(err.response?.data?.error || "Error fetching income");
         }
     };
+
+
+
+
+
 
     return (
         <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
@@ -106,7 +114,9 @@ const Team = () => {
                             <div className="text-right hidden sm:block">Today Rewards</div>
                         </div>
                     </div>
-                    <div className="space-y-4">
+
+                    
+                    <div className="space-y-4" onClick={() => navigate("/level?selected_level=1")}>
                     {/* {income.data?.totalTeam} */}
                                                
                             <a >
@@ -156,7 +166,7 @@ const Team = () => {
                  </div>
 
 
-                 <div className="space-y-4">
+                 <div className="space-y-4" onClick={() => navigate("/level?selected_level=2")}>
                     {/* {income.data?.totalTeam} */}
                                                
                             <a >
@@ -201,7 +211,7 @@ const Team = () => {
                 
                 
                  </div>
-                 <div className="space-y-4">
+                 <div className="space-y-4" onClick={() => navigate("/level?selected_level=3")} >
                     {/* {income.data?.totalTeam} */}
                                                
                             <a >
@@ -246,7 +256,7 @@ const Team = () => {
                 
                 
                  </div>
-                 <div className="space-y-4">
+                 <div className="space-y-4" onClick={() => navigate("/level?selected_level=4")}>
                     {/* {income.data?.totalTeam} */}
                                                
                             <a >
@@ -291,7 +301,7 @@ const Team = () => {
                 
                 
                  </div>
-                 <div className="space-y-4">
+                 <div className="space-y-4" onClick={() => navigate("/level?selected_level=5")}>
                     {/* {income.data?.totalTeam} */}
                                                
                             <a >
@@ -336,7 +346,7 @@ const Team = () => {
                 
                 
                  </div>
-                    <div className="space-y-4">
+                    <div className="space-y-4" onClick={() => navigate("/level?selected_level=6")}>
                     {/* {income.data?.totalTeam} */}
                                                
                             <a >
