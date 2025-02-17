@@ -23,6 +23,8 @@ const WithdrawComponent = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [address, setAddress] = useState(""); 
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
 
 
@@ -46,8 +48,9 @@ const WithdrawComponent = () => {
   useEffect(() => {
     const fetchWithdraws = async () => {
         try {
-            const response = await api.get("auth/withdraws");
-            setWithdraws(response.data);
+            const response = await api.get(`auth/withdraws?page=${page}&limit=5`);
+            setWithdraws(response.data.withdraws);
+            setTotalPages(response.data.totalPages);
         } catch (err) {
             setError("Failed to fetch withdraw history");
         } finally {
@@ -56,7 +59,7 @@ const WithdrawComponent = () => {
     };
 
     fetchWithdraws();
-}, []);
+}, [page]); // Depend on page change
 
 const handleWithdraw = async () => {
   try {
@@ -95,7 +98,6 @@ const handleWithdraw = async () => {
 
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
     return (
      <div className="relative">
         <button
@@ -210,54 +212,66 @@ const handleWithdraw = async () => {
           <div className="bg-white rounded-[16px] p-6 lg:col-span-2 xl:col-span-1">
             <h3 className="font-semibold mb-3">History</h3>
             <div className="space-y-4 h-full">
-              {/* Check if withdrawals exist */}
-              {withdraws.length > 0 ? (
-                <>
-                  {/* Table Headers */}
-                 
+                {withdraws.length > 0 ? (
+                    <>
+                        {withdraws.map((withdrawal, index) => (
+                            <div key={index} className="flex justify-between items-center py-2 border-b">
+                                <div className="w-1/2">
+                                    <p className="font-medium">Withdraw</p>
+                                    <p className="text-secondary font-light text-sm">
+                                        {new Date(withdrawal.created_at).toLocaleString("en-US", {
+                                            year: "numeric",
+                                            month: "short",
+                                            day: "2-digit",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            second: "2-digit",
+                                            hour12: true,
+                                        })}
+                                    </p>
+                                </div>
+                                <p style={{ color: "red" }} className="text-green-500">
+                                    <span>-{withdrawal.amount}</span>
+                                </p>
+                            </div>
+                        ))}
 
-                  {/* Display withdrawals */}
-                  {withdraws.map((withdrawal, index) => (
-                    
-                    <div key={index} className="flex justify-between items-center py-2 border-b">
-                      <div className="w-1/2">
-                      <p className="font-medium">Withdraw</p>
-                      <p className="text-secondary font-light text-sm">
-  {new Date(withdrawal.created_at).toLocaleString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  })}
-</p>
-                      </div>
-                      <p style={{ color:"red", }} className="text-green-500">
-                        <span>-{withdrawal.amount} </span>
-                      </p>
+                        {/* Pagination Controls */}
+                        <div className="flex justify-center mt-4">
+                            <button
+                                onClick={() => setPage(page - 1)}
+                                disabled={page === 1}
+                                className="px-4 py-2 mx-2 bg-gray-300 rounded disabled:opacity-50"
+                            >
+                                 {"<<"}
+                            </button>
+                            <span className="px-4 py-2">Page {page} of {totalPages}</span>
+                            <button
+                                onClick={() => setPage(page + 1)}
+                                disabled={page === totalPages}
+                                className="px-4 py-2 mx-2 bg-gray-300 rounded disabled:opacity-50"
+                            >
+                                        {">>"}
+
+                            </button>
+                        </div>
+                    </>
+                ) : (
+                    <div className="flex h-full justify-center items-center w-full text-secondary">
+                        <div className="w-full text-center">
+                            <img
+                                style={{ width: "60px", height: "60px" }}
+                                alt="Icon Empty"
+                                loading="lazy"
+                                className="mx-auto mb-2"
+                                src="upnl/assets/icons/empty_state.svg"
+                            />
+                            <span>No transactions found</span>
+                        </div>
                     </div>
-                  ))}
-                </>
-              ) : (
-                <div className="flex h-full justify-center items-center w-full text-secondary">
-                  <div className="w-full text-center">
-                    <img
-                      style={{ width: "60px", height: "60px" }}
-                      alt="Icon Empty"
-                      loading="lazy"
-                      width="64"
-                      height="40"
-                      className="mx-auto mb-2"
-                      src="upnl/assets/icons/empty_state.svg"
-                    />
-                    <span>No transactions found</span>
-                  </div>
-                </div>
-              )}
+                )}
             </div>
-          </div>
+        </div>
         </div>
       </div>
     </div></>
