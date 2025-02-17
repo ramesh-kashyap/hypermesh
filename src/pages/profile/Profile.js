@@ -30,7 +30,12 @@ const Profile = () => {
         setProfilePopupOpen(!isProfilePopupOpen);
     };
 
-
+// Function to handle outside click and close popup
+const handleOutsideClick = (event, setPopupState) => {
+  if (event.target.id === "popup-overlay") {
+    setPopupState(false);
+  }
+};
 
     const handleSendOtp = async () => {
         console.log("handleSendOtp function called");
@@ -62,9 +67,7 @@ const Profile = () => {
             setMessage(response.message);
             setError("");
             toast.success("Password Updated Successfully");
-            setTimeout(() => {
-                window.location.reload();
-            }, 3000);
+           
             // Reload after 5 seconds (5000 milliseconds)
            
 
@@ -100,9 +103,7 @@ const Profile = () => {
             if (response.data) {
                 setUser((prevUser) => ({ ...prevUser, name: newName })); // ✅ UI Update
                  toast.success("Profile Updated Successfully");
-                 setTimeout(() => {
-                    window.location.reload();
-                }, 3000);
+                 
             }
         } catch (error) {
             console.error("Error updating profile:", error);
@@ -147,7 +148,7 @@ const Profile = () => {
 
                     {isPasswordPopupOpen && (
 
-                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setPasswordPopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
 
                             <form>
                                 <input type="hidden" name="_token" value="KKX0De0b1aF69ZyhV4ctcUqPaDEGxVrpSEIoZILh" />
@@ -187,8 +188,8 @@ const Profile = () => {
 
 
                     {isTrxPasswordPopupOpen && (
-                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                            <form method="post" action="user/edit-password">
+                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setTrxPasswordPopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                            <form>
                                 <input type="hidden" name="_token" value="KKX0De0b1aF69ZyhV4ctcUqPaDEGxVrpSEIoZILh" />
                                 <div className="bg-white rounded-[20px] w-[400px] px-8 pt-10 pb-6 text-center relative">
                                     <h2 className="text-lg font-semibold">Change Transaction Password</h2>
@@ -224,7 +225,7 @@ const Profile = () => {
 
                     {/* Edit Profile Modal */}
                     {isProfilePopupOpen && (
-                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setProfilePopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                             <div className="bg-white rounded-[20px] w-[400px] px-8 pt-10 pb-6 text-center relative">
                                 <h2 className="text-lg font-semibold">Edit Profile</h2>
                                 <div className="w-[100px] my-10 h-[100px] mx-auto cursor-pointer">
