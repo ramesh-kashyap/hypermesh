@@ -86,11 +86,10 @@ const Level = () => {
             <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between" key={index} style={{marginBottom: 24}} >
                 <div>
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-[20px] font-medium text-black">{user.name} lvl {user.level} </h3>
-                        
-                        <a href="/nodes">
+                        <h3 class="text-[20px] font-medium text-black">{user.name} </h3>
+                     
                             <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">{user.active_status}<span class="ml-1">→</span></button>
-                        </a>
+                      
                     </div>
                 </div>
                 <div class="space-y-2 h-fit">
@@ -103,7 +102,7 @@ const Level = () => {
                         <span class="text-xs">{user.username} </span>
                     </div>
                     <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
-                        <span class="text-xs">Package</span><span class="text-xs">{user.package} USDT</span>
+                        <span class="text-xs">Deposits</span><span class="text-xs"> <img src="/upnl/assets/icons/logo_usdt_2.svg" style={{float:'left'}} /> &nbsp;&nbsp; {Number(user.package,).toFixed(2)}</span>
                     </div>
                 </div>
             
