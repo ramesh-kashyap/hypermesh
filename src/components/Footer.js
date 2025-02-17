@@ -62,7 +62,7 @@ const Footer = () => {
 
       {/* Profile link */}
       <Link
-        to="wallet" // Replace with the actual route
+        to="/wallet" // Replace with the actual route
         className="flex w-1/5 p-[12px] flex-col items-center"
       >
         <img
@@ -79,7 +79,7 @@ const Footer = () => {
       </Link>
 
       <Link
-        to="Profile" // Replace with the actual route
+        to="/Profile" // Replace with the actual route
         className="flex w-1/5 p-[12px] flex-col items-center"
       >
         <img
