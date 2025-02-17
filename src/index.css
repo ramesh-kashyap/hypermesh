@@ -46,3 +46,9 @@ code {
 margin-top: 3.25rem;
 margin-bottom: 1.25rem;
 }
+.register-success.fixed.inset-0.z-50.flex.items-center.justify-center.bg-black.bg-opacity-50 {
+  display: none;
+}
+.register-success.fixed.inset-0.z-50.flex.items-center.justify-center.bg-black.bg-opacity-50.show {
+  display: flex;
+}
