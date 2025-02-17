@@ -4,6 +4,7 @@ import Register from './pages/auth/Register';
 import Team from './pages/team/Team';
 import Level from './pages/team/Level';
 import Investment from './pages/invest/Investment';
+import { Toaster } from "react-hot-toast";
 
 import Node from './pages/team/Node';
 import Profile from './pages/profile/Profile';
@@ -36,7 +37,7 @@ function Layout({ children }) {
 
     return (
         <div id="__next">
-            <div className="Toastify"></div>
+            <Toaster position="top-center" />
             <div className="w-full h-screen flex justify-center">
                 <div className="w-full max-w-[1920px] flex bg-white shadow-lg">
                     {!hideLayout && <Sidebar />}

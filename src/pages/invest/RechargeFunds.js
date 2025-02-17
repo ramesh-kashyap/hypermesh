@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { QRCodeCanvas } from "qrcode.react";
+import { Toaster, toast } from "react-hot-toast";
 
 import axios from "axios";
 import Api from "../../Requests/Api";
@@ -9,10 +11,14 @@ const RechargeFunds = () => {
     const [isCollapsed, setIsCollapsed] = useState(true);
     const [isBinanceVisible, setBinanceVisible] = useState(false);
     const [isEthereumVisible, setEthereumVisible] = useState(false);
-
+    const [blockchain, setBlockchain] = useState("BSC");
+    const [qrCode, setQrCode] = useState("");
+    const [walletAddress, setWalletAddress] = useState("");
+    const [copied, setCopied] = useState(false);
 
     useEffect(() => {
         fetchUsers();
+        
     }, []);
     
     const fetchUsers = async () => {
@@ -34,8 +40,26 @@ const RechargeFunds = () => {
         }
     };
 
-    const toggleCollapse = () => {
-        setIsCollapsed(!isCollapsed);
+   
+
+    const toggleCollapse = async (blockchain,isClose) => {
+
+        if (isClose) {
+            try {
+                const response = await Api.post('auth/recharge', { blockchain});
+                if (response.data.status) 
+                    {
+                        setBlockchain(response.data.blockchain);
+                        setWalletAddress(response.data.wallet);
+                   }
+                
+            } catch (error) {
+                console.error("Error generating payment");
+            }   
+        }
+        
+        
+        setIsCollapsed(!isCollapsed)
     };
 
     const toggleBinanceVisibility = () => {
@@ -50,6 +74,13 @@ const RechargeFunds = () => {
 
  
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(walletAddress).then(() => {
+            setCopied(true);
+                toast.success("Copied!");
+            setTimeout(() => setCopied(false), 2000); // Reset after 2 sec
+        });
+    };
 
  
     return (
@@ -72,14 +103,14 @@ const RechargeFunds = () => {
                         <h2 className="text-xl sm:text-2xl font-bold">Deposit</h2>
                         <br></br>
                         <div className="flex justify-between items-center w-full bg-[#F9F9F9] rounded-[27px] px-[40px] max-sm:px-[20px] py-[4px] max-sm:py-[10px] text-[14px] text-[#999999] my-4 sm:my-6 sm:py-6 max-sm:gap-0">
-                            <span className="text-center text-[#171717] cursor-pointer" onClick={toggleBinanceVisibility}>Select token</span>
+                            <span className="text-center text-[#171717] cursor-pointer"  onClick={() => toggleBinanceVisibility('BSC', false)} >Select token</span>
                             <img alt="right-arrow" loading="lazy" width="30" height="30" src="/upnl/assets/icons/right-arrow-inactive.svg" style={{ color: 'transparent' }} />
                             <span className="text-center">Deposit details</span>
                         </div>
                         <br />
                         <div>
                             {/* Collapsed Div */}
-                            <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={toggleCollapse}>
+                            <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={() => toggleCollapse('BSC', true)}>
                                 <div className="py-4 flex items-center space-x-2 lg:space-x-3 text-sm">
                                     <img alt="BNB logo" loading="lazy" width="40" height="40" src="/upnl/assets/icons/bnb-logo.png" style={{ color: 'transparent', marginLeft: '10px', width: '36px' }} />
                                     <div>
@@ -92,7 +123,7 @@ const RechargeFunds = () => {
 
                             {/* Expanded Div */}
                             {!isCollapsed && (
-                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={toggleCollapse}>
+                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px]  hover:bg-[#ebe8e8]">
                                     <div className="py-4 flex items-start space-x-2 lg:space-x-3 text-sm" style={{ marginLeft: '10px' }}>
 
                                         <div>
@@ -117,22 +148,19 @@ const RechargeFunds = () => {
                                             <div className="flex flex-col items-center">
                                                 <div className="grid grid-cols-3 gap-4 w-full mt-5 p-6 bg-[#F9F9F9] rounded-[20px]">
                                                     <div className="col-span-3 text-center text-[#999999] text-[14px]">
+                                                    <center>
                                                         Send BNB tokens to the QR code or address below.
+                                                        </center>
                                                     </div>
 
                                                     {/* QR Code */}
                                                     <div className="col-span-2 md:col-span-1">
-                                                        <img
-                                                            style={{
-                                                                width: "200px",
-
-                                                                margin: "0px auto",
-                                                            }}
-                                                            src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=0x1A74f5d2D0209A1D9C58a70cc75d9CFC74E70fcC"
-                                                        />
+                                          
+                                                    <center>  <QRCodeCanvas value={walletAddress} size={200} align /> </center>
                                                     </div>
 
                                                     {/* Network & Address Section */}
+                                                    
                                                     <div className="col-span-3 md:col-span-2 h-full flex flex-col justify-start gap-4">
                                                         {/* Network Information */}
                                                         <div className="bg-white p-4 w-full rounded-[20px]">
@@ -159,11 +187,11 @@ const RechargeFunds = () => {
                                                             >
                                                                 <p>Your Address</p>
                                                                 <p className="text-primary">
-                                                                    0xa49E83Eba92DE67387e5CCC7dCa12782bEE618eb
+                                                                    {walletAddress}
                                                                 </p>
                                                             </div>
-                                                            <button className="bg-black min-w-[90px] h-[46px] rounded-[30px] text-white px-4 py-2" style={{ color: "#fff" }}>
-                                                                Copy
+                                                            <button type='button' className="bg-black min-w-[90px] h-[46px] rounded-[30px] text-white px-4 py-2"  onClick={copyToClipboard} style={{ color: "#fff" }}>
+                                                            {copied ? "Copied!" : "Copy"}
                                                             </button>
                                                         </div>
                                                     </div>
@@ -184,20 +212,19 @@ const RechargeFunds = () => {
                                                 <p className="text-sm text-secondary">
                                                     Important: Keep this page open until your deposit transaction is
                                                     recorded. If it's not recorded, you can use our form to{" "}
-                                                    <a href="#" className="text-primary">
+                                                    {/* <a href="#" className="text-primary">
                                                         submit it manually
-                                                    </a>
+                                                    </a> */}
                                                     .
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
-                                    <img alt="BSC logo" loading="lazy" width="20" height="20" src="/upnl/assets/icons/right-repo.svg" style={{ color: 'transparent' }} />
                                 </div>
                             )}
 
                             {/* USDT Section */}
-                            <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={toggleBinanceVisibility}>
+                            <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={() => toggleBinanceVisibility('BSC', true)}  >
                                 <div className="py-4 flex items-center space-x-2 lg:space-x-3 text-sm">
                                     <img alt="USDT logo" loading="lazy" width="40" height="40" src="/upnl/assets/icons/tron-logo.png" style={{ color: 'transparent', marginLeft: '10px', width: '40px' }} />
                                     <div>
@@ -210,7 +237,7 @@ const RechargeFunds = () => {
 
                             {/* Hidden divs for Binance and Ethereum */}
                             {isBinanceVisible && (
-                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={toggleCollapse}>
+                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={() => toggleBinanceVisibility('BSC', false)} >
                                 <div className="py-4 flex items-start space-x-2 lg:space-x-3 text-sm" style={{ marginLeft: '10px' }}>
 
                                     <div>
