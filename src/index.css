@@ -89,3 +89,12 @@ margin-bottom: 1.25rem;
     --tw-text-opacity: 1;
     color: #000000;
 }
+.register-success.fixed.inset-0.z-50.flex.items-center.justify-center.bg-black.bg-opacity-50 {
+  display: none;
+}
+.register-success.fixed.inset-0.z-50.flex.items-center.justify-center.bg-black.bg-opacity-50.show {
+  display: flex;
+}
+.bg-\[\#F1F1F1\].rounded-\[44px\].p-3.py-2.flex.justify-between.items-center {
+  border-radius: inherit;
+}
