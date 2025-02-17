@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    
-    <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg" style={{ background: '#ffff' }}>
-        
+
+    <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg" style={{ background: '#ffff',zIndex:1 }}>
+
       {/* Overview link */}
       <Link
         to="/dashboard" // Replace with the actual route
@@ -18,7 +18,7 @@ const Footer = () => {
           height="20"
           decoding="async"
           className=""
-          
+
           src="/upnl/assets/icons/icon-overview.svg"
         />
         <span className="text-xs mt-1 text-white">Overview</span>
@@ -94,9 +94,9 @@ const Footer = () => {
         />
         <span className="text-xs mt-1 text-white">Profile</span>
       </Link>
-      
+
     </div>
-    
+
   );
 };
 

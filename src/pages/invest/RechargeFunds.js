@@ -227,7 +227,7 @@ const RechargeFunds = () => {
                                                     src="/upnl/assets/icons/tron-logo.png" 
                                                     style={{ color: "transparent",width:'37px' }}
                                                 />
-                                                <span className="text-[20px] font-bold">TRX </span>
+                                                <span className="text-[20px] font-bold">Tron </span>
                                             </div>
                                         </div>
 
@@ -235,7 +235,7 @@ const RechargeFunds = () => {
                                         <div className="flex flex-col items-center">
                                             <div className="grid grid-cols-3 gap-4 w-full mt-5 p-6 bg-[#F9F9F9] rounded-[20px]">
                                                 <div className="col-span-3 text-center text-[#999999] text-[14px]">
-                                                    Send BNB tokens to the QR code or address below.
+                                                    Send Tron tokens to the QR code or address below.
                                                 </div>
 
                                                 {/* QR Code */}
