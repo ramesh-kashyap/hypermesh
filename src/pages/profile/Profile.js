@@ -66,10 +66,7 @@ const handleOutsideClick = (event, setPopupState) => {
             setMessage(response.message);
             setError("");
             toast.success("Password Updated Successfully");
-           
-            // Reload after 5 seconds (5000 milliseconds)
-           
-
+        
         } catch (err) {
             setError(err.message);
             toast.error("Failed to update Pssword: " + err.message);
