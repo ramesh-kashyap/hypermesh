@@ -12,10 +12,11 @@ const RechargeFunds = () => {
     const [isBinanceVisible, setBinanceVisible] = useState(false);
     const [isEthereumVisible, setEthereumVisible] = useState(false);
     const [blockchain, setBlockchain] = useState("BSC");
-    const [qrCode, setQrCode] = useState("");
     const [walletAddress, setWalletAddress] = useState("");
+    const [walletTrxAddress, setTRONWalletAddress] = useState("");
     const [copied, setCopied] = useState(false);
-
+    const [copied2, setCopied2] = useState(false);
+    
     useEffect(() => {
         fetchUsers();
         
@@ -62,7 +63,23 @@ const RechargeFunds = () => {
         setIsCollapsed(!isCollapsed)
     };
 
-    const toggleBinanceVisibility = () => {
+    const toggleBinanceVisibility = async (blockchain,isClose) => {
+
+        if (isClose) {
+            try {
+                const response = await Api.post('auth/recharge', { blockchain});
+                if (response.data.status) 
+                    {
+                        setBlockchain(response.data.blockchain);
+                        setTRONWalletAddress(response.data.wallet);
+                   }
+                
+            } catch (error) {
+                console.error("Error generating payment");
+            }   
+        }
+
+        
         setBinanceVisible(!isBinanceVisible);
         setEthereumVisible(false); // Hide Ethereum when Binance is toggled
     };
@@ -77,6 +94,14 @@ const RechargeFunds = () => {
     const copyToClipboard = () => {
         navigator.clipboard.writeText(walletAddress).then(() => {
             setCopied(true);
+                toast.success("Copied!");
+            setTimeout(() => setCopied(false), 2000); // Reset after 2 sec
+        });
+    };
+
+    const copyToClipboardTrx = () => {
+        navigator.clipboard.writeText(walletTrxAddress).then(() => {
+            setCopied2(true);
                 toast.success("Copied!");
             setTimeout(() => setCopied(false), 2000); // Reset after 2 sec
         });
@@ -224,7 +249,7 @@ const RechargeFunds = () => {
                             )}
 
                             {/* USDT Section */}
-                            <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={() => toggleBinanceVisibility('BSC', true)}  >
+                            <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={() => toggleBinanceVisibility('TRON', true)}  >
                                 <div className="py-4 flex items-center space-x-2 lg:space-x-3 text-sm">
                                     <img alt="USDT logo" loading="lazy" width="40" height="40" src="/upnl/assets/icons/tron-logo.png" style={{ color: 'transparent', marginLeft: '10px', width: '40px' }} />
                                     <div>
@@ -237,7 +262,7 @@ const RechargeFunds = () => {
 
                             {/* Hidden divs for Binance and Ethereum */}
                             {isBinanceVisible && (
-                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={() => toggleBinanceVisibility('BSC', false)} >
+                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]"  >
                                 <div className="py-4 flex items-start space-x-2 lg:space-x-3 text-sm" style={{ marginLeft: '10px' }}>
 
                                     <div>
@@ -267,14 +292,7 @@ const RechargeFunds = () => {
 
                                                 {/* QR Code */}
                                                 <div className="col-span-2 md:col-span-1">
-                                                    <img
-                                                        style={{
-                                                            width: "200px",
-
-                                                            margin: "0px auto",
-                                                        }}
-                                                        src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=0x1A74f5d2D0209A1D9C58a70cc75d9CFC74E70fcC"
-                                                    />
+                                                <center>  <QRCodeCanvas value={walletTrxAddress} size={200} align /> </center>
                                                 </div>
 
                                                 {/* Network & Address Section */}
@@ -289,10 +307,10 @@ const RechargeFunds = () => {
                                                                 width="30"
                                                                 height="30"
                                                                 decoding="async"
-                                                                src="/upnl/assets/icons/logo_bnb_2.svg"
+                                                                src="/upnl/assets/icons/12114250.png"
                                                                 style={{ color: "transparent" }}
                                                             />
-                                                            Binance Smart Chain
+                                                            Tron Blockchain
                                                         </div>
                                                     </div>
 
@@ -304,11 +322,11 @@ const RechargeFunds = () => {
                                                         >
                                                             <p>Your Address</p>
                                                             <p className="text-primary">
-                                                                0xa49E83Eba92DE67387e5CCC7dCa12782bEE618eb
+                                                                {walletTrxAddress}
                                                             </p>
                                                         </div>
-                                                        <button className="bg-black min-w-[90px] h-[46px] rounded-[30px] text-white px-4 py-2" style={{ color: "#fff" }}>
-                                                            Copy
+                                                        <button className="bg-black min-w-[90px] h-[46px] rounded-[30px] text-white px-4 py-2"  onClick={copyToClipboardTrx}  style={{ color: "#fff" }}>
+                                                        {copied2 ? "Copied!" : "Copy"}
                                                         </button>
                                                     </div>
                                                 </div>
