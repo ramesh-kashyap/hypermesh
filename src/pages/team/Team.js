@@ -100,297 +100,229 @@ const Team = () => {
                     </div>
 
                     <div className="flex justify-between mb-4 items-center"></div>
-                    <div className="bg-white mb-3 p-4 rounded-[16px] font-semibold text-gray-600 text-center">
-                        <div className="hidden md:grid grid-cols-5 lg:grid-cols-5">
-                            <div className="text-left">Generation Data</div>
-                            <div className="hidden lg:inline-block">Numbers Users</div>
-                            <div>Cumulative Income</div>
-                            <div>Cumulative Withdrawal</div>
-                            <div>Cumulative Yield</div>
-                        </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden">
-                            <div className="text-left">Team Generation</div>
-                            <div className="text-right">Total Members</div>
-                            <div className="text-right hidden sm:block">Today Rewards</div>
-                        </div>
+                    <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between"  style={{marginBottom: 24 , maxHeight:'257px'}} >
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-[20px] font-medium text-black">First generation data </h3>
+                        
+                        <a onClick={() => navigate("/level?selected_level=1")}>
+                            <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">View List<span class="ml-1">→</span></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-2 h-fit">
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Numbers Users</span>
+                        <span class="text-xs">{income.data?.gen_team1total ||0}/{income.data?.active_gen_team1total ||0}</span>
+                    </div>
+
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Cumulative Income</span>
+                        <span class="text-xs">{income.data?.gen_team1Recharge || 0}</span>
+                    </div>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Withdrawal</span>
+                        <span class="text-xs">{income.data?.gen_team1Withdraw || 0} </span>
                     </div>
 
                     
-                    <div className="space-y-4" onClick={() => navigate("/level?selected_level=1")}>
-                    {/* {income.data?.totalTeam} */}
-                                               
-                            <a >
-                                <div className="bg-white p-3 rounded-[16px] shadow transition-transform hover:shadow-md cursor-pointer">
-                                    <div className="hidden md:grid grid-cols-4 lg:grid-cols-5 items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> First generation data</p>
-                                            </div>
-                                        </div>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Yield</span><span class="text-xs">{income.data?.gen_team1Earning || 0} USDT</span>
+                    </div>
+                   
 
-                                        <p className="hidden lg:block text-sm text-center font-medium">{income.data?.gen_team1total ||0}/{income.data?.active_gen_team1total ||0}</p>
-                                        <div className="flex justify-center">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">{income.data?.gen_team1Recharge || 0}</span>
-                                        </div>
+                    
+                </div>
+            
+            </div>
+            <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between"  style={{marginBottom: 24 , maxHeight:'257px'}} >
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-[20px] font-medium text-black">Second generation data </h3>
+                        
+                        <a onClick={() => navigate("/level?selected_level=2")}>
+                            <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">View List<span class="ml-1">→</span></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-2 h-fit">
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Numbers Users</span>
+                        <span class="text-xs">{income.data?.gen_team2total ||0}/{income.data?.active_gen_team2total ||0}</span>
+                    </div>
 
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3">{income.data?.gen_team1Withdraw || 0}</p>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3 bg-[#F1F1F1] rounded-full">{income.data?.gen_team1Earning || 0}</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> generation data</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex justify-end">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">1/1</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Cumulative Income</span>
+                        <span class="text-xs">{income.data?.gen_team2Recharge || 0}</span>
+                    </div>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Withdrawal</span>
+                        <span class="text-xs">{income.data?.gen_team2Withdraw || 0} </span>
+                    </div>
 
-                
-                
-                
-                 </div>
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Yield</span><span class="text-xs">{income.data?.gen_team2Earning || 0} USDT</span>
+                    </div>
+                   
+
+                    
+                </div>
+            
+            </div>
+            <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between"  style={{marginBottom: 24 , maxHeight:'257px'}} >
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-[20px] font-medium text-black">Third  generation data </h3>
+                        
+                        <a onClick={() => navigate("/level?selected_level=3")}>
+                            <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">View List<span class="ml-1">→</span></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-2 h-fit">
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Numbers Users</span>
+                        <span class="text-xs">{income.data?.gen_team3total ||0}/{income.data?.active_gen_team3total ||0}</span>
+                    </div>
+
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Cumulative Income</span>
+                        <span class="text-xs">{income.data?.gen_team3Recharge || 0}</span>
+                    </div>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Withdrawal</span>
+                        <span class="text-xs">{income.data?.gen_team3Withdraw || 0} </span>
+                    </div>
+
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Yield</span><span class="text-xs">{income.data?.gen_team3Earning || 0} USDT</span>
+                    </div>
+                   
+
+                    
+                </div>
+            
+            </div>
+
+            <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between"  style={{marginBottom: 24 , maxHeight:'257px'}} >
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-[20px] font-medium text-black">Fourth  generation data </h3>
+                        
+                        <a onClick={() => navigate("/level?selected_level=4")}>
+                            <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">View List<span class="ml-1">→</span></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-2 h-fit">
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Numbers Users</span>
+                        <span class="text-xs">{income.data?.gen_team4total ||0}/{income.data?.active_gen_team4total ||0}</span>
+                    </div>
+
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Cumulative Income</span>
+                        <span class="text-xs">{income.data?.gen_team4Recharge || 0}</span>
+                    </div>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Withdrawal</span>
+                        <span class="text-xs">{income.data?.gen_team4Withdraw || 0} </span>
+                    </div>
+
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Yield</span><span class="text-xs">{income.data?.gen_team4Earning || 0} USDT</span>
+                    </div>
+                   
+
+                    
+                </div>
+            
+            </div>
+
+            <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between"  style={{marginBottom: 24 , maxHeight:'257px'}} >
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-[20px] font-medium text-black">Fifth  generation data </h3>
+                        
+                        <a onClick={() => navigate("/level?selected_level=5")}>
+                            <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">View List<span class="ml-1">→</span></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-2 h-fit">
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Numbers Users</span>
+                        <span class="text-xs">{income.data?.gen_team5total ||0}/{income.data?.active_gen_team5total ||0}</span>
+                    </div>
+
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Cumulative Income</span>
+                        <span class="text-xs">{income.data?.gen_team5Recharge || 0}</span>
+                    </div>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Withdrawal</span>
+                        <span class="text-xs">{income.data?.gen_team5Withdraw || 0} </span>
+                    </div>
+
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Yield</span><span class="text-xs">{income.data?.gen_team5Earning || 0} USDT</span>
+                    </div>
+                   
+
+                    
+                </div>
+            
+            </div>
 
 
-                 <div className="space-y-4" onClick={() => navigate("/level?selected_level=2")}>
-                    {/* {income.data?.totalTeam} */}
-                                               
-                            <a >
-                                <div className="bg-white p-3 rounded-[16px] shadow transition-transform hover:shadow-md cursor-pointer">
-                                    <div className="hidden md:grid grid-cols-4 lg:grid-cols-5 items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> Second generation data</p>
-                                            </div>
-                                        </div>
-                                        <p className="hidden lg:block text-sm text-center font-medium">{income.data?.gen_team2total ||0}/{income.data?.active_gen_team2total||0}</p>
-                                        <div className="flex justify-center">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">{income.data?.gen_team2Recharge || 0}</span>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3">{income.data?.gen_team2Withdraw || 0}</p>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3 bg-[#F1F1F1] rounded-full">{income.data?.gen_team2Earning || 0}</p>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium">generation data</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex justify-end">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">1/1</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
 
-                
-                
-                
-                 </div>
-                 <div className="space-y-4" onClick={() => navigate("/level?selected_level=3")} >
-                    {/* {income.data?.totalTeam} */}
-                                               
-                            <a >
-                                <div className="bg-white p-3 rounded-[16px] shadow transition-transform hover:shadow-md cursor-pointer">
-                                    <div className="hidden md:grid grid-cols-4 lg:grid-cols-5 items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium">Third  generation data</p>
-                                            </div>
-                                        </div>
-                                        <p className="hidden lg:block text-sm text-center font-medium">{income.data?.gen_team3total ||0}/{income.data?.active_gen_team3total ||0}</p>
-                                        <div className="flex justify-center">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">{income.data?.gen_team3Recharge || 0}</span>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3">{income.data?.gen_team3Withdraw || 0}</p>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3 bg-[#F1F1F1] rounded-full">{income.data?.gen_team3Earning || 0}</p>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> generation data</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex justify-end">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">1/1</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+            <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between"  style={{marginBottom: 24 , maxHeight:'257px'}} >
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-[20px] font-medium text-black">Sixth  generation data </h3>
+                        
+                        <a onClick={() => navigate("/level?selected_level=6")}>
+                            <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">View List<span class="ml-1">→</span></button>
+                        </a>
+                    </div>
+                </div>
+                <div class="space-y-2 h-fit">
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Numbers Users</span>
+                        <span class="text-xs">{income.data?.gen_team6total ||0}/{income.data?.active_gen_team6total ||0}</span>
+                    </div>
 
-                
-                
-                
-                 </div>
-                 <div className="space-y-4" onClick={() => navigate("/level?selected_level=4")}>
-                    {/* {income.data?.totalTeam} */}
-                                               
-                            <a >
-                                <div className="bg-white p-3 rounded-[16px] shadow transition-transform hover:shadow-md cursor-pointer">
-                                    <div className="hidden md:grid grid-cols-4 lg:grid-cols-5 items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> Fourth  generation data</p>
-                                            </div>
-                                        </div>
-                                        <p className="hidden lg:block text-sm text-center font-medium">{income.data?.gen_team4total || 0}/{income.data?.active_gen_team4total|| 0}</p>
-                                        <div className="flex justify-center">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">{income.data?.gen_team4Recharge || 0}</span>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3">{income.data?.gen_team4Withdraw || 0}</p>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3 bg-[#F1F1F1] rounded-full">{income.data?.gen_team4Earning || 0}</p>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> generation data</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex justify-end">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">1/1</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Cumulative Income</span>
+                        <span class="text-xs">{income.data?.gen_team6Recharge || 0}</span>
+                    </div>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Withdrawal</span>
+                        <span class="text-xs">{income.data?.gen_team6Withdraw || 0} </span>
+                    </div>
 
-                
-                
-                
-                 </div>
-                 <div className="space-y-4" onClick={() => navigate("/level?selected_level=5")}>
-                    {/* {income.data?.totalTeam} */}
-                                               
-                            <a >
-                                <div className="bg-white p-3 rounded-[16px] shadow transition-transform hover:shadow-md cursor-pointer">
-                                    <div className="hidden md:grid grid-cols-4 lg:grid-cols-5 items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> fifth generation data</p>
-                                            </div>
-                                        </div>
-                                        <p className="hidden lg:block text-sm text-center font-medium">{income.data?.gen_team5total || 0}/{income.data?.active_gen_team5total || 0}</p>
-                                        <div className="flex justify-center">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">{income.data?.gen_team5Recharge || 0}</span>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3">{income.data?.gen_team5Withdraw || 0}</p>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3 bg-[#F1F1F1] rounded-full">{income.data?.gen_team5Earning || 0}</p>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> generation data</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex justify-end">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">1/1</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                    
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Cumulative Yield</span><span class="text-xs">{income.data?.gen_team6Earning || 0} USDT</span>
+                    </div>
+                   
 
+                    
+                </div>
+            
+            </div>
                 
-                
-                
-                 </div>
-                    <div className="space-y-4" onClick={() => navigate("/level?selected_level=6")}>
-                    {/* {income.data?.totalTeam} */}
-                                               
-                            <a >
-                                <div className="bg-white p-3 rounded-[16px] shadow transition-transform hover:shadow-md cursor-pointer">
-                                    <div className="hidden md:grid grid-cols-4 lg:grid-cols-5 items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> Sixth generation data</p>
-                                            </div>
-                                        </div>
-                                        <p className="hidden lg:block text-sm text-center font-medium">{income.data?.gen_team6total || 0}/{income.data?.active_gen_team6total || 0}</p>
-                                        <div className="flex justify-center">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">{income.data?.gen_team6Recharge || 0}</span>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3">{income.data?.gen_team6Withdraw || 0}</p>
-                                        </div>
-                                        <div className="flex justify-center">
-                                            <p className="text-sm w-fit text-center px-3 bg-[#F1F1F1] rounded-full">{income.data?.gen_team6Earning || 0}</p>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:hidden items-center">
-                                        <div className="flex items-center space-x-3">
-                                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
-                                                <i className="fas fa-arrow-right"></i>
-                                            </div>
-                                            <div>
-                                                <p className="text-sm font-medium"> generation data</p>
-                                            </div>
-                                        </div>
-                                        <div className="flex justify-end">
-                                            <span className="flex px-[6px] py-1 rounded-full text-xs bg-[#C4FFC8]">1/1</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-
-                
-                
-                
-                 </div>
+                  
 
 
                 </div>

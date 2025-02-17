@@ -86,7 +86,8 @@ const Level = () => {
             <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between" key={index} style={{marginBottom: 24}} >
                 <div>
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-[20px] font-medium text-black">{user.name} </h3>
+                        <h3 class="text-[20px] font-medium text-black">{user.name} lvl {user.level} </h3>
+                        
                         <a href="/nodes">
                             <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">{user.active_status}<span class="ml-1">→</span></button>
                         </a>
