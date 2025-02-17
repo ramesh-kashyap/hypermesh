@@ -62,7 +62,9 @@ const Profile = () => {
             setMessage(response.message);
             setError("");
             toast.success("Password Updated Successfully");
-
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
             // Reload after 5 seconds (5000 milliseconds)
            
 
@@ -100,7 +102,7 @@ const Profile = () => {
                  toast.success("Profile Updated Successfully");
                  setTimeout(() => {
                     window.location.reload();
-                }, 1000);
+                }, 3000);
             }
         } catch (error) {
             console.error("Error updating profile:", error);

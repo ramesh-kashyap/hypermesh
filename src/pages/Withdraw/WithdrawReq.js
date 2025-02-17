@@ -7,11 +7,11 @@ import { Toaster, toast } from "react-hot-toast";
 const networkOptions = [
   {
     name: "usdtTrc20",
-    logo: "upnl/assets/icons/icon_bnb_3.svg",
+    logo: "upnl/assets/icons/tron-logo.png",
   },
   {
     name: "usdtBep20",
-    logo: "upnl/assets/icons/logo_usdt_2.svg",
+    logo: "upnl/assets/icons/bnb-logo.png",
   },
 ];
 
@@ -105,7 +105,7 @@ const handleWithdraw = async () => {
         >
           <div className="flex gap-3 font-semibold">
             <div className="flex items-center space-x-2 lg:space-x-3 text-sm">
-              <img alt={selectedOption.name} loading="lazy" width="25" height="25" src={selectedOption.logo} />
+              <img alt={selectedOption.name} loading="lazy" width="40" height="40" src={selectedOption.logo} />
               <span>{selectedOption.name}</span>
             </div>
           </div>
@@ -134,7 +134,7 @@ const handleWithdraw = async () => {
     <><Toaster position="top-center" /><div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
       <div>
         <div className="flex justify-between">
-          <span className="bg-green-500 text-sm rounded-[22px] h-[33px] px-3 bg-black mb-4 mt-10 flex items-center space-x-2 cursor-pointer">
+          <span style={{ color: "#fff" }} className="bg-green-500 text-sm rounded-[22px] h-[33px] px-3 bg-black mb-4 mt-10 flex items-center space-x-2 cursor-pointer">
             <img alt="Back Icons" loading="lazy" width="17" height="12" src="upnl/assets/icons/icon-back.svg" />
             <span>Back</span>
           </span>
@@ -146,7 +146,6 @@ const handleWithdraw = async () => {
 
             <div className="w-full flex flex-col gap-3 md:gap-5">
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium" >Network</label>
                 <DropdownExample  selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
               </div>
 
@@ -200,9 +199,9 @@ const handleWithdraw = async () => {
             </div>
 
             <div className="mt-8 w-full flex justify-end">
-              <button
+              <button style={{ backgroundColor: "#60656ac7", padding: "10px,10px", borderRadius: "50px",color:"rgb(255 255 255 / 92%)", }}
                 onClick={handleWithdraw}
-                className="bg-green-500 text-white px-3 py-1 rounded-[30px] md:w-auto disabled:opacity-50"
+                className=" px-6 py-3 rounded-[30px] md:w-auto disabled:opacity-50"
               >
                 Confirm
               </button>
@@ -221,12 +220,23 @@ const handleWithdraw = async () => {
 
                   {/* Display withdrawals */}
                   {withdraws.map((withdrawal, index) => (
+                    
                     <div key={index} className="flex justify-between items-center py-2 border-b">
                       <div className="w-1/2">
                       <p className="font-medium">Withdraw</p>
-                        <p className="text-secondary font-light text-sm">{withdrawal.created_at}</p>
+                      <p className="text-secondary font-light text-sm">
+  {new Date(withdrawal.created_at).toLocaleString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  })}
+</p>
                       </div>
-                      <p className="text-green-500">
+                      <p style={{ color:"red", }} className="text-green-500">
                         <span>-{withdrawal.amount} </span>
                       </p>
                     </div>
