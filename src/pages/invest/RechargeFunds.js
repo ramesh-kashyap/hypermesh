@@ -107,7 +107,19 @@ const RechargeFunds = () => {
         });
     };
 
- 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+            weekday: "short", // Includes day of the week (e.g., Mon, Tue)
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false // Ensures 24-hour format
+        }).replace(",", ""); // Remove comma for a cleaner format
+    };
     return (
         <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
             <div className="bg-blue-100 text-blue-800 p-4 rounded-md mb-6">
@@ -385,11 +397,11 @@ const RechargeFunds = () => {
                                     </div>
                                     <div className="ml-3">
                                         <p className="font-medium mb-1">Deposit</p>
-                                        <p className="text-secondary font-light text-xs">  {user.user_id_fk} {user.status}</p>
+                                        <p className="text-secondary font-light text-xs">{formatDate(user.created_at)}</p>
                                     </div>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-green-500">+<span>{user.amount}</span></p>
+                                    <p className="text-green-500">+ $<span>{user.amount} </span></p>
                                 </div>
                             </div>
                                      ))

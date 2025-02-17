@@ -50,6 +50,7 @@ function Layout({ children }) {
                             
                             
                         <Route path="/" element={<Navigate to="/login" />} />
+                        <Route path="/connect" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
                         <Route path="/Node" element={<ProtectedRoute><Node /></ProtectedRoute>} />
 
