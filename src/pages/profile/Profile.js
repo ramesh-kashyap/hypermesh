@@ -47,10 +47,8 @@ const handleOutsideClick = (event, setPopupState) => {
 };
 
     const handleSendOtp = async () => {
-        console.log("handleSendOtp function called");
         try {
             const response = await sendOtp(email);
-            console.log("API Response in handleSendOtp:", response);
     
             setMessage(response.message);
             setError("");
@@ -69,6 +67,7 @@ const handleOutsideClick = (event, setPopupState) => {
         e.preventDefault();
         if (password !== confirmPassword) {
             setError("Passwords do not match");
+            toast.error("Passwords do not match");  // 🔹 Show popup message
             return;
         }
         try {
@@ -161,11 +160,8 @@ const handleOutsideClick = (event, setPopupState) => {
 
                             <form>
                                 <input type="hidden" name="_token" value="KKX0De0b1aF69ZyhV4ctcUqPaDEGxVrpSEIoZILh" />
-                                {message && <p className="text-green-500">{message}</p>}
-                                {error && <p className="text-red-500">{error}</p>}
-                                {message && <p className="text-green-500">{message}</p>}
-                                {error && <p className="text-red-500">{error}</p>}
                                 <div className="bg-white rounded-[20px] w-[400px] px-8 pt-10 pb-6 text-center relative">
+
                                     <h2 className="text-lg font-semibold">Change Password</h2>
                                     <div className="mb-4 mt-8 text-left">
                                         <label className="block text-gray-600 mb-1">Email</label>

@@ -28,14 +28,11 @@ const WithdrawComponent = () => {
 
   const fetchUserAddress = async () => {
     try {
-      console.log("Fetching user address for:", selectedOption.name);
       const response = await api.get("auth/usdt-address");
   
-      console.log("API Response:", response.data);
   
       if (response.data) {
         setAddress(response.data[selectedOption.name]); 
-        console.log("Set Address:", response.data[selectedOption.name]);
       }
     } catch (error) {
       console.error("Error fetching user address:", error);
@@ -62,24 +59,26 @@ const WithdrawComponent = () => {
 }, []);
 
 const handleWithdraw = async () => {
-  if (!amount || !address) {
-    setMessage("Please enter all required details.");
-    return;
-  }
-
   try {
     const response = await api.post("auth/withdrawal", { 
       amount, 
-      payment_mode: selectedOption.name,  // Only sending the name
+      payment_mode: selectedOption.name, 
       address 
     });
 
     console.log("Withdraw Successful:", response.data);
-    toast.success("Profile Updated Successfully");
+    toast.success(response.data.message); // Backend ka success message show karega
 
   } catch (error) {
-    console.error("Withdraw failed", error.response?.data || error.message);
-    setMessage(error.response?.data?.message || "Withdrawal failed. Try again.");
+    console.error("Withdraw failed:", error);
+
+    // Backend se error message properly extract karein
+    const errorMessage = error.response && error.response.data && error.response.data.error
+      ? error.response.data.error
+      : "Withdraw failed. Please try again.";
+
+    setError(errorMessage);
+    toast.error(errorMessage); // Proper error message show karega
   }
 };
 
@@ -184,7 +183,6 @@ const handleWithdraw = async () => {
               </div>
             </div>
 
-            {message && <p className="text-center text-green-500">{message}</p>} {/* Show message */}
 
             <div className="w-full h-[1px] bg-[#F1F1F1]"></div>
             <div className="flex flex-col gap-2 px-0 sm:px-5">
