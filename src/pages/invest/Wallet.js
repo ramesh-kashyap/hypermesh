@@ -1,6 +1,56 @@
-import React from 'react';
+import { useEffect, useState } from "react";
+
+import axios from "axios";
+import Api from "../../Requests/Api";
 
 const Wallet = () => {
+
+    const [users, setUsers] = useState([]); // ✅ Always start with an empty array
+    const [error, setError] = useState("");
+
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+    
+    const fetchUsers = async () => {
+        try {
+            const response = await Api.get("auth/deposit-History");
+    
+            if (response.data && Array.isArray(response.data.data)) {
+                setUsers(response.data.data);
+            } else {
+                setUsers([]); 
+            }
+    
+            console.log(response.data);
+    
+    
+            console.log(response.data.data);
+        } catch (err) {
+            setError(err.response?.data?.error || "Error fetching income");
+        }
+    };
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+            weekday: "short", // Includes day of the week (e.g., Mon, Tue)
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false // Ensures 24-hour format
+        }).replace(",", ""); // Remove comma for a cleaner format
+    };
+    
+    // Example usage:
+    // console.log(formatDate("2024-12-18T17:23:57")); 
+
+
+   
+    
     return (
         <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
             <div className="grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-3 gap-6">
@@ -14,8 +64,8 @@ const Wallet = () => {
                                 <p className="text-secondary" style={{ paddingBottom: '10px' }}></p>
                             </div>
                             <div className="flex flex-row gap-2 items-end">
-                                <a className="bg-green-500 text-white h-[46px] px-6 py-2 rounded-[30px] flex flex-1 items-center justify-center" href="/RechargeFunds" style={{ color: 'black' }}>Deposit</a>
-                                <a href="/WithdrawReq">
+                                <a className="bg-black text-white h-[46px] px-6 py-2 rounded-[30px] flex flex-1 items-center justify-center" href="/RechargeFunds" style={{ color: '#fff' }}>Deposit</a>
+                                <a href="/SelectNetwork">
                                     <button className="border border-black h-[46px] text-black px-6 py-2 rounded-[30px] flex flex-1 items-center justify-center">Withdraw</button>
                                 </a>
                                 {/* <a href="/Transferfund">
@@ -67,39 +117,33 @@ const Wallet = () => {
                     </div>
                 </div>
                 <div className="bg-white rounded-[16px] p-6 lg:col-span-2 xl:col-span-1">
-                    <h3 className="font-semibold mb-3">History</h3>
-                    <div className="space-y-4 h-full">
-                        {[
-                            { type: 'Deposit', amount: '+400', date: 'Wed, 18 Dec 2024 17:23:57', detailLink: '6762b7d5f05e8bbe38097901' },
-                            { type: 'Deposit', amount: '+400', date: 'Wed, 18 Dec 2024 17:23:36', detailLink: '6762b7c0fcc1b0419704e35f' },
-                            { type: 'Deposit', amount: '+400', date: 'Wed, 18 Dec 2024 15:40:33', detailLink: '67629f98eda21072d60ba436' },
-                            { type: 'Deposit', amount: '+400', date: 'Wed, 18 Dec 2024 15:39:59', detailLink: '67629f77ce38d251870c3c07' },
-                            { type: 'Deposit', amount: '+20', date: 'Wed, 18 Dec 2024 13:37:02', detailLink: '676282a651258d221d0d7a1c' },
-                        ].map((history, index) => (
+                        <h3 className="font-semibold mb-3">History</h3>
+                        <div className="space-y-4 h-full">
+                        {users.length > 0 ? (
+            users.map((user, index) => (
                             <div className="flex justify-between items-center text-sm mb-4" key={index}>
                                 <div className="flex">
-                                    <div className="flex items-center justify-center rounded-[50%] bg-[#F9F9F9] w-[44px] h-[44px]">
+                                    <div className="flex items-center justify-center hover:cursor-pointer rounded-[50%] bg-[#F9F9F9] w-[44px] h-[44px]">
                                         <img alt="IN Icon" loading="lazy" width="28" height="28" src="/upnl/assets/icons/icon_down.svg" style={{ color: 'transparent' }} />
                                     </div>
                                     <div className="ml-3">
-                                        <p className="font-medium">
-                                            {history.type}
-                                            <a target="_blank" href={`user/viewdetail/${history.detailLink}`} style={{ marginLeft: '10px', color: '#ffffff', textTransform: 'lowercase' }}>
-                                                <i className="fa fa-share-alt" aria-hidden="true"></i>
-                                            </a>
-                                        </p>
-                                        <p className="text-secondary font-light text-sm">{history.date}</p>
+                                        <p className="font-medium mb-1">Deposit</p>
+                                        <p className="text-secondary font-light text-xs">  {formatDate(user.created_at)}</p>
                                     </div>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-green-500"><span>{history.amount}</span></p>
+                                    <p className="text-green-500">+<span>{user.amount}</span></p>
                                 </div>
                             </div>
-                        ))}
-                       
+                                     ))
+                                    ) : (
+                                        <p>No users found</p>
+                                    )}
+                            
+                        </div>
                     </div>
-                </div>
             </div>
+         
          
         </div>
     );

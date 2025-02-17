@@ -66,12 +66,6 @@ const Header = () => {
 
 
               </div>
-
-
-              
-
-
-
               
               <div className="flex mx-2 items-center justify-center font-bold"></div>
             </a>

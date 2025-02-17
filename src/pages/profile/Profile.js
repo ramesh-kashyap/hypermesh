@@ -63,6 +63,9 @@ const Profile = () => {
             setError("");
             toast.success("Password Updated Successfully");
 
+            // Reload after 5 seconds (5000 milliseconds)
+           
+
         } catch (err) {
             setError(err.message);
             toast.error("Failed to update Pssword: " + err.message);
@@ -77,6 +80,7 @@ const Profile = () => {
                 if (response.data) {
                     setUser(response.data);
                     setNewName(response.data.name); 
+                    setEmail(response.data.email); 
                 }
             } catch (error) {
                 console.error("Error fetching user profile:", error);
@@ -94,6 +98,9 @@ const Profile = () => {
             if (response.data) {
                 setUser((prevUser) => ({ ...prevUser, name: newName })); // ✅ UI Update
                  toast.success("Profile Updated Successfully");
+                 setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             }
         } catch (error) {
             console.error("Error updating profile:", error);
@@ -113,9 +120,9 @@ const Profile = () => {
                             <img alt="Edit Icon" loading="lazy" width="28" height="28" src="/upnl/assets/icons/icon-referrals.svg" style={{ color: 'transparent' }} />
                         </a>
                         <div className="mx-auto w-full text-primary text-[28px] font-semibold" style={{ fontFamily: 'ClashDisplay-Semibold' }}>
-                            Raju                        </div>
+                            {newName}                        </div>
                         <div className="mx-auto w-full text-secondary text-sm mb-[60px]">
-                            kumar@gmail.com!
+                            {email}
                         </div>
                         <div className="flex flex-wrap md:flex-nowrap mx-auto w-full justify-center">
                             <button className="rounded-[30px] h-[48px] py-3 px-6 bg-[#F1F1F1] md:mr-2 mb-2" onClick={handlePasswordPopupToggle}>
@@ -250,7 +257,8 @@ const Profile = () => {
                 </div>
             </div>
 
-        </div></>
+        </div>
+        </>
     );
 };
 

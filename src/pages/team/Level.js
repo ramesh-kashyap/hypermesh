@@ -80,45 +80,36 @@ const Level = () => {
         return <Loader />;
     }
     
-
-   
     return (
         <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
-            <div className="w-full mt-10 flex justify-center text-primary">
-                <div className="w-full max-w-[1440px] rounded-lg">
-                   
-                        <table id="customers">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Username</th>
-                                    <th>Package</th>
-                                    <th>Join Date</th>
-                                    <th>Status</th>
-
-                                </tr>
-                                {users.map((user, index) => (
-
-                                <tr  key={index}>
-                                    <td>{user.name}</td>
-                                    <td>{user.username}</td>
-                                    <td>{user.package} USDT</td>
-
-                                    <td>{formatDate(user.created_at)}</td>
-
-                                    <td>{user.active_status}</td>
-
-                                </tr>
-
-
-
-                                
-                              
-                            ))}
-                                </table>
-
+<h1 style={{marginBottom: '20px'}}>Level Team</h1>
+{users.map((user, index) => (
+            <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between" key={index} style={{marginBottom: 24}} >
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-[20px] font-medium text-black">{user.name} </h3>
+                        <a href="/nodes">
+                            <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">{user.active_status}<span class="ml-1">→</span></button>
+                        </a>
+                    </div>
                 </div>
+                <div class="space-y-2 h-fit">
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center" >
+                        <span class="text-xs">Join Date</span>
+                        <span class="text-xs">{formatDate(user.created_at)}</span>
+                    </div>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">User ID</span>
+                        <span class="text-xs">{user.username} </span>
+                    </div>
+                    <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Package</span><span class="text-xs">{user.package} USDT</span>
+                    </div>
+                </div>
+            
             </div>
-         
+
+))}
         </div>
     );
 };
