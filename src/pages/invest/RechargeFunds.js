@@ -33,6 +33,24 @@ const RechargeFunds = () => {
         }
     };
 
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+            weekday: "short", // Includes day of the week (e.g., Mon, Tue)
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false // Ensures 24-hour format
+        }).replace(",", ""); // Remove comma for a cleaner format
+    };
+
+
+
+
     const toggleCollapse = () => {
         setIsCollapsed(!isCollapsed);
     };
@@ -155,7 +173,7 @@ const RechargeFunds = () => {
                                     </div>
                                     <div className="ml-3">
                                         <p className="font-medium mb-1">Deposit</p>
-                                        <p className="text-secondary font-light text-xs">  {user.user_id_fk} {user.status}</p>
+                                        <p className="text-secondary font-light text-xs">  {formatDate(user.created_at)}</p>
                                     </div>
                                 </div>
                                 <div className="text-right">
