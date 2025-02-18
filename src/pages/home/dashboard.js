@@ -17,12 +17,7 @@ const Dashboard = () => {
      setIsOpen(false);
    };
  
-   // Function to handle Accept action (optional)
-   const handleAccept = () => {
-     // Logic for Accept (e.g., connect with Telegram)
-     console.log("Account connected with Telegram!");
-     setIsOpen(false); // Close the modal after accepting
-   };
+ 
 
 
    const [error, setError] = useState("");
