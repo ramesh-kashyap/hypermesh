@@ -262,7 +262,6 @@ const RechargeFunds = () => {
 
                             {/* USDT Section */}
                             <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={() => toggleBinanceVisibility('TRON', true)}  >
-                            <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={() => toggleBinanceVisibility('TRON', true)}  >
                                 <div className="py-4 flex items-center space-x-2 lg:space-x-3 text-sm">
                                     <img alt="USDT logo" loading="lazy" width="40" height="40" src="/upnl/assets/icons/tron-logo.png" style={{ color: 'transparent', marginLeft: '10px', width: '40px' }} />
                                     <div>
@@ -275,7 +274,6 @@ const RechargeFunds = () => {
 
                             {/* Hidden divs for Binance and Ethereum */}
                             {isBinanceVisible && (
-                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]"  >
                                 <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]"  >
                                 <div className="py-4 flex items-start space-x-2 lg:space-x-3 text-sm" style={{ marginLeft: '10px' }}>
 
@@ -307,7 +305,6 @@ const RechargeFunds = () => {
                                                 {/* QR Code */}
                                                 <div className="col-span-2 md:col-span-1">
                                                 <center>  <QRCodeCanvas value={walletTrxAddress} size={200} align /> </center>
-                                                <center>  <QRCodeCanvas value={walletTrxAddress} size={200} align /> </center>
                                                 </div>
 
                                                 {/* Network & Address Section */}
@@ -323,10 +320,8 @@ const RechargeFunds = () => {
                                                                 height="30"
                                                                 decoding="async"
                                                                 src="/upnl/assets/icons/12114250.png"
-                                                                src="/upnl/assets/icons/12114250.png"
                                                                 style={{ color: "transparent" }}
                                                             />
-                                                            Tron Blockchain
                                                             Tron Blockchain
                                                         </div>
                                                     </div>
@@ -340,11 +335,8 @@ const RechargeFunds = () => {
                                                             <p>Your Address</p>
                                                             <p className="text-primary">
                                                                 {walletTrxAddress}
-                                                                {walletTrxAddress}
                                                             </p>
                                                         </div>
-                                                        <button className="bg-black min-w-[90px] h-[46px] rounded-[30px] text-white px-4 py-2"  onClick={copyToClipboardTrx}  style={{ color: "#fff" }}>
-                                                        {copied2 ? "Copied!" : "Copy"}
                                                         <button className="bg-black min-w-[90px] h-[46px] rounded-[30px] text-white px-4 py-2"  onClick={copyToClipboardTrx}  style={{ color: "#fff" }}>
                                                         {copied2 ? "Copied!" : "Copy"}
                                                         </button>
