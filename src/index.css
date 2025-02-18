@@ -35,7 +35,7 @@ code {
   }
   .text-white {
     --tw-text-opacity: 1;
-    color: #000000;
+    color: #ffffff;
 }
 @media (min-width: 768px) {
   .md\:flex {

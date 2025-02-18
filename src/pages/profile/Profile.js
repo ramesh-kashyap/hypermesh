@@ -161,11 +161,11 @@ const handleOutsideClick = (event, setPopupState) => {
                    
                     {isPasswordPopupOpen && (
 
-                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setPasswordPopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50">
+<div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setPasswordPopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50">
 
-                            <form>
-                                <input type="hidden" name="_token" value="KKX0De0b1aF69ZyhV4ctcUqPaDEGxVrpSEIoZILh" />
-                                <div className="bg-white rounded-[20px] w-[400px] px-8 pt-10 pb-6 text-center relative">
+    <form>
+        <input type="hidden" name="_token" value="KKX0De0b1aF69ZyhV4ctcUqPaDEGxVrpSEIoZILh" />
+        <div className="bg-white rounded-[20px] w-[400px] px-8 pt-10 pb-6 text-center relative">
 
                                     <h2 className="text-lg font-semibold">Change Password</h2>
                                     <div className="mb-4 mt-8 text-left">
