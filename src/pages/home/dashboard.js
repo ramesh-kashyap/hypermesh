@@ -3,15 +3,19 @@ import axios from "axios";
 import Api from "../../Requests/Api";
 import TelegramConnectModal from "../../components/TelegramConnectModal";
 import  { encryptID, decryptID } from "../../components/cryptoUtils";
+import {  toast } from "react-hot-toast";
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
+     const navigate = useNavigate();
    const [balance, setBalance] = useState([]);
    const [error, setError] = useState("");
-   const [showModal, setShowModal] = useState(true);
-   const [originalID, setOriginalID] = useState("49");
+   const [showModal, setShowModal] = useState(false);
+   const [originalID, setOriginalID] = useState(49);
    const [encryptedID, setEncryptedID] = useState("");
    const [decryptedID, setDecryptedID] = useState("");
-
+   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(true);
 
    const handleEncrypt = () => {
       const encrypted = encryptID(originalID);
@@ -23,18 +27,24 @@ const Dashboard = () => {
      const urlParams = new URLSearchParams(window.location.search);
      const code = urlParams.get("code");
      const decryptedID = decryptID(code);
-
+     
      try {
-      const response = await Api.post('auth/connect-telegram',{decryptedID});
-      
-      setBalance(response.data);
+      const response = await Api.post('auth/connect-telegram',{telegram_id:decryptedID});
+      if (response.data.status) 
+         {
+            toast.success("Telegram Connected successful!");
+            // Navigate to a protected route (e.g., /dashboard)
+          
+            navigate('/dashboard');
+         }
+
 
    } catch (err) {
       setError(err.response?.data?.error || "Error connect telegram");
    }
       
 
-     setShowModal(true);
+     setShowModal(false);
    };
  
    const handleDecline = () => {
@@ -42,11 +52,21 @@ const Dashboard = () => {
      setShowModal(false);
    };
 
+
+
    useEffect(() => {
       fetchbalance();
+      fetchUserInfo();
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get("code");
+      const decryptedID = decryptID(code);
+         if (code) {
+            setShowModal(true);
+          }
+
+     
    }, []);
    const fetchbalance = async () => {
-
       try {
          const response = await Api.get('auth/available-balance');
          setBalance(response.data);
@@ -54,6 +74,22 @@ const Dashboard = () => {
          setError(err.response?.data?.error || "Error fetching income");
       }
    };
+
+   const fetchUserInfo = async () => {
+      try {
+          const response = await Api.get('auth/userinfo');
+          if (response.data.status) {
+              setUsername(response.data.name);
+          }
+      } catch (err) {
+          console.error("❌ Error fetching user info:", err);
+      } finally {
+          setLoading(false);
+      }
+  };
+  
+
+ 
    return (
 
       <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
@@ -63,7 +99,7 @@ const Dashboard = () => {
             <div>
             {showModal && (
             <TelegramConnectModal
-               username="Sachin Prajapati"
+               username={username}
                onAccept={handleAccept}
                onDecline={handleDecline}
             />
@@ -89,7 +125,7 @@ const Dashboard = () => {
                               fontFamily: 'ClashDisplay-Semibold'
                            }}><span style={{
                               fontSize: '25px'
-                           }}> {balance.available_balance} USDT</span></p>
+                           }}> {Number(balance.available_balance).toFixed(2)} USDT</span></p>
 
                         <p className="text-secondary"></p>
                      </div>
@@ -113,7 +149,7 @@ const Dashboard = () => {
                            }}>
                            <span style={{
                               fontSize: '25px'
-                           }}> {Number(balance.totlinvest)} USDT</span></p>
+                           }}> {Number(balance.totlinvest).toFixed(2)} USDT</span></p>
                         <p className="text-secondary"></p>
                      </div>
                   </div>
@@ -135,7 +171,7 @@ const Dashboard = () => {
                      }}>
                      <span style={{
                         fontSize: '25px'
-                     }}>{Number(balance.withdraw)} USDT</span></p>
+                     }}>{Number(balance.withdraw).toFixed(2)} USDT</span></p>
                </div>
             </div>
          </div>
