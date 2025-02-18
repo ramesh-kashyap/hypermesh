@@ -115,7 +115,7 @@ const handleWithdraw = async () => {
 
     if (loading) return <p>Loading...</p>;
     return (
-     <div>
+     <div className="relative">
         <button
           onClick={toggleDropdown}
           className="flex items-center justify-between rounded-2xl border border-[#F1F1F1] bg-white text-sm w-full h-[65px] p-3 sm:p-5"
@@ -151,8 +151,8 @@ const handleWithdraw = async () => {
     <><Toaster position="top-center" /><div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
       <div>
         <div className="flex justify-between">
-          <span style={{ color: "#fff" }} className="bg-green-500 text-sm rounded-[22px] h-[33px] px-3 bg-black mb-4 mt-10 flex items-center space-x-2 cursor-pointer">
-            <img alt="Back Icons" loading="lazy" width="17" height="12" src="upnl/assets/icons/icon-back.svg" />
+          <span    onClick={() => window.history.back()} style={{ color: "#fff" }} className="text-white text-sm rounded-[22px] h-[33px] px-3 bg-black mb-4 mt-10 flex items-center space-x-2 cursor-pointer">
+            <img alt="Back Icons" loading="lazy" width="17" height="12" decoding="async" data-nimg="1" src="upnl/assets/icons/icon-back.svg" />
             <span>Back</span>
           </span>
         </div>
@@ -160,12 +160,8 @@ const handleWithdraw = async () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-3 gap-6">
           <div className="lg:col-span-3 xl:col-span-2 bg-white rounded-[16px] p-6">
             <h2 className="text-xl sm:text-2xl font-bold">Withdraw</h2>
-            <p className="text-[40px] md:text-[36px] lg:text-[40px] mr-2 font-semibold"
-                           style={{
-                              fontFamily: 'ClashDisplay-Semibold'
-                           }}><span style={{
-                              fontSize: '23px'
-                           }}> {balance.available_balance} USDT</span></p>
+           
+     
             <div className="w-full flex flex-col gap-3 md:gap-5">
               <div className="flex flex-col gap-2">
                 <DropdownExample  selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
@@ -199,7 +195,7 @@ const handleWithdraw = async () => {
                 </div>
 
                 <div className="text-[#0E1A32] font-normal text-xs text-right ">
-                  <span style={{ color: '#63728E' }}>Available</span> 0 USDT
+                  <span style={{ color: '#63728E' }}>Available</span> {balance.available_balance} USDT
                 </div>
 
                 <hr className="my-2 mt-3" style={{ color: "#eff0f1" }} />
