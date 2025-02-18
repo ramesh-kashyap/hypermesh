@@ -1,11 +1,46 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Api from "../../Requests/Api";
+import TelegramConnectModal from "../../components/TelegramConnectModal";
+import  { encryptID, decryptID } from "../../components/cryptoUtils";
 
 const Dashboard = () => {
    const [balance, setBalance] = useState([]);
    const [error, setError] = useState("");
+   const [showModal, setShowModal] = useState(true);
+   const [originalID, setOriginalID] = useState("49");
+   const [encryptedID, setEncryptedID] = useState("");
+   const [decryptedID, setDecryptedID] = useState("");
 
+
+   const handleEncrypt = () => {
+      const encrypted = encryptID(originalID);
+      setEncryptedID(encrypted);
+    };
+
+   const handleAccept = async () => {
+     console.log("User accepted Telegram connection.");
+     const urlParams = new URLSearchParams(window.location.search);
+     const code = urlParams.get("code");
+     const decryptedID = decryptID(code);
+
+     try {
+      const response = await Api.post('auth/connect-telegram',{decryptedID});
+      
+      setBalance(response.data);
+
+   } catch (err) {
+      setError(err.response?.data?.error || "Error connect telegram");
+   }
+      
+
+     setShowModal(true);
+   };
+ 
+   const handleDecline = () => {
+     console.log("User declined Telegram connection.");
+     setShowModal(false);
+   };
 
    useEffect(() => {
       fetchbalance();
@@ -13,10 +48,8 @@ const Dashboard = () => {
    const fetchbalance = async () => {
 
       try {
-
          const response = await Api.get('auth/available-balance');
          setBalance(response.data);
-         console.log(response.data)
       } catch (err) {
          setError(err.response?.data?.error || "Error fetching income");
       }
@@ -25,6 +58,21 @@ const Dashboard = () => {
 
       <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
          <div className="w-full mt-10 flex flex-col justify-center text-primary">
+
+            {/* model popup/ */}
+            <div>
+            {showModal && (
+            <TelegramConnectModal
+               username="Sachin Prajapati"
+               onAccept={handleAccept}
+               onDecline={handleDecline}
+            />
+            )}
+            </div>
+
+
+
+            {/* end model */}
             <div className="max-w-[1920px] w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                <div className="bg-white p-6 rounded-[16px] flex flex-col items-left">
                   <div className="flex items-center justify-left mb-4">
