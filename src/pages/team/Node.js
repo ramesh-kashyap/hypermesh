@@ -25,9 +25,7 @@ const Node = () => {
     
             console.log(response.data);
     
-    
-            console.log(response.data.data);
-        } catch (err) {
+            } catch (err) {
             setError(err.response?.data?.error || "Error fetching income");
         }
     };
