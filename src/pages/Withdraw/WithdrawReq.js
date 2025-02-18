@@ -25,8 +25,22 @@ const WithdrawComponent = () => {
   const [address, setAddress] = useState(""); 
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [balance, setBalance] = useState([]);
 
+  useEffect(() => {
+    fetchbalance();
+ }, []);
+ const fetchbalance = async () => {
 
+    try {
+
+       const response = await api.get('auth/available-balance');
+       setBalance(response.data);
+       console.log(response.data)
+    } catch (err) {
+       setError(err.response?.data?.error || "Error fetching income");
+    }
+ };
 
   const fetchUserAddress = async () => {
     try {
@@ -96,10 +110,12 @@ const handleWithdraw = async () => {
     };
 
 
+   
+
 
     if (loading) return <p>Loading...</p>;
     return (
-     <div className="relative">
+     <div>
         <button
           onClick={toggleDropdown}
           className="flex items-center justify-between rounded-2xl border border-[#F1F1F1] bg-white text-sm w-full h-[65px] p-3 sm:p-5"
@@ -144,7 +160,12 @@ const handleWithdraw = async () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-3 gap-6">
           <div className="lg:col-span-3 xl:col-span-2 bg-white rounded-[16px] p-6">
             <h2 className="text-xl sm:text-2xl font-bold">Withdraw</h2>
-
+            <p className="text-[40px] md:text-[36px] lg:text-[40px] mr-2 font-semibold"
+                           style={{
+                              fontFamily: 'ClashDisplay-Semibold'
+                           }}><span style={{
+                              fontSize: '23px'
+                           }}> {balance.available_balance} USDT</span></p>
             <div className="w-full flex flex-col gap-3 md:gap-5">
               <div className="flex flex-col gap-2">
                 <DropdownExample  selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
@@ -238,15 +259,15 @@ const handleWithdraw = async () => {
 
                         {/* Pagination Controls */}
                         <div className="flex justify-center mt-4">
-                            <button
+                            <button style={{ backgroundColor: "rgb(164 239 247)" }} 
                                 onClick={() => setPage(page - 1)}
                                 disabled={page === 1}
                                 className="px-4 py-2 mx-2 bg-gray-300 rounded disabled:opacity-50"
                             >
                                  {"<<"}
                             </button>
-                            <span className="px-4 py-2">Page {page} of {totalPages}</span>
-                            <button
+                            <span className="px-4 py-2"> {page} of {totalPages}</span>
+                            <button style={{ backgroundColor: "rgb(164 239 247)" }} 
                                 onClick={() => setPage(page + 1)}
                                 disabled={page === totalPages}
                                 className="px-4 py-2 mx-2 bg-gray-300 rounded disabled:opacity-50"

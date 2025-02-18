@@ -9,6 +9,22 @@ import { useNavigate } from 'react-router-dom';
 const Dashboard = () => {
      const navigate = useNavigate();
    const [balance, setBalance] = useState([]);
+
+   const [isOpen, setIsOpen] = useState(true); // Modal visibility state
+    
+   // Function to close the modal when Decline is clicked
+   const closeModal = () => {
+     setIsOpen(false);
+   };
+ 
+   // Function to handle Accept action (optional)
+   const handleAccept = () => {
+     // Logic for Accept (e.g., connect with Telegram)
+     console.log("Account connected with Telegram!");
+     setIsOpen(false); // Close the modal after accepting
+   };
+
+
    const [error, setError] = useState("");
    const [showModal, setShowModal] = useState(false);
    const [originalID, setOriginalID] = useState(49);
@@ -438,7 +454,31 @@ const Dashboard = () => {
                      </div>
                   </div>
                </div>
-
+               {isOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50">
+          <div className="bg-white p-8 rounded-[20px] shadow-lg w-fit text-center">
+            <h2 className="text-lg font-semibold mb-2">Connect Telegram Account</h2>
+            <p className="text-sm text-secondary">Connect your account with Telegram:</p>
+            <p className="mb-4">Sachin Prajapati</p>
+            <div className="flex justify-between gap-4">
+              {/* Decline Button */}
+              <button
+                onClick={closeModal} // Close the modal on Decline
+                className="px-4 w-1/2 py-2 bg-gray-300 rounded-[30px]"
+              >
+                Decline
+              </button>
+              {/* Accept Button */}
+              <button
+                onClick={handleAccept} // Handle the Accept action
+                className="px-4 w-1/2 py-2 bg-black1 text-white rounded-[30px]"
+              >
+                Accept
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
                <div className="flex space-x-4 mt-6">
                   <div className="flex items-center"><span

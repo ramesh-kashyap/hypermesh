@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Api from "../../Requests/Api";
 import { Toaster, toast } from "react-hot-toast";
+import {Lock, KeyRound} from "lucide-react"
 import { sendOtp, resetPassword } from "../../Requests/Api"; // Ensure the correct path
 import { Toaster, toast } from "react-hot-toast";
 import { sendOtp, resetPassword } from "../../Requests/Api"; // Ensure the correct path
@@ -119,7 +120,7 @@ const handleOutsideClick = (event, setPopupState) => {
         <><Toaster position="top-center" /><div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
             <div className="w-full mt-10 flex justify-center text-primary">
                 <div className="max-w-[1920px] w-full">
-                    <div className="w-full relative max-w-[669px] pb-[46px] text-center pt-[36px] bg-[#FFF] rounded-[16px] mx-auto mt-[100px]">
+                    <div className="w-full max-w-[669px] pb-[46px] text-center pt-[36px] bg-[#FFF] rounded-[16px] mx-auto mt-[100px]">
                         <div className="w-[100px] h-[100px] rounded-full mx-auto text-[72px] font-semibold" style={{ background: '#2da9dd', fontFamily: 'ClashDisplay-Semibold' }}>
                             B
                         </div>
@@ -131,14 +132,21 @@ const handleOutsideClick = (event, setPopupState) => {
                         <div className="mx-auto w-full text-secondary text-sm mb-[60px]">
                             {email}
                         </div>
-                        <div className="flex flex-wrap md:flex-nowrap mx-auto w-full justify-center">
-                            <button className="rounded-[30px] h-[48px] py-3 px-6 bg-[#F1F1F1] md:mr-2 mb-2" onClick={handlePasswordPopupToggle}>
-                                Login Password
-                            </button>
-                            <a className="rounded-[30px] h-[48px] py-3 px-6 bg-[#F1F1F1] md:mr-2 flex items-center justify-center" onClick={handleTrxPasswordPopupToggle}>
-                                Change Trx Password
-                            </a>
-                        </div>
+                        <div className="flex mx-auto w-full justify-center">
+      <a >
+        <button className="flex flex-1 justify-center rounded-[30px] max-w-[200px] h-[48px] py-3 px-6 bg-[#F1F1F1]" onClick={handlePasswordPopupToggle}>
+        <KeyRound size={20} />
+          <span className="ml-[10px] text-[16px] font-semibold">Password</span>
+        </button>
+      </a>
+      <a >
+        <button className="flex flex-1 ml-2 md:ml-4 justify-center rounded-[30px] max-w-[200px] h-[48px] py-3 px-6 bg-[#F1F1F1]" onClick={handleTrxPasswordPopupToggle}>
+                          <Lock size={20} />
+      
+          <span className=" text-[16px] font-semibold">Security</span>
+        </button>
+      </a>
+    </div>
                     </div>
 
 
@@ -153,7 +161,7 @@ const handleOutsideClick = (event, setPopupState) => {
                    
                     {isPasswordPopupOpen && (
 
-                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setPasswordPopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setPasswordPopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50">
 
                             <form>
                                 <input type="hidden" name="_token" value="KKX0De0b1aF69ZyhV4ctcUqPaDEGxVrpSEIoZILh" />
@@ -193,7 +201,7 @@ const handleOutsideClick = (event, setPopupState) => {
 
 
                     {isTrxPasswordPopupOpen && (
-                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setTrxPasswordPopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setTrxPasswordPopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50">
                             <form>
                                 <input type="hidden" name="_token" value="KKX0De0b1aF69ZyhV4ctcUqPaDEGxVrpSEIoZILh" />
                                 <div className="bg-white rounded-[20px] w-[400px] px-8 pt-10 pb-6 text-center relative">
@@ -265,7 +273,7 @@ const handleOutsideClick = (event, setPopupState) => {
 
                     {/* Edit Profile Modal */}
                     {isProfilePopupOpen && (
-                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setProfilePopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div id="popup-overlay"  onClick={(e) => handleOutsideClick(e, setProfilePopupOpen)} className="fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50">
                             <div className="bg-white rounded-[20px] w-[400px] px-8 pt-10 pb-6 text-center relative">
                                 <h2 className="text-lg font-semibold">Edit Profile</h2>
                                 <div className="w-[100px] my-10 h-[100px] mx-auto cursor-pointer">
