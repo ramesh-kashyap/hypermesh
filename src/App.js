@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Login from './pages/auth/Login';
+
 import Register from './pages/auth/Register';
 import Team from './pages/team/Team';
 import Level from './pages/team/Level';
@@ -32,7 +33,7 @@ import ResetPassword from "./pages/auth/ResetPassword"; // Import Forgot Passwor
 
 function Layout({ children }) {
     const location = useLocation();
-    const hideLayout = location.pathname === "/login" || location.pathname === "/register"|| location.pathname === "/forgot-password";
+    const hideLayout = location.pathname === "/login" ||   location.pathname === "/Tellogin" ||     location.pathname === "/register"|| location.pathname === "/forgot-password";
 
     return (
         <div id="__next">
@@ -73,6 +74,8 @@ function Layout({ children }) {
                             <Route path="/register" element={<Register />} />
                             <Route path="/forgot-password" element={<ForgotPassword />} />
                             <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+
 
                         </Routes>
                     </div>
