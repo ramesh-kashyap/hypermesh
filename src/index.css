@@ -34,14 +34,34 @@ code {
     background-color: #52bad3;
     color: white;
   }
-  @media (min-width: 768px) {
-    .md\:flex {
-        display: unset;
-    }
+  .text-white {
+    --tw-text-opacity: 1;
+    color: #ffffff;
+}
+@media (min-width: 768px) {
+  .md\:flex {
+      display: unset;
+  }
 }
 .my-5 {
-  margin-top: 3.25rem;
-  margin-bottom: 1.25rem;
+margin-top: 3.25rem;
+margin-bottom: 1.25rem;
+}
+.register-success.fixed.inset-0.z-50.flex.items-center.justify-center.bg-black.bg-opacity-50 {
+  display: none;
+}
+.register-success.fixed.inset-0.z-50.flex.items-center.justify-center.bg-black.bg-opacity-50.show {
+  display: flex;
+}
+@media (min-width: 768px) {
+  .md\:py-\[30px\] {
+      padding-top: 30px;
+      padding-bottom: 30px;
+  }
+}
+.py-\[20px\] {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #customers {

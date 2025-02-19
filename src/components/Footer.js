@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const Footer = () => {
+export default function Footer() {
+  const location = useLocation(); // Get current location
+
   return (
-    
-    <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg" style={{ background: '#ffff' }}>
-        
+    <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg" style={{zIndex:1}}>
       {/* Overview link */}
       <Link
-        to="/dashboard" // Replace with the actual route
-        className="flex w-1/5 p-[12px] flex-col items-center"
+        className="flex flex-col items-center py-2 px-3 w-1/5"
+        to="/dashboard"
       >
         <img
           alt="overview Icon"
@@ -17,35 +17,33 @@ const Footer = () => {
           width="20"
           height="20"
           decoding="async"
-          className=""
-          
           src="/upnl/assets/icons/icon-overview.svg"
+          style={{ color: 'transparent' }}
         />
-        <span className="text-xs mt-1 text-white">Overview</span>
+        <span className={`${location.pathname === "/dashboard" ? "text-[rgb(0,147,233)]" : "text-[#555]"}`}>Nodes</span>
       </Link>
 
       {/* Market link */}
       <Link
-        to="Node" // Replace with the actual route
-        className="flex w-1/5 p-[12px] flex-col items-center"
+        className="flex flex-col items-center py-2 px-3 w-1/5"
+        to="/Market"
       >
         <img
-          alt="my_nodes Icon"
+          alt="market Icon"
           loading="lazy"
           width="20"
           height="20"
           decoding="async"
-          className=""
           src="/upnl/assets/icons/icon-nodes.svg"
           style={{ color: 'transparent' }}
         />
-        <span className="text-xs mt-1 text-white">Nodes</span>
+        <span className={`${location.pathname === "/Market" ? "text-[rgb(0,147,233)]" : "text-[#555]"}`}>Earn</span>
       </Link>
 
       {/* Referrals link */}
       <Link
-        to="/team" // Replace with the actual route
-        className="flex w-1/5 p-[12px] flex-col items-center"
+        className="flex flex-col items-center py-2 px-3 w-1/5"
+        to="/team"
       >
         <img
           alt="referrals Icon"
@@ -53,17 +51,16 @@ const Footer = () => {
           width="20"
           height="20"
           decoding="async"
-          className=""
           src="/upnl/assets/icons/icon-referrals.svg"
           style={{ color: 'transparent' }}
         />
-        <span className="text-xs mt-1 text-white">Referrals</span>
+        <span className={`${location.pathname === "/team" ? "text-[rgb(0,147,233)]" : "text-[#555]"}`}>Referrals</span>
       </Link>
 
       {/* Profile link */}
       <Link
-        to="/wallet" // Replace with the actual route
-        className="flex w-1/5 p-[12px] flex-col items-center"
+        className="flex flex-col items-center py-2 px-3 w-1/5"
+        to="/profile"
       >
         <img
           alt="profile Icon"
@@ -71,33 +68,12 @@ const Footer = () => {
           width="20"
           height="20"
           decoding="async"
-          className=""
-          src="/upnl/assets/icons/icon-wallet.svg"
+          src="upnl/assets/icons/icon-profile.svg"
           style={{ color: 'transparent' }}
         />
-        <span className="text-xs mt-1 text-white">wallet</span>
-      </Link>
+<span className={`${location.pathname === "/profile" ? "bg-green-50" : "text-[#555]"}`}>Profile</span>
 
-      <Link
-        to="/Profile" // Replace with the actual route
-        className="flex w-1/5 p-[12px] flex-col items-center"
-      >
-        <img
-          alt="profile Icon"
-          loading="lazy"
-          width="20"
-          height="20"
-          decoding="async"
-          className=""
-          src="/upnl/assets/icons/icon-profile.svg"
-          style={{ color: 'transparent' }}
-        />
-        <span className="text-xs mt-1 text-white">Profile</span>
       </Link>
-      
     </div>
-    
   );
-};
-
-export default Footer;
+}
