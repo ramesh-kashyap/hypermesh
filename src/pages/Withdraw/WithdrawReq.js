@@ -115,7 +115,7 @@ const handleWithdraw = async () => {
 
     if (loading) return <p>Loading...</p>;
     return (
-     <div className="relative">
+     <div className="">
         <button
           onClick={toggleDropdown}
           className="flex items-center justify-between rounded-2xl border border-[#F1F1F1] bg-white text-sm w-full h-[65px] p-3 sm:p-5"
@@ -130,7 +130,7 @@ const handleWithdraw = async () => {
         </button>
 
         {isOpen && (
-          <div className="absolute top-full left-0 w-full bg-white shadow-md rounded-2xl mt-1 z-10">
+          <div className=" top-full left-0 w-full bg-white shadow-md rounded-2xl mt-1 z-10">
             {networkOptions.map((option, index) => (
               <div 
                 key={index}

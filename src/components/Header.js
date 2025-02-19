@@ -6,10 +6,26 @@ import { Link, useNavigate } from 'react-router-dom';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [username, setUsername] = useState("Guest");
+  const [referralCount, setReferralCount] = useState("0");
+
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State to manage popup visibility
   const menuRef = useRef(null);
 
   const getFirstLetter = (str) => str ? str.charAt(0).toUpperCase() : '';
+
+  useEffect(() => {
+    const fetchReferrals = async () => {
+      try {
+        const response = await Api.get('auth/referrals-user');
+        setReferralCount(response.data.totalReferrals);
+
+      } catch (error) {
+        console.error("Error fetching referrals:", error);
+    }
+    };
+    fetchReferrals();
+}, []);
+
 
   useEffect(() => {
     fetchUserInfo();
@@ -93,7 +109,8 @@ const Header = () => {
                 src="/upnl/assets/icons/icon_user_add.svg"
                 style={{ color: "transparent" }}
               />
-              <span className="lg:inline text-xl">{username}!</span>
+             <span className="lg:inline text-ms">Reffered</span>
+             <div className="flex ml-3 items-center justify-center rounded-full bg-gray-200 min-w-8 h-8 text-xs px-2">{referralCount}</div>
             </div>
           </a>
           <a className="flex flex-row gap-4 h-[38px] bg-white p-1 px-2 rounded-full md:mr-3" title="Wallet" href="/wallet">
@@ -130,7 +147,8 @@ const Header = () => {
 
         {/* Button Section */}
         <div className="relative flex items-center space-x-2 font-semibold">
-          
+        <span className="lg:inline text-xl">Hello, {username}!</span>
+
           {/* User Button */}
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="" style={{position:"relative"}}>
             <div
