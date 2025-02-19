@@ -37,7 +37,7 @@ export default function Footer() {
           src="/upnl/assets/icons/icon-nodes.svg"
           style={{ color: 'transparent' }}
         />
-        <span className={`${location.pathname === "/Market" ? "text-[rgb(0,147,233)]" : "text-[#555]"}`}>Earn</span>
+        <span className="text-xs mt-1 text-white">Earn</span>
       </Link>
 
       {/* Referrals link */}
@@ -59,8 +59,8 @@ export default function Footer() {
 
       {/* Profile link */}
       <Link
-        className="flex flex-col items-center py-2 px-3 w-1/5"
-        to="/profile"
+        to="profile-setting" // Replace with the actual route
+        className="flex w-1/5 p-[12px] flex-col items-center"
       >
         <img
           alt="profile Icon"
@@ -71,8 +71,7 @@ export default function Footer() {
           src="upnl/assets/icons/icon-profile.svg"
           style={{ color: 'transparent' }}
         />
-<span className={`${location.pathname === "/profile" ? "bg-green-50" : "text-[#555]"}`}>Profile</span>
-
+        <span className="text-xs mt-1 text-white">raj</span>
       </Link>
     </div>
   );
