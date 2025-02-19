@@ -3,8 +3,6 @@ import Api from "../../Requests/Api";
 import { Toaster, toast } from "react-hot-toast";
 import {Lock, KeyRound} from "lucide-react"
 import { sendOtp, resetPassword } from "../../Requests/Api"; // Ensure the correct path
-import { Toaster, toast } from "react-hot-toast";
-import { sendOtp, resetPassword } from "../../Requests/Api"; // Ensure the correct path
 
 const Profile = () => {
     const [isPasswordPopupOpen, setPasswordPopupOpen] = useState(false);
@@ -13,13 +11,6 @@ const Profile = () => {
     const [user, setUser] = useState(null);
     const [newName, setNewName] = useState(""); // ✅ New Name State
     const [loading, setLoading] = useState(false);
-
-    const [email, setEmail] = useState("");
-    const [code, setCode] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
 
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
