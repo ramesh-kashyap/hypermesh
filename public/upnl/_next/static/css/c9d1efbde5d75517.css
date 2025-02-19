@@ -1258,8 +1258,8 @@ video {
 
 .bg-black {
   --tw-bg-opacity: 1;
-  
-  background-color:#000000;}
+  background-color: rgb(0 0 0/var(--tw-bg-opacity));
+  }
   .bg-black1 {
     --tw-bg-opacity: 1;
     background-color: rgb(0 0 0 / var(--tw-bg-opacity));

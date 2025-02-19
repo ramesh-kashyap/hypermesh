@@ -5,7 +5,7 @@ export default function Footer() {
   const location = useLocation(); // Get current location
 
   return (
-    <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg">
+    <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg" style={{zIndex:1}}>
       {/* Overview link */}
       <Link
         className="flex flex-col items-center py-2 px-3 w-1/5"

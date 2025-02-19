@@ -6,26 +6,10 @@ import { Link, useNavigate } from 'react-router-dom';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [username, setUsername] = useState("Guest");
-  const [referralCount, setReferralCount] = useState("0");
-
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State to manage popup visibility
   const menuRef = useRef(null);
 
   const getFirstLetter = (str) => str ? str.charAt(0).toUpperCase() : '';
-
-  useEffect(() => {
-    const fetchReferrals = async () => {
-      try {
-        const response = await Api.get('auth/referrals-user');
-        setReferralCount(response.data.totalReferrals);
-
-      } catch (error) {
-        console.error("Error fetching referrals:", error);
-    }
-    };
-    fetchReferrals();
-}, []);
-
 
   useEffect(() => {
     fetchUserInfo();
@@ -109,8 +93,7 @@ const Header = () => {
                 src="/upnl/assets/icons/icon_user_add.svg"
                 style={{ color: "transparent" }}
               />
-             <span className="lg:inline text-ms">Reffered</span>
-             <div className="flex ml-3 items-center justify-center rounded-full bg-gray-200 min-w-8 h-8 text-xs px-2">{referralCount}</div>
+              <span className="lg:inline text-xl">{username}!</span>
             </div>
           </a>
           <a className="flex flex-row gap-4 h-[38px] bg-white p-1 px-2 rounded-full md:mr-3" title="Wallet" href="/wallet">
@@ -147,8 +130,7 @@ const Header = () => {
 
         {/* Button Section */}
         <div className="relative flex items-center space-x-2 font-semibold">
-        <span className="lg:inline text-xl">Hello, {username}!</span>
-
+          
           {/* User Button */}
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="" style={{position:"relative"}}>
             <div
@@ -186,27 +168,27 @@ const Header = () => {
               </ul>
             </div>
           )}
-     {/* Confirmation Popup */}
-     {isPopupOpen && (
-      <div ref={menuRef} className="jsx-9b2c38d357270ef1 w-full fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50 z-[999999]">
-      <div className="jsx-9b2c38d357270ef1 bg-white px-8 pt-10 pb-6 w-[385px] max-w-[90%] rounded-[20px] shadow-lg animate-fade-in">
-        <div className="jsx-9b2c38d357270ef1 flex justify-center mb-4">
-        <LogOut size={30}/>
-        </div>
-        <h3 className="jsx-9b2c38d357270ef1 text-center font-semibold mb-10">
-          Confirmation of logout
-        </h3>
-        <div className="jsx-9b2c38d357270ef1 justify-center w-full">
-          <button onClick={handleLogoutConfirm} className="jsx-9b2c38d357270ef1 w-full bg-black text-white rounded-full px-6 py-2">
-            Confirm
-          </button>
-          <button onClick={handlePopupClose} className="jsx-9b2c38d357270ef1 w-full mt-2 bg-gray-200 text-black rounded-full px-6 py-2">
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-       )}
+          {/* Confirmation Popup */}
+          {isPopupOpen && (
+            <div ref={menuRef} className="jsx-9b2c38d357270ef1 w-full fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50 z-[999999]" style={{zIndex:1}}>
+            <div className="jsx-9b2c38d357270ef1 bg-white px-8 pt-10 pb-6 w-[385px] max-w-[90%] rounded-[20px] shadow-lg animate-fade-in">
+              <div className="jsx-9b2c38d357270ef1 flex justify-center mb-4">
+              <LogOut size={30}/>
+              </div>
+              <h3 className="jsx-9b2c38d357270ef1 text-center font-semibold mb-10">
+                Confirmation of logout
+              </h3>
+              <div className="jsx-9b2c38d357270ef1 justify-center w-full">
+                <button onClick={handleLogoutConfirm} className="jsx-9b2c38d357270ef1 w-full bg-black text-white rounded-full px-6 py-2">
+                  Confirm
+                </button>
+                <button onClick={handlePopupClose} className="jsx-9b2c38d357270ef1 w-full mt-2 bg-gray-200 text-black rounded-full px-6 py-2">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+            )}
      
 
           {/* Language Button */}

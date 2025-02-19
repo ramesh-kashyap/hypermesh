@@ -83,7 +83,7 @@ const handleWithdraw = async () => {
       address 
     });
 
-    console.log("Withdraw Successful:", response.data); 
+    console.log("Withdraw Successful:", response.data);
     toast.success(response.data.message); // Backend ka success message show karega
 
   } catch (error) {
@@ -95,7 +95,7 @@ const handleWithdraw = async () => {
       : "Withdraw failed. Please try again.";
 
     setError(errorMessage);
-    toast.error(errorMessage); 
+    toast.error(errorMessage); // Proper error message show karega
   }
 };
 
@@ -115,7 +115,7 @@ const handleWithdraw = async () => {
 
     if (loading) return <p>Loading...</p>;
     return (
-     <div className="">
+     <div className="relative">
         <button
           onClick={toggleDropdown}
           className="flex items-center justify-between rounded-2xl border border-[#F1F1F1] bg-white text-sm w-full h-[65px] p-3 sm:p-5"
@@ -130,7 +130,7 @@ const handleWithdraw = async () => {
         </button>
 
         {isOpen && (
-          <div className=" top-full left-0 w-full bg-white shadow-md rounded-2xl mt-1 z-10">
+          <div className="absolute top-full left-0 w-full bg-white shadow-md rounded-2xl mt-1 z-10">
             {networkOptions.map((option, index) => (
               <div 
                 key={index}

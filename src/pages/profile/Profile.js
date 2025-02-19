@@ -100,6 +100,7 @@ const handleOutsideClick = (event, setPopupState) => {
             if (response.data) {
                 setUser((prevUser) => ({ ...prevUser, name: newName }));
                  toast.success("Profile Updated Successfully");
+                
                  
             }
         } catch (error) {
