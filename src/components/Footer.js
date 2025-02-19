@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { IconName } from "lucide-react";
+
 
 export default function Footer() {
   const location = useLocation(); // Get current location
