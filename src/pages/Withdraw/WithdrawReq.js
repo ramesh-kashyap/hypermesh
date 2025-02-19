@@ -83,7 +83,7 @@ const handleWithdraw = async () => {
       address 
     });
 
-    console.log("Withdraw Successful:", response.data);
+    console.log("Withdraw Successful:", response.data); 
     toast.success(response.data.message); // Backend ka success message show karega
 
   } catch (error) {
@@ -95,7 +95,7 @@ const handleWithdraw = async () => {
       : "Withdraw failed. Please try again.";
 
     setError(errorMessage);
-    toast.error(errorMessage); // Proper error message show karega
+    toast.error(errorMessage); 
   }
 };
 

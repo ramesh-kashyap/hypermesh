@@ -31,7 +31,7 @@ const Profile = () => {
         setProfilePopupOpen(!isProfilePopupOpen);
     };
 
-// Function to handle outside click and close popup
+// Function to handle outside click and close
 const handleOutsideClick = (event, setPopupState) => {
   if (event.target.id === "popup-overlay") {
     setPopupState(false);
@@ -98,7 +98,7 @@ const handleOutsideClick = (event, setPopupState) => {
             const response = await Api.put("auth/Update-Profile", { name: newName });
 
             if (response.data) {
-                setUser((prevUser) => ({ ...prevUser, name: newName })); // ✅ UI Update
+                setUser((prevUser) => ({ ...prevUser, name: newName }));
                  toast.success("Profile Updated Successfully");
                  
             }
