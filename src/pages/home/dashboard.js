@@ -37,10 +37,18 @@ const Dashboard = () => {
           
             navigate('/dashboard');
          }
+         else
+         {
+            toast.error(response.data.message);
+         }
 
 
    } catch (err) {
+
+      console.log(err);
+      
       setError(err.response?.data?.error || "Error connect telegram");
+
    }
       
 

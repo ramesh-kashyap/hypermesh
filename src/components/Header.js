@@ -168,27 +168,27 @@ const Header = () => {
               </ul>
             </div>
           )}
-     {/* Confirmation Popup */}
-     {isPopupOpen && (
-      <div ref={menuRef} className="jsx-9b2c38d357270ef1 w-full fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50 z-[999999]">
-      <div className="jsx-9b2c38d357270ef1 bg-white px-8 pt-10 pb-6 w-[385px] max-w-[90%] rounded-[20px] shadow-lg animate-fade-in">
-        <div className="jsx-9b2c38d357270ef1 flex justify-center mb-4">
-        <LogOut size={30}/>
-        </div>
-        <h3 className="jsx-9b2c38d357270ef1 text-center font-semibold mb-10">
-          Confirmation of logout
-        </h3>
-        <div className="jsx-9b2c38d357270ef1 justify-center w-full">
-          <button onClick={handleLogoutConfirm} className="jsx-9b2c38d357270ef1 w-full bg-black text-white rounded-full px-6 py-2">
-            Confirm
-          </button>
-          <button onClick={handlePopupClose} className="jsx-9b2c38d357270ef1 w-full mt-2 bg-gray-200 text-black rounded-full px-6 py-2">
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-       )}
+          {/* Confirmation Popup */}
+          {isPopupOpen && (
+            <div ref={menuRef} className="jsx-9b2c38d357270ef1 w-full fixed inset-0 flex items-center justify-center bg-black1 bg-opacity-50 z-[999999]" style={{zIndex:1}}>
+            <div className="jsx-9b2c38d357270ef1 bg-white px-8 pt-10 pb-6 w-[385px] max-w-[90%] rounded-[20px] shadow-lg animate-fade-in">
+              <div className="jsx-9b2c38d357270ef1 flex justify-center mb-4">
+              <LogOut size={30}/>
+              </div>
+              <h3 className="jsx-9b2c38d357270ef1 text-center font-semibold mb-10">
+                Confirmation of logout
+              </h3>
+              <div className="jsx-9b2c38d357270ef1 justify-center w-full">
+                <button onClick={handleLogoutConfirm} className="jsx-9b2c38d357270ef1 w-full bg-black text-white rounded-full px-6 py-2">
+                  Confirm
+                </button>
+                <button onClick={handlePopupClose} className="jsx-9b2c38d357270ef1 w-full mt-2 bg-gray-200 text-black rounded-full px-6 py-2">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+            )}
      
 
           {/* Language Button */}
