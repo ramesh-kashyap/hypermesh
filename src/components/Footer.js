@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-export default function Footer() {
-  const location = useLocation(); // Get current location
-
+const Footer = () => {
   return (
-    <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg" style={{zIndex:1}}>
+    
+    <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg" style={{ background: '#ffff' }}>
+        
       {/* Overview link */}
       <Link
-        className="flex flex-col items-center py-2 px-3 w-1/5"
-        to="/dashboard"
+        to="/dashboard" // Replace with the actual route
+        className="flex w-1/5 p-[12px] flex-col items-center"
       >
         <img
           alt="overview Icon"
@@ -17,33 +17,35 @@ export default function Footer() {
           width="20"
           height="20"
           decoding="async"
+          className=""
+          
           src="/upnl/assets/icons/icon-overview.svg"
-          style={{ color: 'transparent' }}
         />
-        <span className={`${location.pathname === "/dashboard" ? "text-[rgb(0,147,233)]" : "text-[#555]"}`}>Nodes</span>
+        <span className="text-xs mt-1 text-white">Overview</span>
       </Link>
 
       {/* Market link */}
       <Link
-        className="flex flex-col items-center py-2 px-3 w-1/5"
-        to="/Market"
+        to="Node" // Replace with the actual route
+        className="flex w-1/5 p-[12px] flex-col items-center"
       >
         <img
-          alt="market Icon"
+          alt="my_nodes Icon"
           loading="lazy"
           width="20"
           height="20"
           decoding="async"
+          className=""
           src="/upnl/assets/icons/icon-nodes.svg"
           style={{ color: 'transparent' }}
         />
-        <span className={`${location.pathname === "/Market" ? "text-[rgb(0,147,233)]" : "text-[#555]"}`}>Earn</span>
+        <span className="text-xs mt-1 text-white">Nodes</span>
       </Link>
 
       {/* Referrals link */}
       <Link
-        className="flex flex-col items-center py-2 px-3 w-1/5"
-        to="/team"
+        to="/team" // Replace with the actual route
+        className="flex w-1/5 p-[12px] flex-col items-center"
       >
         <img
           alt="referrals Icon"
@@ -51,16 +53,17 @@ export default function Footer() {
           width="20"
           height="20"
           decoding="async"
+          className=""
           src="/upnl/assets/icons/icon-referrals.svg"
           style={{ color: 'transparent' }}
         />
-        <span className={`${location.pathname === "/team" ? "text-[rgb(0,147,233)]" : "text-[#555]"}`}>Referrals</span>
+        <span className="text-xs mt-1 text-white">Referrals</span>
       </Link>
 
       {/* Profile link */}
       <Link
-        className="flex flex-col items-center py-2 px-3 w-1/5"
-        to="/profile"
+        to="/wallet" // Replace with the actual route
+        className="flex w-1/5 p-[12px] flex-col items-center"
       >
         <img
           alt="profile Icon"
@@ -68,12 +71,33 @@ export default function Footer() {
           width="20"
           height="20"
           decoding="async"
-          src="upnl/assets/icons/icon-profile.svg"
+          className=""
+          src="/upnl/assets/icons/icon-wallet.svg"
           style={{ color: 'transparent' }}
         />
-<span className={`${location.pathname === "/profile" ? "bg-green-50" : "text-[#555]"}`}>Profile</span>
-
+        <span className="text-xs mt-1 text-white">wallet</span>
       </Link>
+
+      <Link
+        to="/Profile" // Replace with the actual route
+        className="flex w-1/5 p-[12px] flex-col items-center"
+      >
+        <img
+          alt="profile Icon"
+          loading="lazy"
+          width="20"
+          height="20"
+          decoding="async"
+          className=""
+          src="/upnl/assets/icons/icon-profile.svg"
+          style={{ color: 'transparent' }}
+        />
+        <span className="text-xs mt-1 text-white">Profile</span>
+      </Link>
+      
     </div>
+    
   );
-}
+};
+
+export default Footer;
