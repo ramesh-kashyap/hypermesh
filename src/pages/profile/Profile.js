@@ -19,6 +19,8 @@ const Profile = () => {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
 
+
+   
     const handleTrxPasswordPopupToggle = () => {
         setTrxPasswordPopupOpen(!isTrxPasswordPopupOpen);
     };
@@ -100,9 +102,11 @@ const handleOutsideClick = (event, setPopupState) => {
             if (response.data) {
                 setUser((prevUser) => ({ ...prevUser, name: newName }));
                  toast.success("Profile Updated Successfully");
-                
+                 localStorage.setItem("userName", newName); // Save in LocalStorage
+            window.dispatchEvent(new Event("userNameUpdated")); // Dispatch Event
                  
             }
+           
         } catch (error) {
             console.error("Error updating profile:", error);
         } finally {

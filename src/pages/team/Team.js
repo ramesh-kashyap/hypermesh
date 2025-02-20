@@ -33,6 +33,9 @@ const Team = () => {
             const data2 ={token:token};
             const response =await Api.post('auth/team',data2);                
             setIncome(response.data);
+
+
+            
             // console.log(response.data)
         } catch (err) {
             setError(err.response?.data?.error || "Error fetching income");

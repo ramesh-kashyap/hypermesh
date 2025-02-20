@@ -5,26 +5,53 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [username, setUsername] = useState("Guest");
+  const [userName, setUserName] = useState(localStorage.getItem("userName") || "John Doe");
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State to manage popup visibility
   const menuRef = useRef(null);
 
   const getFirstLetter = (str) => str ? str.charAt(0).toUpperCase() : '';
 
+  const [income, setIncome] = useState([]);
+  const [error, setError] = useState("");
   useEffect(() => {
-    fetchUserInfo();
+      fetchteam();
   }, []);
 
-  const fetchUserInfo = async () => {
-    try {
-      const response = await Api.get('auth/userinfo');
-      if (response.data.status) {
-        setUsername(response.data.name);
-      }
-    } catch (err) {
-      console.error("❌ Error fetching user info:", err);
+
+  const fetchteam = async () => {
+    const token = localStorage.getItem("token"); // Get JWT Token
+    console.log("Token from LocalStorage:", token); // Debugging
+
+    if (!token) {
+        setError("User not authenticated!");
+        return;
     }
+    try {
+        const data2 ={token:token};
+        const response =await Api.post('auth/team',data2);                
+        setIncome(response.data);
+
+
+        
+        // console.log(response.data)
+    } catch (err) {
+        setError(err.response?.data?.error || "Error fetching income");
+    }
+};
+
+
+
+useEffect(() => {
+  const updateUserName = () => {
+    setUserName(localStorage.getItem("userName")); // Get Updated Name
   };
+
+  window.addEventListener("userNameUpdated", updateUserName);
+
+  return () => {
+    window.removeEventListener("userNameUpdated", updateUserName);
+  };
+}, []);
 
   const navigate = useNavigate();
   
@@ -93,9 +120,12 @@ const Header = () => {
                 src="/upnl/assets/icons/icon_user_add.svg"
                 style={{ color: "transparent" }}
               />
-              <span className="lg:inline text-xl">{username}!</span>
+              <span className="lg:inline text-ms">Reffered</span>
+              <div className="flex ml-3 items-center justify-center rounded-full bg-gray-200 min-w-8 h-8 text-xs px-2">{income.data?.totalTeam}</div>
+
             </div>
           </a>
+          
           <a className="flex flex-row gap-4 h-[38px] bg-white p-1 px-2 rounded-full md:mr-3" title="Wallet" href="/wallet">
             <div className="flex flex-row justify-center items-center gap-2">
               <div className="flex items-center justify-center font-bold">0</div>
@@ -130,7 +160,7 @@ const Header = () => {
 
         {/* Button Section */}
         <div className="relative flex items-center space-x-2 font-semibold">
-          
+        <span className="lg:inline text-xl">Hello, {userName}!</span>
           {/* User Button */}
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="" style={{position:"relative"}}>
             <div
@@ -140,7 +170,7 @@ const Header = () => {
                 backgroundImage: "linear-gradient(315deg, #0093E9 0%, #80D0C7 100%)",
               }}
             >
-              {getFirstLetter(username)}
+              {getFirstLetter(userName)}
             </div>
           </button>
    

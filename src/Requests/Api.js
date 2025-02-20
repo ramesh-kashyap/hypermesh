@@ -67,7 +67,6 @@ export const resetPassword = async (email, code, password) => {
 };
 
 
-
 const Api2 = axios.create({
     baseURL: 'http://localhost:3002', // Make sure this is the correct backend port
   });
