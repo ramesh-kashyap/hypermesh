@@ -12,7 +12,7 @@ export default function Content() {
         <div className="bg-gray-200 rounded-full p-4">
           <i className="fab fa-discord text-3xl text-black"></i>
         </div>
-        <h2 className="text-xl font-semibold text-black">Connect Discord</h2>
+        <h2 className="text-xl font-semibold text-black"> Discord</h2>
         <button 
           className="bg-black text-white py-2 px-6 rounded-full text-lg" 
           onClick={handleConnectClick} // Add the onClick handler
