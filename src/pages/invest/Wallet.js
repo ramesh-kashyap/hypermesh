@@ -6,10 +6,13 @@ import Api from "../../Requests/Api";
 const Wallet = () => {
 
     const [users, setUsers] = useState([]); // ✅ Always start with an empty array
+    const [balance, setBalance] = useState([]); // ✅ Always start with an empty array
+
     const [error, setError] = useState("");
 
 
     useEffect(() => {
+        fetchbalance();
         fetchUsers();
     }, []);
     
@@ -31,6 +34,19 @@ const Wallet = () => {
             setError(err.response?.data?.error || "Error fetching income");
         }
     };
+
+    const fetchbalance = async () => {
+        try {
+           const response = await Api.get('auth/available-balance');
+           setBalance(response.data);
+        } catch (err) {
+           setError(err.response?.data?.error || "Error fetching income");
+        }
+     };
+
+
+
+
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         return date.toLocaleDateString("en-US", {
@@ -60,7 +76,7 @@ const Wallet = () => {
                         <div className="flex flex-col">
                             <div>
                                 <p className="text-primary font-medium mb-2">Total Assets</p>
-                                <p className="text-[30px] font-bold"><span>1,600.00 USDT</span></p>
+                                <p className="text-[30px] font-bold"><span>{Number(balance.available_balance).toFixed(2)}  USDT</span></p>
                                 <p className="text-secondary" style={{ paddingBottom: '10px' }}></p>
                             </div>
                             <div className="flex flex-row gap-2 items-end">
@@ -84,35 +100,33 @@ const Wallet = () => {
                             <thead>
                                 <tr className="text-secondary">
                                     <th className="text-left py-1 font-medium text-[12px]">Asset</th>
-                                    <th className="text-right py-1 font-medium text-[12px]">Holdings</th>
-                                    <th className="text-right py-1 font-medium text-[12px] hidden md:table-cell">Price</th>
-                                    <th className="text-right py-1 font-medium text-[12px]"><span className="hidden md:inline-block">Total USD</span><span className="md:hidden">USD</span></th>
+                                  
+                                    <th className="text-right py-1 font-medium text-[12px]">
+                                        {/* <span className="hidden md:inline-block">Total USD</span><span className="md:hidden">USD</span> */}
+                                        </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {[
-                                    { name: 'POINT', holdings: 0, price: 'Coming Soon', total: 'Coming Soon', logo: 'logo_point_2.svg' },
-                                    { name: 'MCC', holdings: 0, price: 'Coming Soon', total: 'Coming Soon', logo: 'logo_mcc_2.svg' },
-                                    { name: 'Bitcoin', holdings: 0, price: '$98,482.30', total: '$0', logo: 'logo_btc_2.svg' },
-                                    { name: 'USDT', holdings: 0, price: '$1.00', total: '$0', logo: 'logo_usdt_2.svg' },
-                                    { name: 'BNB', holdings: 0, price: '$729.03', total: '$0', logo: 'logo_bnb_2.svg' },
-                                ].map((asset, index) => (
-                                    <tr className="border-t h-[72px]" key={index}>
-                                        <td className="py-4 flex items-center space-x-2 lg:space-x-3 text-sm">
-                                            <img alt={`${asset.name} logo`} loading="lazy" width="40" height="40" src={`upnl/assets/icons/${asset.logo}`} style={{ color: 'transparent' }} />
-                                            <span>{asset.name}</span>
-                                        </td>
-                                        <td className="py-4 text-right text-sm"><span>{asset.holdings}</span></td>
-                                        <td className="py-4 text-primary text-right text-sm hidden md:table-cell"><span className="text-secondary">{asset.price}</span></td>
-                                        <td className="py-4 text-primary text-right text-sm">
-                                            <div className="flex flex-col md:flex-row justify-end gap-1">
-                                                <p><span>{asset.total}</span></p>
-                                                <p className="block md:hidden text-secondary text-sm"><span>Price: {asset.price}</span></p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+    <tr className="border-t h-[72px]">
+        <td className="py-4 flex items-center space-x-2 lg:space-x-3 text-sm">
+            <img alt="Total Deposit logo" loading="lazy" width="40" height="40" src="upnl/assets/icons/logo_usdt_2.svg" style={{ color: 'transparent' }} />
+            <span>Total Deposit</span>
+        </td>
+     
+        <td className="py-4 text-right text-sm"><span>{Number(balance.totlinvest).toFixed(2)} </span></td>
+
+    </tr>
+    
+    <tr className="border-t h-[72px]">
+        <td className="py-4 flex items-center space-x-2 lg:space-x-3 text-sm">
+            <img alt="Total logo" loading="lazy" width="40" height="40" src="upnl/assets/icons/logo_usdt_2.svg" style={{ color: 'transparent' }} />
+            <span>Total Withdrawal</span>
+        </td>
+        <td className="py-4 text-right text-sm"><span>{Number(balance.withdraw).toFixed(2)} </span></td>
+        
+      
+    </tr>
+</tbody>
                         </table>
                     </div>
                 </div>
