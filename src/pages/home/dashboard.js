@@ -33,20 +33,15 @@ const Dashboard = () => {
          if (response.data.status) {
             toast.success("Telegram Connected successful!");
             // Navigate to a protected route (e.g., /dashboard)
-
             navigate('/dashboard');
          }
          else {
             toast.error(response.data.message);
          }
-
-
       } catch (err) {
 
          console.log(err);
-
          setError(err.response?.data?.error || "Error connect telegram");
-
       }
 
 
