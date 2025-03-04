@@ -5,6 +5,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [balance, setBalance] = useState([]);
+  const [error, setError] = useState("");
+
+
   const [username, setUsername] = useState("Guest");
   const [isPopupOpen, setIsPopupOpen] = useState(false); // State to manage popup visibility
   const menuRef = useRef(null);
@@ -13,6 +17,8 @@ const Header = () => {
 
   useEffect(() => {
     fetchUserInfo();
+    
+    fetchbalance();
   }, []);
 
   const fetchUserInfo = async () => {
@@ -25,6 +31,17 @@ const Header = () => {
       console.error("❌ Error fetching user info:", err);
     }
   };
+
+
+  const fetchbalance = async () => {
+    try {
+       const response = await Api.get('auth/available-balance');
+       setBalance(response.data);
+    } catch (err) {
+       setError(err.response?.data?.error || "Error fetching income");
+    }
+ };
+
 
   const navigate = useNavigate();
   
@@ -98,7 +115,7 @@ const Header = () => {
           </a>
           <a className="flex flex-row gap-4 h-[38px] bg-white p-1 px-2 rounded-full md:mr-3" title="Wallet" href="/wallet">
             <div className="flex flex-row justify-center items-center gap-2">
-              <div className="flex items-center justify-center font-bold">0</div>
+              {/* <div className="flex items-center justify-center font-bold">0</div> */}
               <img
                 alt="MCC"
                 loading="lazy"
@@ -106,14 +123,14 @@ const Header = () => {
                 height="30"
                 decoding="async"
                 className="w-[24px] h-[24px] md:w-[30px] md:h-[30px]"
-                src="upnl/assets/icons/logo_mcc_2.svg"
+                src="upnl/assets/icons/logo_usdt_2.svg"
                 style={{ color: "transparent" }}
               />
             </div>
             <div className="hidden md:flex flex-row justify-center items-center gap-2">
         <div className="flex flex-row justify-center items-center gap-2">
-          <div className="flex items-center mt-1 justify-center font-bold">0</div>
-          <img
+          <div className="flex items-center mt-1 justify-center font-bold">{Number(balance.available_balance).toFixed(2)} </div>
+          {/* <img
             alt="POINT"
             loading="lazy"
             width="30"
@@ -122,7 +139,7 @@ const Header = () => {
             className="w-[24px] h-[24px] md:w-[30px] md:h-[30px]"
             src="upnl/assets/icons/logo_point_2.svg"
             style={{ color: "transparent" }}
-          />
+          /> */}
         </div>
       </div>
           </a>

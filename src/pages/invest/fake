@@ -1,0 +1,65 @@
+import React, { useState, useEffect } from 'react';
+import Chart from 'react-apexcharts';
+import Api from "../../Requests/Api";
+
+export default function Nodepowerdata() {
+  const [roiArray, setRoiArray] = useState([]);
+  const [dayArray, setDayArray] = useState([]);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await Api.get("auth/roi");
+      console.log("API Response:", response.data);
+
+      if (!Array.isArray(response.data)) {
+        throw new Error("Invalid API response format");
+      }
+
+      const tempRoiArray = response.data.map(item => item.roi);
+      const tempDayArray = response.data.map(item => item.day);
+
+      setRoiArray(tempRoiArray);
+      setDayArray(tempDayArray);
+    } catch (err) {
+      console.error("API Error:", err);
+      setError(err.response?.data?.error || "Error fetching ROI data");
+    }
+  };
+
+  return (
+    <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
+      <div className='contaniner-fluid mb-5'>
+        {error && <p className="text-red-500">{error}</p>}
+
+        {roiArray.length > 0 && dayArray.length > 0 ? (
+          <Chart
+            type="bar"
+            width={800}
+            height={400}
+            series={[
+              {
+                name: "ROI",
+                data: roiArray,
+              }
+            ]}
+            options={{
+              chart: {
+                id: "roi-chart",
+              },
+              xaxis: {
+                categories: dayArray,
+              }
+            }}
+          />
+        ) : (
+          <p>Loading Chart...</p>
+        )}
+      </div>
+    </div>
+  );
+}

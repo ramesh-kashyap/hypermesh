@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Api from "../../Requests/Api";
 import TelegramConnectModal from "../../components/TelegramConnectModal";
-import  { encryptID, decryptID } from "../../components/cryptoUtils";
-import {  toast } from "react-hot-toast";
+import { encryptID, decryptID } from "../../components/cryptoUtils";
+import { toast } from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
-     const navigate = useNavigate();
+   const navigate = useNavigate();
    const [balance, setBalance] = useState([]);
    const [error, setError] = useState("");
    const [showModal, setShowModal] = useState(false);
@@ -15,49 +15,47 @@ const Dashboard = () => {
    const [encryptedID, setEncryptedID] = useState("");
    const [decryptedID, setDecryptedID] = useState("");
    const [username, setUsername] = useState("");
-  const [loading, setLoading] = useState(true);
+   const [loading, setLoading] = useState(true);
 
    const handleEncrypt = () => {
       const encrypted = encryptID(originalID);
       setEncryptedID(encrypted);
-    };
+   };
 
    const handleAccept = async () => {
-     console.log("User accepted Telegram connection.");
-     const urlParams = new URLSearchParams(window.location.search);
-     const code = urlParams.get("code");
-     const decryptedID = decryptID(code);
-     
-     try {
-      const response = await Api.post('auth/connect-telegram',{telegram_id:decryptedID});
-      if (response.data.status) 
-         {
+      console.log("User accepted Telegram connection.");
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get("code");
+      const decryptedID = decryptID(code);
+
+      try {
+         const response = await Api.post('auth/connect-telegram', { telegram_id: decryptedID });
+         if (response.data.status) {
             toast.success("Telegram Connected successful!");
             // Navigate to a protected route (e.g., /dashboard)
-          
+
             navigate('/dashboard');
          }
-         else
-         {
+         else {
             toast.error(response.data.message);
          }
 
 
-   } catch (err) {
+      } catch (err) {
 
-      console.log(err);
-      
-      setError(err.response?.data?.error || "Error connect telegram");
+         console.log(err);
 
-   }
-      
+         setError(err.response?.data?.error || "Error connect telegram");
 
-     setShowModal(false);
+      }
+
+
+      setShowModal(false);
    };
- 
+
    const handleDecline = () => {
-     console.log("User declined Telegram connection.");
-     setShowModal(false);
+      console.log("User declined Telegram connection.");
+      setShowModal(false);
    };
 
 
@@ -68,11 +66,11 @@ const Dashboard = () => {
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get("code");
       const decryptedID = decryptID(code);
-         if (code) {
-            setShowModal(true);
-          }
+      if (code) {
+         setShowModal(true);
+      }
 
-     
+
    }, []);
    const fetchbalance = async () => {
       try {
@@ -85,111 +83,138 @@ const Dashboard = () => {
 
    const fetchUserInfo = async () => {
       try {
-          const response = await Api.get('auth/userinfo');
-          if (response.data.status) {
-              setUsername(response.data.name);
-          }
+         const response = await Api.get('auth/userinfo');
+         if (response.data.status) {
+            setUsername(response.data.name);
+         }
       } catch (err) {
-          console.error("❌ Error fetching user info:", err);
+         console.error("❌ Error fetching user info:", err);
       } finally {
-          setLoading(false);
+         setLoading(false);
       }
-  };
-  
+   };
 
- 
+
+
    return (
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
+
+
+
+
+
+
+         <div class="bg-blue-100 text-blue-800 p-4 rounded-md mb-6"><p>Please verify your account to receive free <b>BNB</b> (used for rewards claiming fee). <a class="font-bold" href="/#">Verify Now!</a></p></div>
          <div className="w-full mt-10 flex flex-col justify-center text-primary">
 
             {/* model popup/ */}
             <div>
-            {showModal && (
-            <TelegramConnectModal
-               username={username}
-               onAccept={handleAccept}
-               onDecline={handleDecline}
-            />
-            )}
+               {showModal && (
+                  <TelegramConnectModal
+                     username={username}
+                     onAccept={handleAccept}
+                     onDecline={handleDecline}
+                  />
+               )}
             </div>
 
 
 
             {/* end model */}
             <div className="max-w-[1920px] w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-               <div className="bg-white p-6 rounded-[16px] flex flex-col items-left">
-                  <div className="flex items-center justify-left mb-4">
-                     <div className="bg-blue-100 rounded-full p-2"><img alt="Total Rewards Icon" loading="lazy" width="32"
-                        height="32" decoding="async" data-nimg="1"
-                        src="/upnl/assets/icons/icon_total_rewards.svg" style={{ color: 'transparent' }} />
-                     </div>
-                  </div>
-                  <div className="text-left">
-                     <h3 className="font-medium mb-1">My Balance</h3>
-                     <div className="flex flex-row md:flex-col xl:flex-row items-baseline">
-                        <p className="text-[40px] md:text-[36px] lg:text-[40px] mr-2 font-semibold"
-                           style={{
-                              fontFamily: 'ClashDisplay-Semibold'
-                           }}><span style={{
-                              fontSize: '25px'
-                           }}> {Number(balance.available_balance).toFixed(2)} USDT</span></p>
+               <div className="bg-white pt-3 px-4 pb-4 rounded-[16px] flex flex-col items-left gap-3">
+                  <div className="flex items-center gap-3"><div className="w-[42px] h-[42px] flex items-center justify-center rounded-[12px]" style={{
+                     background: 'linear-gradient(rgb(237, 255, 248) 0%, rgb(174, 255, 226) 100%)',
+                     width: '48px',
+                     marginBottom: '-21px'
+                  }}>
+                     <img alt="Logo MCC 2" loading="lazy" width="32" height="32" decoding="async" data-nimg="1" src="/assets/logo_mcc_2.svg" style={{ color: 'transparent', width: '39px' }} />
+                  </div><div className="flex flex-col"><p className="text-base text-primary font-bold" style={{ marginTop: '21px' }}>MCC</p>
+                        <p className="text-sm text-secondary font-medium">Token MCC</p></div></div>
+                  <div className="text-left"><h3 className="font-semibold text-xs leading-[19.2px] mb-1 mt-3">Today Rewards</h3>
+                     <p className="text-[28px] leading-[34px] font-semibold" style={{ fontFamily: 'ClashDisplay-Semibold' }}>
+                        <span className="overflow-hidden truncate max-w-[80%]"><span>0</span></span>
 
-                        <p className="text-secondary"></p>
-                     </div>
+                        <span className="text-[14px] leading-[16.8px] text-secondary ml-2" >MCC</span></p>
                   </div>
-               </div>
+                  <div className="flex items-center justify-between w-full py-2 px-3 rounded-[12px] bg-[#D5FFF0] border-[#AEFFE2]" style={{ background: ' #b9ffe6' }}>
+                     <p className="text-secondary text-xs leading-[19.2px]">Total Rewards</p>
+                     <div className="flex text-primary text-xs leading-[19.2px] font-semibold max-w-[50%]">
+                        <p className="overflow-hidden truncate"><span>0</span></p>
+                        <p className="ml-1">MCC</p>
+                     </div></div></div>
 
 
-               <div className="bg-white p-6 rounded-[16px] max-h-[226px] h-full flex flex-col items-left">
-                  <div className="flex items-center justify-left mb-4">
-                     <div className="bg-green-100 rounded-full p-2"><img alt="Today's Rewards Icon" loading="lazy" width="32"
-                        height="32" decoding="async" data-nimg="1"
-                        src="/upnl/assets/icons/icon_todays_rewards.svg" style={{ color: 'transparent' }} />
-                     </div>
+               <div class="bg-white pt-3 px-4 pb-4 rounded-[16px] h-full flex flex-col items-left  gap-3">
+                  <div class="flex items-center gap-3">
+                     <div class="w-[42px] h-[42px] flex items-center justify-center rounded-[12px]" style={{
+                        background: 'linear-gradient(rgb(255, 250, 230) 0%, rgb(255, 232, 138) 100%)', width: '48px',
+                        marginBottom: '-21px'
+                     }}
+                     >
+                        <img alt="Logo MCP 2" loading="lazy" width="32" height="32" decoding="async" data-nimg="1" src="/assets/logo_point_2.svg" style={{ color: 'transparent', width: '39px' }} />
+                     </div><div class="flex flex-col"><p class="text-base text-primary font-bold" style={{ marginTop: '21px' }}>Points</p>
+                        <p class="text-sm text-secondary font-medium">MC Points</p></div></div>
+                  <div class="text-left">
+                     <h3 class="font-semibold text-xs leading-[19.2px] mb-1 mt-3">Today Rewards</h3>
+                     <p class="text-[28px] leading-[34px] font-semibold" style={{ fontFamily: 'ClashDisplay-Semibold' }}>
+                        <span class="overflow-hidden truncate max-w-[80%]">
+                           <span>18</span></span><span class="text-[14px] leading-[16.8px] text-secondary ml-2">Points</span></p>
                   </div>
-                  <div className="text-left">
-                     <h3 className="font-medium mb-1"> Total invested </h3>
-                     <div className="flex flex-row md:flex-col xl:flex-row items-baseline">
-                        <p className="text-[40px] md:text-[36px] lg:text-[40px] font-semibold mr-2"
-                           style={{
-                              fontFamily: 'ClashDisplay-Semibold'
-                           }}>
-                           <span style={{
-                              fontSize: '25px'
-                           }}> {Number(balance.totlinvest).toFixed(2)} USDT</span></p>
-                        <p className="text-secondary"></p>
-                     </div>
+                  <div class="flex items-center justify-between w-full py-2 px-3 rounded-[12px] bg-[#FFEFB0] border-[#FFE88A]" style={{ background: 'rgb(249 222 133)' }}>
+                     <p class="text-secondary text-xs leading-[19.2px]">Total Rewards</p>
+                     <div class="flex text-primary text-xs leading-[19.2px] font-semibold max-w-[50%]">
+                        <p class="overflow-hidden truncate">
+                           <span>118.8</span></p><p class="ml-1">Points</p></div>
+                  </div></div>
+               <div class="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between">
+                  <div><div class="flex justify-between items-center mb-4">
+                     <h3 class="text-[20px] font-medium text-black">Network</h3>
+                     <a href="/nodes">
+                        <button class="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]">Manage <span class="ml-1">→</span>
+                        </button></a></div>
                   </div>
-               </div>
-               <div
-                  className="bg-white p-6 max-h-[226px] h-full col-span-full lg:col-span-1 rounded-[16px] flex flex-col justify-between">
-                  <div>
-                     <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-[20px] font-medium text-black"> Total withdrawn</h3>
-                        <a
-                        ><button
-                           className="text-sm flex items-center px-3 py-1 rounded-[22px] bg-[#F1F1F1]"
-                           fdprocessedid="bjee6h">Manage <span className="ml-1">→</span></button></a>
-                     </div>
-                  </div>
-                  <p className="text-[40px] md:text-[36px] lg:text-[40px] font-semibold mr-2"
-                     style={{
-                        fontFamily: 'ClashDisplay-Semibold'
-                     }}>
-                     <span style={{
-                        fontSize: '25px'
-                     }}>{Number(balance.withdraw).toFixed(2)} USDT</span></p>
-               </div>
+                  <div class="space-y-2 h-fit">
+                     <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">POINT Mining Difficulty</span><span class="text-xs">100</span></div>
+                     <div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">MCC Mining Difficulty</span><span class="text-xs">900,000</span>
+                     </div><div class="bg-[#F1F1F1] rounded-[44px] p-3 py-2 flex justify-between items-center">
+                        <span class="text-xs">Node online</span><span class="text-xs">0/2</span></div></div></div>
             </div>
          </div>
+
+
+
+
+
+
+
          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div className="bg-white p-5 rounded-[16px] mt-6 col-span-1 lg:col-span-8">
                <div className="flex justify-between items-center mb-4">
                   <h3 className="text-md font-semibold text-black">Reward Stats</h3>
-                  <div className="flex bg-gray-200 rounded-[16px] h-[30px]"><button
+                  {/* <div className="flex bg-gray-200 rounded-[16px] h-[30px]">
+                     <button
                      className="flex-1 min-w-[87px] px-4 py-1 text-sm font-medium rounded-full text-center bg-black text-white">Daily</button><button
-                        className="flex-1 px-4 py-1 text-sm font-medium rounded-full text-center ">Monthly</button></div>
+                        className="flex-1 px-4 py-1 text-sm font-medium rounded-full text-center ">Monthly</button></div> */}
                </div>
                <div className="w-full h-72">
                   <div className="recharts-responsive-container" style={{
@@ -448,7 +473,7 @@ const Dashboard = () => {
                </div>
 
 
-               <div className="flex space-x-4 mt-6">
+               {/* <div className="flex space-x-4 mt-6">
                   <div className="flex items-center"><span
                      className="w-[22px] h-[22px] bg-green-500 rounded-full mr-2"></span><span
                         className="text-gray-600">Mining</span></div>
@@ -458,7 +483,7 @@ const Dashboard = () => {
                   <div className="flex items-center"><span
                      className="w-[22px] h-[22px] bg-[#FFCC00] rounded-full mr-2"></span><span
                         className="text-gray-600">Tasks</span></div>
-               </div>
+               </div> */}
             </div>
             <div className="col-span-1 lg:col-span-4 bg-white rounded-[16px] mt-6 p-5" >
                <h2 className="text-[20px] font-medium text-primary text-center mb-3">Become Resource

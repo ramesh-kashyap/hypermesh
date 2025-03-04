@@ -4,6 +4,7 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Team from './pages/team/Team';
 import Level from './pages/team/Level';
+
 import Investment from './pages/invest/Investment';
 import { Toaster } from "react-hot-toast";
 
@@ -27,6 +28,8 @@ import Footer from './components/Footer';
 
 
 import NodeDetails from './pages/home/NodeDetails';
+import Nodepowerdata from './pages/team/Nodepowerdata';
+
 import ForgotPassword from "./pages/auth/ForgotPassword"; // Import Forgot Password Page
 import ResetPassword from "./pages/auth/ResetPassword"; // Import Forgot Password Page
 
@@ -70,9 +73,12 @@ function Layout({ children }) {
                             <Route path="/WithdrawReq" element={<ProtectedRoute><WithdrawReq/></ProtectedRoute>} />
                             <Route path="/Transferfund" element={<ProtectedRoute><Transferfund/></ProtectedRoute>} />
                             <Route path="/content" element={<ProtectedRoute><Content/></ProtectedRoute>} />
+                            <Route path="/Nodepowerdata" element={<ProtectedRoute><Nodepowerdata/></ProtectedRoute>} />
+
 
 
                             <Route path="/login" element={<Login />} />
+
                             <Route path="/register" element={<Register />} />
                             <Route path="/forgot-password" element={<ForgotPassword />} />
                             <Route path="/reset-password/:token" element={<ResetPassword />} />
