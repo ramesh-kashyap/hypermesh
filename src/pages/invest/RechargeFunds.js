@@ -1,137 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from "react-router-dom";
+
 
 const RechargeFunds = () => {
-    const [isCollapsed, setIsCollapsed] = useState(true);
-    const [isBinanceVisible, setBinanceVisible] = useState(false);
-    const [isEthereumVisible, setEthereumVisible] = useState(false);
-
-    const toggleCollapse = () => {
-        setIsCollapsed(!isCollapsed);
-    };
-
-    const toggleBinanceVisibility = () => {
-        setBinanceVisible(!isBinanceVisible);
-        setEthereumVisible(false); // Hide Ethereum when Binance is toggled
-    };
-
-    const toggleEthereumVisibility = () => {
-        setEthereumVisible(!isEthereumVisible);
-        setBinanceVisible(false); // Hide Binance when Ethereum is toggled
-    };
-
     return (
-        <div className="flex-1 overflow-y-auto px-4 md:px-10 lg:px-10 xl:px-20 pt-5 pb-[88px] md:pb-[20px] bg-[#F1F1F1]">
-            <div className="bg-blue-100 text-blue-800 p-4 rounded-md mb-6">
-                <p>Please verify your account to receive free <b>BNB</b> (used for rewards claiming fee). <a className="font-bold" href="/wallet/deposit#">Verify Now!</a></p>
-            </div>
-            <div>
-                <div className="flex justify-between">
-                    <span className="text-white text-sm rounded-[22px] h-[33px] px-3 bg-black mb-4 mt-10 flex items-center space-x-2 cursor-pointer">
-                        <img alt="Back Icons" loading="lazy" width="17" height="12" src="/upnl/assets/icons/icon-back.svg" style={{ color: 'transparent' }} />
-                        <span>Back</span>
-                    </span>
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-5 xl:grid-cols-3 gap-6">
-                    <div className="lg:col-span-3 xl:col-span-2 bg-white rounded-[16px] p-6">
-                        <h2 className="text-xl sm:text-2xl font-bold">Deposit</h2>
-                        <div className="flex justify-between items-center w-full bg-[#F9F9F9] rounded-[27px] px-[40px] max-sm:px-[20px] py-[4px] max-sm:py-[10px] text-[14px] text-[#999999] my-4 sm:my-6 sm:py-6 max-sm:gap-0">
-                            <span className="text-center text-[#171717] cursor-pointer" onClick={toggleBinanceVisibility}>Select token</span>
-                            <img alt="right-arrow" loading="lazy" width="30" height="30" src="/upnl/assets/icons/right-arrow.svg" style={{ color: 'transparent' }} />
-                            <span className="text-center" onClick={toggleEthereumVisibility}>Select network</span>
-                            <img alt="right-arrow" loading="lazy" width="30" height="30" src="/upnl/assets/icons/right-arrow-inactive.svg" style={{ color: 'transparent' }} />
-                            <span className="text-center">Deposit details</span>
-                        </div>
-                        <br />
-                        <div>
-                            {/* Collapsed Div */}
-                            <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={toggleCollapse}>
-                                <div className="py-4 flex items-center space-x-2 lg:space-x-3 text-sm">
-                                    <img alt="BNB logo" loading="lazy" width="40" height="40" src="/upnl/assets/icons/logo_bnb_2.svg" style={{ color: 'transparent' }} />
-                                    <div>
-                                        <div className="text-[16px] text-[#171717] font-semibold">BNB</div>
-                                        <div className="text-[12px] text-[#999999]">BNB</div>
-                                    </div>
-                                </div>
-                                <img alt="BNB logo" loading="lazy" width="20" height="20" src="/upnl/assets/icons/right-repo.svg" style={{ color: 'transparent' }} />
-                            </div>
+        <div class="uni-body pages-user-recharge">
+            <uni-app class="uni-app--maxwidth">
+                <uni-page data-page="pages/user/recharge">
+                    <uni-page-wrapper>
+                        <uni-page-body>
+                            <uni-view data-v-bec7c7ce="" class="page">
+                                <uni-view data-v-bec7c7ce="" class="ellipse"></uni-view>
+                                <uni-view data-v-bec7c7ce="" class="top-box"><uni-view data-v-636c600c="" data-v-bec7c7ce="" class="uni-row" style={{ marginLeft: '0px', marginRight: '0px' }}><uni-view data-v-35b9a113="" data-v-bec7c7ce="" class="uni-col uni-col-6" style={{ paddingLeft: '0px', paddingRight: '0px' }}>
+                                    <Link to="/dashboard" >
+                                        <uni-view data-v-53c5f33f="" class="back"><img data-v-53c5f33f="" src="/static/img/back.png" alt="" style={{ width: '35px' }} /></uni-view>
 
-                            {/* Expanded Div */}
-                            {!isCollapsed && (
-                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={toggleCollapse}>
-                                    <div className="py-4 flex items-start space-x-2 lg:space-x-3 text-sm">
-                                        <img alt="BSC logo" loading="lazy" width="40" height="40" src="/upnl/assets/icons/logo_bsc_2.svg" style={{ color: 'transparent' }} />
-                                        <div>
-                                            <div className="text-[16px] text-[#171717] font-semibold mb-2">Binance Smart Chain</div>
-                                            <div className="text-[12px] text-[#999999]">1 block confirmations</div>
-                                            <div className="text-[12px] text-[#999999]">Estimated time up to 1 minute</div>
-                                        </div>
+                                    </Link>
+                                </uni-view><uni-view data-v-35b9a113="" data-v-bec7c7ce="" class="uni-col uni-col-12" style={{ paddingLeft: '0px', paddingRight: '0px' }}><uni-view data-v-bec7c7ce="" class="page-title">Deposit</uni-view></uni-view><uni-view data-v-35b9a113="" data-v-bec7c7ce="" class="uni-col uni-col-6" style={{ paddingLeft: '0px', paddingRight: '0px' }}><uni-view data-v-bec7c7ce="" class="records"><img data-v-bec7c7ce="" src="/static/img/records.png" alt="" style={{ width: '25px', marginTop: '5px' }} /></uni-view></uni-view></uni-view></uni-view><uni-view data-v-bec7c7ce="" class="recharge-box"><uni-view data-v-bec7c7ce="" class="input-layer"><uni-view data-v-bec7c7ce="" class="input-title">Select Deposit Type</uni-view><uni-view data-v-bec7c7ce="" class="select-box"><uni-view data-v-bec7c7ce="" class="item"><img data-v-bec7c7ce="" src="/static/img/USDT.png" alt="" />TRC20</uni-view>
+                                    <uni-view data-v-bec7c7ce="" class="item"><img data-v-bec7c7ce="" src="/static/img/USDT.png" alt="" />ERC20</uni-view>
+                                    <uni-view data-v-bec7c7ce="" class="item"><img data-v-bec7c7ce="" src="/static/coin/eth.png" alt="" />ETH</uni-view>
+                                </uni-view></uni-view><uni-view data-v-bec7c7ce="" class="input-layer" style={{ marginTop: '20px' }}><uni-view data-v-bec7c7ce="" class="input-title">Amount</uni-view>        <uni-view data-v-30449abe="" data-v-bec7c7ce="" class="uni-easyinput" style={{ color: 'rgb(255, 255, 255)' }}><uni-view data-v-30449abe="" class="uni-easyinput__content is-input-border " style={{ borderColor: 'rgba(255, 255, 255, 0.2)', backgroundColor: 'unset' }}>        <uni-input data-v-30449abe="" class="uni-easyinput__content-input" style={{ paddingLeft: '10px' }}>
+                                    <div class="uni-input-wrapper">
+                                        <div class="uni-input-placeholder uni-easyinput__placeholder-class" data-v-30449abe="" data-v-bec7c7ce="">Please Enter Amount</div><input maxlength="140" step="" enterkeyhint="done" autocomplete="off" type="" class="uni-input-input" />
                                     </div>
-                                    <img alt="BSC logo" loading="lazy" width="20" height="20" src="/upnl/assets/icons/right-repo.svg" style={{ color: 'transparent' }} />
-                                </div>
-                            )}
+                                </uni-input>        </uni-view></uni-view></uni-view>        </uni-view><uni-view data-v-bec7c7ce="" class="submit">Submit</uni-view>    </uni-view></uni-page-body></uni-page-wrapper></uni-page>
 
-                            {/* USDT Section */}
-                            <div className="flex items-center justify-between bg-[#F9F9F9] h-[72px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]" onClick={toggleBinanceVisibility}>
-                                <div className="py-4 flex items-center space-x-2 lg:space-x-3 text-sm">
-                                    <img alt="USDT logo" loading="lazy" width="40" height="40" src="/upnl/assets/icons/logo_usdt_2.svg" style={{ color: 'transparent' }} />
-                                    <div>
-                                        <div className="text-[16px] text-[#171717] font-semibold">USDT</div>
-                                        <div className="text-[12px] text-[#999999]">TetherUS</div>
-                                    </div>
-                                </div>
-                                <img alt="USDT logo" loading="lazy" width="20" height="20" src="/upnl/assets/icons/right-repo.svg" style={{ color: 'transparent' }} />
-                            </div>
-
-                            {/* Hidden divs for Binance and Ethereum */}
-                            {isBinanceVisible && (
-                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]">
-                                    <div className="py-4 flex items-start space-x-2 lg:space-x-3 text-sm">
-                                        <img alt="BSC logo" loading="lazy" width="40" height="40" src="/upnl/assets/icons/logo_bsc_2.svg" style={{ color: 'transparent' }} />
-                                        <div>
-                                            <div className="text-[16px] text-[#171717] font-semibold mb-2">Binance Smart Chain</div>
-                                            <div className="text-[12px] text-[#999999]">1 block confirmations</div>
-                                            <div className="text-[12px] text-[#999999]">Estimated time up to 1 minute</div>
-                                        </div>
-                                    </div>
-                                    <img alt="BSC logo" loading="lazy" width="20" height="20" src="/upnl/assets/icons/right-repo.svg" style={{ color: 'transparent' }} />
-                                </div>
-                            )}
-                            {isEthereumVisible && (
-                                <div className="flex items-center justify-between bg-[#F9F9F9] h-[120px] mb-2 p-[15px] rounded-[16px] cursor-pointer hover:bg-[#ebe8e8]">
-                                    <div className="py-4 flex items-start space-x-2 lg:space-x-3 text-sm">
-                                        <img alt="ETH logo" loading="lazy" width="40" height="40" src="/upnl/assets/icons/logo_eth_2.svg" style={{ color: 'transparent' }} />
-                                        <div>
-                                            <div className="text-[16px] text-[#171717] font-semibold mb-2">Ethereum</div>
-                                            <div className="text-[12px] text-[#999999]">1 block confirmations</div>
-                                            <div className="text-[12px] text-[#999999]">Estimated time up to 2 minute</div>
-                                        </div>
-                                    </div>
-                                    <img alt="ETH logo" loading="lazy" width="20" height="20" src="/upnl/assets/icons/right-repo.svg" style={{ color: 'transparent' }} />
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                    <div className="bg-white rounded-[16px] p-6 lg:col-span-2 xl:col-span-1">
-                        <h3 className="font-semibold mb-3">History</h3>
-                        <div className="space-y-4 h-full">
-                            <div className="flex justify-between items-center text-sm mb-4">
-                                <div className="flex">
-                                    <div className="flex items-center justify-center hover:cursor-pointer rounded-[50%] bg-[#F9F9F9] w-[44px] h-[44px]">
-                                        <img alt="IN Icon" loading="lazy" width="28" height="28" src="/upnl/assets/icons/icon_down.svg" style={{ color: 'transparent' }} />
-                                    </div>
-                                    <div className="ml-3">
-                                        <p className="font-medium mb-1">Deposit</p>
-                                        <p className="text-secondary font-light text-xs">a month</p>
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-green-500">+<span>0.039 BNB</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </uni-app>
         </div>
     );
 };

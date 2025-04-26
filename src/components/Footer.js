@@ -1,86 +1,96 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const Footer = () => {
+export default function Footer() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   return (
-    
-    <div className="fixed bottom-0 w-full bg-white flex md:hidden justify-around shadow-lg" style={{ background: '#f1c40f' }}>
-        
-      {/* Overview link */}
-      <Link
-        to="/dashboard" // Replace with the actual route
-        className="flex w-1/5 p-[12px] flex-col items-center"
-      >
-        <img
-          alt="overview Icon"
-          loading="lazy"
-          width="20"
-          height="20"
-          decoding="async"
-          className=""
-          
-          src="/upnl/assets/icons/icon-overview.svg"
-        />
-        <span className="text-xs mt-1 text-white">Nodes</span>
-      </Link>
 
-      {/* Market link */}
-      <Link
-        to="Market" // Replace with the actual route
-        className="flex w-1/5 p-[12px] flex-col items-center"
-      >
-        <img
-          alt="my_nodes Icon"
-          loading="lazy"
-          width="20"
-          height="20"
-          decoding="async"
-          className=""
-          src="/upnl/assets/icons/icon-nodes.svg"
-          style={{ color: 'transparent' }}
-        />
-        <span className="text-xs mt-1 text-white">Earn</span>
-      </Link>
+    <div class="uni-body pages-index-index">
 
-      {/* Referrals link */}
-      <Link
-        to="/team" // Replace with the actual route
-        className="flex w-1/5 p-[12px] flex-col items-center"
-      >
-        <img
-          alt="referrals Icon"
-          loading="lazy"
-          width="20"
-          height="20"
-          decoding="async"
-          className=""
-          src="/upnl/assets/icons/icon-referrals.svg"
-          style={{ color: 'transparent' }}
-        />
-        <span className="text-xs mt-1 text-white">Referrals</span>
-      </Link>
+      <uni-app class="uni-app--showtabbar uni-app--maxwidth">
 
-      {/* Profile link */}
-      <Link
-        to="profile-setting" // Replace with the actual route
-        className="flex w-1/5 p-[12px] flex-col items-center"
-      >
-        <img
-          alt="profile Icon"
-          loading="lazy"
-          width="20"
-          height="20"
-          decoding="async"
-          className=""
-          src="/upnl/assets/icons/icon-profile.svg"
-          style={{ color: 'transparent' }}
-        />
-        <span className="text-xs mt-1 text-white">Profile</span>
-      </Link>
-      
-    </div>
-    
+
+        <uni-tabbar
+          class="uni-tabbar-bottom" >
+          <div class="uni-tabbar" style={{ backgroundColor: 'rgb(68, 67, 70)', backdropFilter: 'none',width: '100%' }}>
+            <div class="uni-tabbar-border" style={{ backgroundColor: 'rgba(255, 255, 255, 0.12)' }}></div>
+            <div class="uni-tabbar__item">
+            <Link to="/dashboard"style={{ textDecoration: "none", color: "inherit",cursor: "none"  }}>
+                <div class="uni-tabbar__bd" style={{ height: '65px' }}>
+                  <div class="uni-tabbar__icon" style={{ width: '24px', height: '24px' }}><img
+                    src="/static/tabbar/home.png" /></div>
+                  <div  className="uni-tabbar__label"
+                    style={{
+                      color:
+                        currentPath === '/dashboard' ? 'rgb(53, 247, 231)' : 'rgba(255, 255, 255, 0.5)',
+                      fontSize: '13px',
+                      lineHeight: 'normal',
+                      marginTop: '3px',
+                    }}>
+                    Home </div>
+                </div>
+              </Link>
+            </div>
+            <div class="uni-tabbar__item">
+            <Link to="/trade"style={{ textDecoration: "none", color: "inherit",cursor: "none" }}>
+
+                <div class="uni-tabbar__bd" style={{ height: '65px' }}>
+                  <div class="uni-tabbar__icon" style={{ width: '24px', height: '24px' }}><img
+                    src=" /static/tabbar/trade.png" /></div>
+                  <div  className="uni-tabbar__label"
+                    style={{
+                      color:
+                        currentPath === '/trade' ? 'rgb(53, 247, 231)' : 'rgba(255, 255, 255, 0.5)',
+                      fontSize: '13px',
+                      lineHeight: 'normal',
+                      marginTop: '3px',
+                    }}>
+                    Trade </div>
+                </div>
+                </Link>
+            </div>
+            <div class="uni-tabbar__item">
+            <Link to="/assets"style={{ textDecoration: "none", color: "inherit", cursor: "none" }}>
+
+                <div class="uni-tabbar__bd" style={{ height: '65px' }}>
+                  <div class="uni-tabbar__icon" style={{ width: '24px', height: '24px' }}><img
+                    src=" /static/tabbar/assets.png" /></div>
+                  <div  className="uni-tabbar__label"
+                    style={{
+                      color:
+                        currentPath === '/assets' ? 'rgb(53, 247, 231)' : 'rgba(255, 255, 255, 0.5)',
+                      fontSize: '13px',
+                      lineHeight: 'normal',
+                      marginTop: '3px',
+                    }}>
+                    Assets </div>
+                </div>
+              </Link>
+            </div>
+            <div class="uni-tabbar__item">
+            <Link to="/server"style={{ textDecoration: "none", color: "inherit",cursor: "none" }}>
+
+                <div class="uni-tabbar__bd" style={{ height: '65px' }}>
+                  <div class="uni-tabbar__icon" style={{ width: '24px', height: '24px' }}><img
+                    src=" /static/tabbar/server.png" /></div>
+                  <div className="uni-tabbar__label"
+                    style={{
+                      color:
+                        currentPath === '/server' ? 'rgb(53, 247, 231)' : 'rgba(255, 255, 255, 0.5)',
+                      fontSize: '13px',
+                      lineHeight: 'normal',
+                      marginTop: '3px',
+                    }}>
+                    Server </div>
+                </div>
+              </Link>
+            </div>
+          </div>  
+          <div class="uni-placeholder" style={{ height: '65px' }}></div>
+        </uni-tabbar>
+      </uni-app>
+    </div>  
   );
-};
-
-export default Footer;
+}

@@ -94,6 +94,7 @@ const Email = () => {
                 </div>
             </div>
         </div>
+        
     );
 };
 

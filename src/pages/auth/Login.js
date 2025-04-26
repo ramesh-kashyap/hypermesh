@@ -1,187 +1,109 @@
-import React, { useEffect } from "react";
-import Api2, { googleAuth } from '../../Requests/Api';
-import Api from '../../Requests/Api';
-import { useGoogleLogin } from '@react-oauth/google';
-import { useNavigate } from 'react-router-dom';
-import { BrowserRouter as Route, Router,Routes, Link } from 'react-router-dom';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import React, { useState } from "react";
+// import {  } from "react-router-dom";
+
 import axios from "axios";
 
-
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+import Api from "../../Requests/Api";
 const Login = () => {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleLogin = () => {
-    // Redirecting to your Google login API
-    window.location.href = "http://localhost:3002/google";
-  };
 
-    // 🔹 Check for token on page load
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        console.log("✅ Token found, redirecting to Dashboard...");
-        navigate("/dashboard"); // Redirect to Dashboard if token exists
-      }
-    }, [navigate]); // Runs only on component mount
-  
 
-  
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-  const responseGoogle = async (authResult)=>{
-    try{
-        console.log(authResult);
-        if(authResult['code']){
-            const result = await googleAuth(authResult['code']); 
-            console.log(result.data);
-            // Extract user information from the result (assuming the backend returns this)
-            const { name, email, picture } = result.data.user;
 
-            // Log the user information
-            console.log(`User's Name: ${name}`);
-            console.log(`User's Email: ${email}`);
-            console.log(`User's Profile Image: ${picture}`);
 
-            localStorage.setItem('token', result.data.token);
-
-            // Redirect to dashboard
-            navigate('/');
-       
-        }else {
-            // If there's no authorization code, handle the error
-            console.error('Authorization code not received');
-        }
-    }catch(err){
-        console.error('Error while requesting google code:', err);
-    }
-}
-
-    const googleLogin = useGoogleLogin({
-        onSuccess: responseGoogle,
-        onError: responseGoogle,
-        flow: 'auth-code',
+    try {
+      const response = await Api.post("/login", {
+        username,
+        password
       });
-
-      const handleLoginSuccess = async(credentialResponse) => {
-        // credentialResponse contains the credential/token information
-        console.log('Login Success:', credentialResponse);
-        // You might want to send the credentialResponse.credential to your backend for verification
-
-        try {
-          // Send the Google credential to your backend
-          const response = await axios.post('http://localhost:3002/api/auth/google', {
-            token: credentialResponse.credential,
-          });
-           console.log('reaponse',response);
-          // Assuming the backend returns a JSON object with a property `jwtToken`
-          const { jwtToken } = response.data;
-          console.log('check',jwtToken);
-          if (jwtToken) {
-            // Save JWT to local storage
-            localStorage.setItem('token', jwtToken);
-            // Navigate to a protected route (e.g., /dashboard)
-            navigate('/dashboard');
-          } else {
-            console.error('JWT token not found in the response');
-          }
-        } catch (error) {
-          console.error('Error during token generation:', error);
-        }
-
-      };
+    
+      if (response.data?.token) {
+        const { token, message } = response.data;
+        localStorage.setItem("authToken", token);
+        toast.success(message || "Login successful");
+        navigate("/dashboard");
+      } else {
+        toast.error(response.data?.message || "Invalid credentials");
+        console.error("Login failed:", response.data);
+      }
+    
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error(error.response?.data?.message || "Something went wrong!");
+    }
+    
+    
+  };
 
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center pt-[100px] bg-gray-50 p-6">
-      <div className="absolute top-6 flex justify-between w-full px-6">
-        <img
-          alt="MeshNode Logo"
-          loading="lazy"
-          width="163"
-          height="40"
-          className="hidden sm:flex"
-          src="/upnl/assets/icons/logo_meshchain_full_text.svg"
-        />
-        <img
-          alt="Logo"
-          loading="lazy"
-          width="40"
-          height="40"
-          className="flex sm:hidden"
-          src="/upnl/assets/icons/logo_meshchain.svg"
-        />
-        <div className="flex">
-          <button className="w-[80px] md:w-[100px] mr-2 md:mr-4 py-2 px-2 md:px-4 bg-green-500 text-white rounded-[30px] shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
-            Log In
-          </button>
-          <button className="w-[100px] py-2 px-2 md:px-4 bg-[#171717] text-white rounded-[30px] shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
-            Sign Up
-          </button>
-        </div>
-      </div>
-      <div className="bg-white max-w-[385px] rounded-[20px] py-6 px-6 md:px-8 w-full shadow-lg">
-        <h2 className="text-[28px] font-semibold text-gray-800 text-center mb-2">
-          Log In
-        </h2>
-        <p className="text-sm text-gray-500 text-center mb-6">
-          Welcome back! Log in to stay updated with all your nodes and rewards.
-        </p>
-        <form onSubmit={(e) => e.preventDefault()}> {/* Prevent default form submission */}
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-gray-700">
-              Username
-            </label>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Enter username"
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-[12px] shadow-sm focus:outline-none focus:ring focus:ring-green-500"
-              />
-            </div>
-          </div>
+    <div class="uni-body pages-login-login">
+      <uni-app class="uni-app--maxwidth">
+        <uni-page data-page="pages/login/login">
+          <uni-page-wrapper>
+            <uni-page-body>
+              <uni-view data-v-2b56ecaf="" class="page">
+                <uni-view data-v-2b56ecaf="" class="ellipse"></uni-view>
+                <uni-view data-v-2b56ecaf="" class="service">
+                  <uni-text data-v-45a6b600="" data-v-2b56ecaf="" class="" style={{ color: 'rgb(53, 247, 231)', fontSize: '30px' }}>
 
-          <div className="mb-3">
-            <label className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
-            <div className="relative">
-              <input
-                required
-                placeholder="Enter Password"
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-[12px] shadow-sm focus:outline-none focus:ring focus:ring-green-500"
-              />
-            </div>
-          </div>
-          <div className="flex items-center justify-end">
-            <a className="text-sm text-gray-500 hover:text-gray-600" href="/forgot-password">
-              Forgot Password?
-            </a>
-          </div>
-          <button
-            type="submit"
-            className="w-full h-[46px] py-2 px-4 bg-green-500 font-medium text-white rounded-[30px] shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 mt-4"
-          >
-            Log In
-          </button>
-        </form>
+                  </uni-text></uni-view>
+                <uni-view data-v-2b56ecaf="" class="language"><img data-v-2b56ecaf="" src="/static/img/icon-lang.png" alt="" /></uni-view>
+                <uni-view data-v-2b56ecaf="" class="welcome">Welcome Back!</uni-view><uni-view data-v-2b56ecaf="" class="welcome-tips">Enter your Email and password to continue to your account</uni-view>
+                <uni-view data-v-2b56ecaf="" class="input-box">
 
-        {/* Google Login Button */}
-        <div className="mt-6 text-center">
-        <GoogleLogin
-  onSuccess={handleLoginSuccess}
-  onError={responseGoogle}
-  flow="auth-code"
-/>
-        </div>
 
-        <div className="mt-6 text-center">
-          <span className="text-sm text-gray-600">
-            Don't have an account? 
-            <a className="text-gray-800 underline font-semibold" href="/register">
-              Sign Up
-            </a>
-          </span>
-        </div>
-      </div>
+                  <uni-view data-v-2b56ecaf="" class="input-layer">
+
+                    <uni-view data-v-2b56ecaf="" class="input-title">Username</uni-view>
+                    <uni-view data-v-30449abe="" data-v-2b56ecaf="" class="uni-easyinput" ><uni-view data-v-30449abe="" class="uni-easyinput__content is-input-border " style={{ borderColor: 'rgba(255, 255, 255, 0.2)', backgroundColor: 'unset' }}><uni-view data-v-30449abe="" class="content-clear-icon"><img data-v-30449abe="" src="/static/img/user.png" alt="" /></uni-view>  <uni-input data-v-30449abe="" class="uni-easyinput__content-input" style={{ paddingLeft: '10px' }}>
+                      <div class="uni-input-wrapper">
+                        <div class="uni-input-placeholder uni-easyinput__placeholder-class" data-v-30449abe="" data-v-2b56ecaf="" style={{ display: 'none' }}>Please Enter Username</div>
+                        <input maxLength="140" autoComplete="off" type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} className="uni-input-input" required enterKeyHint="done" />
+                      </div>
+                    </uni-input>
+                      <uni-text data-v-45a6b600="" data-v-30449abe="" class="uni-icons content-clear-icon " style={{ color: 'rgb(192, 196, 204)', fontSize: '24px' }}><span></span></uni-text></uni-view></uni-view>
+
+                  </uni-view>
+                  <uni-view data-v-2b56ecaf="" class="input-layer">
+
+                    <uni-view data-v-2b56ecaf="" class="input-title">Password</uni-view>
+                    <uni-view data-v-30449abe="" data-v-2b56ecaf="" class="uni-easyinput" ><uni-view data-v-30449abe="" class="uni-easyinput__content is-input-border " style={{ borderColor: 'rgba(255, 255, 255, 0.2)', backgroundColor: 'unset' }}><uni-view data-v-30449abe="" class="content-clear-icon"><img data-v-30449abe="" src="/static/img/lock.png" alt="" /></uni-view>  <uni-input data-v-30449abe="" class="uni-easyinput__content-input" style={{ paddingLeft: '10px' }}>
+                      <div class="uni-input-wrapper">
+                        <div class="uni-input-placeholder uni-easyinput__placeholder-class" data-v-30449abe="" data-v-2b56ecaf="" style={{ display: 'none' }}>Please Enter password</div>
+                        <input maxlength="140" step="" enterkeyhint="done" autocomplete="off" type="password" name="password" value={password}
+                          onChange={(e) => setPassword(e.target.value)} required className="uni-input-input" />
+                      </div>
+                    </uni-input>
+                      <uni-text data-v-45a6b600="" data-v-30449abe="" class="uni-icons content-clear-icon " style={{ color: 'rgb(192, 196, 204)', fontSize: '24px' }}><span></span></uni-text></uni-view></uni-view>
+
+                  </uni-view>
+
+
+                  <uni-view data-v-2b56ecaf="" class="forget">Forget Password?</uni-view>
+
+
+
+                  <button data-v-2b56ecaf="" class="login" style={{ width: '100%' }} onClick={handleLogin}>Log in</button>
+
+
+                  <uni-view data-v-2b56ecaf="" class="register">Don't have an account?<Link to="/register" style={{ textDecorationLine: 'none' }}><uni-view data-v-2b56ecaf="" class="create">Create Account</uni-view></Link></uni-view>
+                </uni-view>
+              </uni-view>
+            </uni-page-body>
+          </uni-page-wrapper>
+        </uni-page>
+
+
+      </uni-app>
+
     </div>
   );
 };
